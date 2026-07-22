@@ -1,0 +1,35 @@
+name: Deploy to NationBuilder
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Disable CRLF conversion
+        run: git config core.autocrlf false && git checkout -- .
+
+      - name: Set deploy base SHA
+        run: |
+          before="${{ github.event.before }}"
+          # workflow_dispatch has no before SHA; fall back to committed record
+          if [[ "$before" == "0000000000000000000000000000000000000000" ]] || [[ -z "$before" ]]; then
+            echo "Manual trigger — using .last-deploy-sha from repo"
+          else
+            echo "$before" > .last-deploy-sha
+          fi
+
+      - name: Write NationBuilder session cookie
+        # Refresh NB_COOKIES secret when uploads start failing with session/CSRF errors
+        run: echo "${{ secrets.NB_COOKIES }}" > .nb-cookies
+
+      - name: Stage and upload changed files
+        run: bash deploy.sh --upload
