@@ -1,0 +1,27 @@
+{% if page.headline.size > 0 %}
+  <h2 class="mb-3">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if request.logged_in? %}
+    <div id="stream">
+      <div class="reaction-wrap" id="reactions">
+        <ul id="stream-activities" class="activities list-unstyled">
+          {% for activity in page.activity_stream.activities_following %}
+          <li class="activity d-flex bg-transparent {% unless forloop.last == true %}mb-4 pb-4{% endunless %}">
+            <div class="stream-pic pr-2">
+              <img src="{{ activity.signup.profile_image_url }}" width="32" height="32" class="rounded-circle" />
+            </div>
+            <div class="mt-1 w-100">
+              {{ activity.show }}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {{ page.activity_stream.activities_following | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+  {% endif %}
+
+</div>

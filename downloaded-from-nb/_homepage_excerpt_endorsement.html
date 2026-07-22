@@ -1,0 +1,26 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Endorse</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+
+  {% if homepage_excerpt.endorsement.intro.size > 0 %}
+    {{ homepage_excerpt.endorsement.intro }}
+  {% endif %}
+
+  {% if homepage_excerpt.endorsement.content.size > 0 %}
+  <div id="endorsement-content">
+    {{ homepage_excerpt.endorsement.content }}
+  </div>
+  {% endif %}
+
+  <a class="btn btn-primary" href="{{ homepage_excerpt.url }}">Endorse</a>
+</div>

@@ -1,0 +1,13 @@
+{% if request.logged_in? %}
+  {% if signup_follow.id != request.current_signup.id %}
+    {% if request.current_signup.following_ids contains signup_follow.id %}
+    <a href="{{ signup_follow.unfollow_url }}" class="btn btn-sm btn-outline-secondary delete">Unfollow</a>
+    {% else %}
+    <a href="{{ signup_follow.follow_url }}" class="btn btn-sm btn-outline-primary post">Follow</a>
+    {% endif %}
+
+    {% if signup_follow.following_ids contains request.current_signup.id %}
+      <div class="desktop-visible"><div class="small text-muted is_following">{{ signup_follow.published_name }} is following you</div></div>
+    {% endif %}
+  {% endif %}
+{% endif %}

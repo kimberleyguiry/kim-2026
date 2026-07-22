@@ -1,0 +1,208 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured petition</a>
+  </h3>
+</div>
+<div class="card-body">
+  <h4 class="card-title excerpt-title">
+    <a href="{{ homepage_excerpt.url }}">{{ homepage_excerpt.headline }}</a>
+  </h4>
+
+  {% if homepage_excerpt.petition.intro.size > 0 %}
+    {{ homepage_excerpt.petition.intro }}
+  {% endif %}
+
+  {% if homepage_excerpt.petition.has_goal? %}
+    <div class="mb-3">
+      {% include "progress"
+        percent: homepage_excerpt.petition.percent_of_goal,
+        count: homepage_excerpt.petition.signatures_count,
+        goal: homepage_excerpt.petition.goal,
+        label: homepage_excerpt.petition.signature_name
+      %}
+    </div>
+  {% elsif homepage_excerpt.petition.signatures_count > 4 %}
+    <div class="lead">
+      {{ homepage_excerpt.petition.signatures_count | number_with_commas }} {{ homepage_excerpt.petition.signature_name | pluralize | downcase }}
+    </div>
+  {% endif %}
+
+  {% if homepage_excerpt.petition.content.size > 0 %}
+    <div id="petition-content">
+      {{ homepage_excerpt.petition.content }}
+    </div>
+  {% endif %}
+
+  {% if homepage_excerpt.petition.is_signed? %}
+
+    {% form_for petition_signature %}
+      {% hidden_field_tag "page_id", homepage_excerpt.id %}
+
+      <div class="form">
+        <h3 class="lead text-success">Thank you for signing!</h3>
+        <div class="form-errors">{% error_messages_for petition_signatures %}</div>
+
+        {% if homepage_excerpt.is_commentable? %}
+          <div class="form-group">
+            <label for="petition_signature_content">Change your comment</label>
+            {% text_area "content", class:"form-control textarea autogrow" %}
+          </div>
+        {% endif %}
+
+        {% if homepage_excerpt.petition.is_image? %}
+          <div class="form-group">
+            <label for="petition_signature_image">Upload a picture (140x140)</label>
+            <div class="custom-file">
+              {% file_field "image", class:"custom-file-input file" %}
+              <label for="petition_signature_image" class="custom-file-label">Choose a file</label>
+            </div>
+          </div>
+          {% if petition_signature.has_image? %}
+            <img src="{{ petition_signature.large_square_image_url }}" width="140" height="140" class="border p-1 rounded" /></p>
+          {% endif %}
+        {% endif %}
+
+        {% if homepage_excerpt.is_commentable? %}
+          {% capture signature_name %}Update {{ homepage_excerpt.petition.signature_name }}{% endcapture %}
+          {% submit_tag signature_name, class:"btn btn-primary" %} &nbsp;
+        {% endif %}
+
+        {% capture signature_name %}Remove {{ homepage_excerpt.petition.signature_name }}{% endcapture %}
+        {{ homepage_excerpt.petition.current_signature | delete_link message: signature_name class_name: "btn btn-sm btn-link text-muted"}}
+
+        <div class="form-submit"></div>
+
+      </div>
+
+    {% endform_for %}
+
+  {% else %}
+
+    {% form_for petition_signature %}
+
+      <div class="form">
+
+        {% if request.sorta_logged_in? %}
+          <p class="font-weight-bold">Hi {{ request.current_signup.name_or_email }}, will you sign?</p>
+          {% if request.logged_in? == false %}
+            <p>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">sign out</a>.</p>
+          {% endif %}
+        {% else %}
+          <p class="font-weight-bold">Will you sign?</p>
+        {% endif %}
+
+        <div class="form-errors">{% error_messages_for petition_signature %}</div>
+
+        {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+          <div class="form-group">
+            <label for="petition_signature_first_name">First Name</label>
+            {% text_field "first_name", class:"form-control" %}
+          </div>
+          <div class="form-group">
+            <label for="petition_signature_last_name">Last Name</label>
+            {% text_field "last_name", class:"form-control" %}
+          </div>
+        {% endif %}
+
+        {% if request.sorta_logged_in? == false %}
+          <div class="form-group">
+            <label for="petition_signature_email">Email</label>
+            {% email_field "email", class:"form-control" %}
+          </div>
+          {% if site.ask_for_mobiles? %}
+            <div class="form-group">
+              <label for="petition_signature_mobile_number">Mobile phone</label>
+              {% phone_field "mobile_number", class:"form-control" %}
+            </div>
+          {% endif %}
+          {% unless homepage_excerpt.show_consent_form? %}
+            <div class="form-group custom-control custom-checkbox">
+              {% check_box "email_opt_in", class:"custom-control-input" %}
+              <label class="custom-control-label" for="petition_signature_email_opt_in">Send me email updates</label>
+            </div>
+            {% if site.ask_for_mobiles? %}
+              <div class="form-group custom-control custom-checkbox">
+                {% check_box "mobile_opt_in", class:"custom-control-input" %}
+                <label class="custom-control-label" for="petition_signature_mobile_opt_in">Send me text message updates</label>
+              </div>
+            {% endif %}
+          {% endunless %}
+        {% endif %}
+
+        {% if homepage_excerpt.petition.is_phone? %}
+          <div class="form-group">
+            <label for="petition_signature_phone_number">Phone</label>
+            {% phone_field "phone_number", class:"form-control" %}
+          </div>
+        {% endif %}
+
+        {% if homepage_excerpt.petition.is_address? %}
+          {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+            <div class="form-group">
+              <label for="petition_signature_submitted_address">Address <small class="text-muted">(Street, City, State, Postal code)</small></label>
+              {% if homepage_excerpt.petition.require_address? %}
+                {% text_field "submitted_address", class:"form-control", required: "required" %}
+              {% else %}
+                {% text_field "submitted_address", class:"form-control" %}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              <label for="petition_signature_country_code">Country</label>
+              {% select_field "country_code", homepage_excerpt.petition.countries, "code", "name", prompt: "Select a country", class: "form-control" %}
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {% if homepage_excerpt.is_commentable? %}
+          <div class="form-group">
+            <label for="petition_signature_content">Comments (optional)</label>
+            {% text_area "content", class:"form-control textarea autogrow" %}
+          </div>
+        {% endif %}
+
+        {% if homepage_excerpt.petition.is_image? %}
+          <div class="form-group">
+            <label for="petition_signature_image">Upload a picture (140x140)</label>
+            <div class="custom-file">
+              {% file_field "image", class:"custom-file-input file" %}
+              <label for="petition_signature_image" class="custom-file-label">Choose a file</label>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if site.ask_to_publish_to_stream? %}
+          <div class="form-group custom-control custom-checkbox">
+            {% check_box "is_private", class:"custom-control-input" %}
+            <label class="custom-control-label" for="petition_signature_is_private">Don't publish this on the website</label>
+          </div>
+        {% endif %}
+
+        {% if homepage_excerpt.petition.is_volunteer? and site.ask_for_volunteers? %}
+          {% if request.sorta_logged_in? == false or request.current_signup.is_volunteer == false %}
+            <div class="form-group custom-control custom-checkbox">
+              {% check_box "is_volunteer", class:"custom-control-input" %}
+              <label class="custom-control-label" for="petition_signature_is_volunteer">I want to volunteer</label>
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {% if homepage_excerpt.show_consent_form? %}{% include "consent_form" %}{% endif %}
+
+        {% capture signature_name %}Add {{ homepage_excerpt.petition.signature_name }}{% endcapture %}
+        {% submit_tag signature_name, class:"btn btn-primary" %}
+        <div class="form-submit"></div>
+
+      </div>
+    {% endform_for %}
+
+    {% if homepage_excerpt.text_keyword_instructions.size > 0 %}
+</div><!-- /.card-body -->
+<div class="card-body border-top">
+  <div class="card-text">
+    or {{ homepage_excerpt.text_keyword_instructions }}
+  </div>
+    {% endif %}
+
+  {% endif %}
+
+</div> <!-- /.card-body -->

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row justify-content-center text-left">
+    <div class="col-11 col-md-10 col-lg-7">
+      <div class="flash-share alert alert-info fade show">
+        <h4 class="alert-heading">{{ flash.message }}</h4>
+        <p>
+          Tell all your friends, they should join you! A link will be included.
+        </p>
+        <div class="share">
+          <div class="share-btns row">
+            <div class="col-12 col-md-3 mb-2 mb-md-0">
+              <a class="btn btn-block btn-info" href="mailto:?body={{ flash.page.full_url_with_recruiter }}"
+                >Email</a
+              >
+            </div>
+            <div class="col-12 col-md-3 mb-2 mb-md-0">
+              <a
+                class="btn btn-block btn-facebook"
+                href="https://www.facebook.com/share.php?u={{ flash.page.full_url_with_recruiter }}"
+                >Facebook</a
+              >
+            </div>
+            <div class="col-12 col-md-3 mb-2 mb-md-0">
+              <a class="btn btn-block btn-twitter" href="{{ flash.page.tweet_url }}">Twitter</a>
+            </div>
+            <div class="col-12 col-md-3 mb-2 mb-md-0">
+              <a
+                class="btn btn-block btn-whatsapp"
+                href="https://api.whatsapp.com/send?text={{ flash.page.full_url_with_recruiter }}"
+                >WhatsApp</a
+              >
+            </div>
+          </div>
+          <hr />
+          <div class="text-right">
+            <a href="#" class="text-info flash-close">No Thanks</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

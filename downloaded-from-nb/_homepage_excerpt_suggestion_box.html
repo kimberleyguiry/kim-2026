@@ -1,0 +1,18 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Suggestion box</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+  {% if homepage_excerpt.suggestion_box.content.size > 0 %}
+    {{ homepage_excerpt.suggestion_box.content }}
+  {% endif %}
+  <a class="btn btn-primary submit-link" href="{{ homepage_excerpt.url }}">Add your suggestion</a>
+</div>

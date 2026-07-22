@@ -1,0 +1,58 @@
+{% if page.headline.size > 0 %}
+<h2 class="mb-3">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if page.faq.content.size > 0 %}
+  <div id="intro" class="intro">
+    {{ page.faq.content }}
+  </div>
+  {% endif %}
+
+  <ul class="pl-3">
+    {% for child in page.children %}
+    {% if child.type_name == 'Question' %}
+      <li><a href="{{ child.url }}">{{ child.headline }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  <ul class="list-unstyled mb-4 faq faq-{{ page.id }}">
+    {% for child in page.children %}
+    <li class="{% unless forloop.last == true %}mb-4{% endunless %} question-page-{{ child.id }}">
+      {% if child.type_name == 'Question' %}
+      <h3><a href="{{ child.url }}">{{ child.headline }}</a></h3>
+
+      <div class="excerpt">
+        {% if child.question.content.size > 0 %}
+        {{ child.question.content }}
+        {% endif %}
+        {% if child.question.answer.size > 0 %}
+        <div class="card">
+          <p class="card-header">Answer</p>
+          <div class="card-body">
+            {{ child.question.answer }}
+            </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% if page.tags_count > 0 %}
+  <div class="mt-4">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  {% include "like_page" heading: "Was this helpful?" %}
+
+  {% if page.show_stream? %}
+  <div class="mt-4">
+    {% include "page_stream" %}
+  </div>
+  {% endif %}
+</div>

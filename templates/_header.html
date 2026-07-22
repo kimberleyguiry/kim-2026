@@ -1,0 +1,12 @@
+<header id="header" class="navbar navbar-expand-lg navbar-light py-4">
+  <div class="container">
+    <a class="navbar-brand w-25" href="/">
+      {% if site.has_meta_image? %}
+        <img src="{{ site.meta_image_url }}" class="navbar-brand-img mw-100" alt="{{ site.long_name }}"/>
+      {% else %}
+        {{ site.long_name }}
+      {% endif %}
+    </a>
+    {% include "nav" %}
+  </div>
+</header>

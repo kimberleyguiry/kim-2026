@@ -1,0 +1,42 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured press release</a>
+    </h3>
+  {% else %}
+    <h4 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h4>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+  <small class="released-at text-muted">
+    {{ homepage_excerpt.published_at | date: '%B %d, %Y' }}
+  </small>
+
+  {% if homepage_excerpt.has_author? %}
+    <div class="contact vcard small pb-3">
+      <div class="contact-name">
+        <span class="n">{{ homepage_excerpt.author.published_name }}</span>
+      </div>
+      {% if homepage_excerpt.author.has_phone? %}
+        <a href="tel:{{ homepage_excerpt.author.phone_number }}" class="tel">
+          {{ homepage_excerpt.author.phone_format }}
+        </a>
+      {% endif %}
+      {% if homepage_excerpt.author.has_email? %}
+        <div class="email">
+          {{ homepage_excerpt.author.email | enkode_email }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="truncate-500" data-truncate="500">
+    {{ homepage_excerpt.press_release.content }}
+  </div>
+
+  <p><a href="{{ homepage_excerpt.url }}">Continue reading &rarr;</a></p>
+
+</div>

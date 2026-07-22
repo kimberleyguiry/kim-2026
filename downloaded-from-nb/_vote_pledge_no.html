@@ -1,0 +1,55 @@
+{% form_for vote_pledge %}
+
+  <p class="text-danger font-weight-bold">No, I will not {% if vote_pledge.could_vote? %}vote for{% else %}support{% endif %} {{ site.candidate_first_name_or_site_name }}.</p>
+
+  {% if page.vote_pledge.no_content.size > 0 %}
+    {{ page.vote_pledge.no_content }}
+  {% endif %}
+
+  {% hidden_field_tag "vote_pledge[will_vote_status]", "-1" %}
+
+  <div class="form-errors">{% error_messages_for vote_pledge %}</div>
+
+  <div class="form-group">
+    <div class="custom-control custom-checkbox">
+      {% check_box "do_not_contact", class:"custom-control-input" %}
+      <label class="custom-control-label" for="vote_pledge_do_not_contact">Do not contact me</label>
+    </div>
+  </div>
+
+  {% if request.sorta_logged_in? == false or request.current_signup.has_name? == false %}
+    <div class="form-group">
+      <label for="vote_pledge_first_name">First Name</label>
+      {% text_field "first_name", class:"form-control" %}
+    </div>
+    <div class="form-group">
+      <label for="vote_pledge_last_name">Last Name</label>
+      {% text_field "last_name", class:"form-control" %}
+    </div>
+  {% endif %}
+
+  {% if request.sorta_logged_in? == false or request.current_signup.has_mobile? == false %}
+    <div class="form-group">
+      <label for="vote_pledge_email">Email</label>
+      {% email_field "email", class:"form-control" %}
+    </div>
+  {% endif %}
+
+  {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
+    <div class="form-group">
+      <label for="vote_pledge_submitted_address">
+        Address (Street, City, Postal code)
+        <small class="text-muted d-block">To see if you can vote</small>
+      </label>
+      {% text_field "submitted_address", class:"form-control" %}
+    </div>
+  {% endif %}
+
+  {% if page.show_consent_form? %}
+    {% include "consent_form" %}
+  {% endif %}
+
+  {% submit_tag "Save settings", class:"btn btn-primary submit-button" %}
+  <div class="form-submit"></div>
+
+{% endform_for %}

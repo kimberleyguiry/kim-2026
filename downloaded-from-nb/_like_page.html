@@ -1,0 +1,9 @@
+<div class="mt-4 pt-4 like-page border-top">
+  <div class="row">
+    {% if page.type_name == "Blog Post" or page.type_name == "Suggestion" %}
+      <div class="col-auto">
+        {{ "Share" | share_button page_id: page.id }}
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,418 @@
+<div class="page-excerpt page-{{ page_excerpt.id }}">
+  <h3><a href="{{ page_excerpt.url }}">{{ page_excerpt.headline }}</a></h3>
+
+  <div class="byline text-muted small">
+    Posted
+    {% if page_excerpt.has_parent? %}
+      on <a href="{{ page_excerpt.parent.url }}">{{ page_excerpt.parent.name }}</a>
+    {% endif %}
+    {% if page_excerpt.has_author? %}
+      by {{ page_excerpt.author.published_name_linked }}
+    {% endif %}
+      &middot; {{ page_excerpt.published_at | date: '%B %d, %Y %l:%M %p' }}
+    {% if page_excerpt.show_stream? %}
+      {% if page_excerpt.public_activities_count > 0 %}
+        &middot; <a href="{{ page_excerpt.url }}#reactions">{{ page_excerpt.public_activities_count }} reaction{% if page_excerpt.public_activities_count > 1 %}s{% endif %}</a>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="excerpt">
+    {% case page_excerpt.type_name %}
+
+      {% when 'Activity Stream' %}
+
+      {% when 'ActBlue' %}
+        <a class="btn btn-primary submit-link" href="{{ page_excerpt.actblue.actblue_page_url_with_tracking }}">Donate on ActBlue</a>
+
+      {% when 'Basic' %}
+        {{ page_excerpt.basic.content }}
+
+      {% when 'Blog' %}
+        {% for post in page_excerpt.blog.most_recent_blog_posts limit: 3 %}
+          <h4><a href="{{ post.url }}">{{ post.headline }}</a></h4>
+          <p class="byline text-muted small">
+            Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+            {% if post.show_stream? %}
+              {% if post.public_activities_count > 0 %}
+                &middot; <a href="{{ post.url }}#reactions">{{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}</a>
+              {% endif %}
+            {% endif %}
+          </p>
+        {% endfor %}
+        <p>
+          <a href="{{ page_excerpt.url }}">See all posts</a>
+          {% if page_excerpt.blog.is_posting_public? %}
+          or <a href="{{ page_excerpt.url }}">{{ page_excerpt.blog.public_posting_prompt }}</a>
+          {% endif %}
+        </div>
+
+      {% when 'Blog Post' %}
+        {{ page_excerpt.blog_post.content }}
+        {% if page_excerpt.blog_post.is_extended? %}
+          <span class="read-more"><a href='{{ page_excerpt.url }}'>Read more</a></span>
+        {% endif %}
+
+      {% when 'Calendar' %}
+        {% if page_excerpt.calendar.content.size > 0 %}
+          {{ page_excerpt.calendar.content }}
+        {% endif %}
+        {% if page_excerpt.calendar.show_map? %}
+          {% if page_excerpt.calendar.events_upcoming_count > 0 %}
+            <div class="form">
+              {{ page_excerpt.calendar.events_upcoming_map }}
+            </div>
+          {% endif %}
+        {% endif %}
+        <a href="{{ page_excerpt.url }}">See all events</a>
+        {% if page_excerpt.calendar.allow_user_submitted? %}
+          or <a href="{{ page_excerpt.calendar.new_event_url }}">Host your own</a>
+        {% endif %}
+
+      {% when 'Donation' %}
+        {% if page_excerpt.donation.has_amount_goal? %}
+          {% include "progress"
+            percent: page_excerpt.donation.percent_of_amount_goal,
+            amount: page_excerpt.donations_amount_format,
+            count: page_excerpt.donations_count,
+            goal: page_excerpt.donation.amount_goal_format,
+            label: "raised"
+          %}
+        {% elsif page_excerpt.donation.has_donor_goal? %}
+          {% include "progress"
+            percent: page_excerpt.donation.percent_of_donor_goal,
+            count: page_excerpt.donations_count,
+            goal: page_excerpt.donation.donor_goal,
+            label: "donors"
+          %}
+        {% endif %}
+        {% if page_excerpt.donation.content.size > 0 %}
+          {{ page_excerpt.donation.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Donate</a>
+
+      {% when 'Endorsement' %}
+        {% if page_excerpt.endorsement.intro.size > 0 %}
+          {{ page_excerpt.endorsement.intro }}
+        {% endif %}
+        {% if page_excerpt.endorsement.content.size > 0 %}
+          <div id="endorsement-content">
+            {{ page_excerpt.endorsement.content }}
+          </div>
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Endorse</a>
+
+      {% when 'Event' %}
+        {% if page_excerpt.event.content.size > 0 %}
+          {{ page_excerpt.event.content }}
+        {% endif %}
+        <div class="event-detail">
+          <div class="subhead">WHEN</div>
+          <div class="subtext">
+            {% if page_excerpt.event.is_multi_day? %}
+              {{ page_excerpt.event.local_start_at | event_time }} - {{ page_excerpt.event.local_end_at | event_time }}
+            {% else %}
+              {{ page_excerpt.event.local_start_at | event_time }}
+            {% endif %}
+          </div>
+        </div>
+        {% if page_excerpt.event.has_venue? %}
+          <div class="event-detail">
+            <div class="subhead">Where</div>
+            <div class="subtext">
+              {% if page_excerpt.event.venue_name.size > 0 %}
+                {{ page_excerpt.event.venue_name }}<br/>
+              {% endif %}
+              {% for line in page_excerpt.event.venue_address.multi_line %}
+                {{ line }}<br/>
+              {% endfor %}
+              {% if page_excerpt.event.has_venue_address? %}
+                <a href="{{ page_excerpt.event.venue_address.google_map_link }}">Google map and directions</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+        <div class="my-3">
+          {% if page_excerpt.event.is_ticket_required? %}
+            {{ page_excerpt.event.ticket_price_with_currency }}
+          {% elsif page_excerpt.event.is_user_ticket_required? %}
+            {{ page_excerpt.event.user_ticket_price_with_currency }}
+          {% endif %}
+          {% if page_excerpt.event.is_ticket_required? or page_excerpt.event.is_user_ticket_required? %} &middot; {% endif %}
+          {% if page_excerpt.event.show_guests? and page_excerpt.event.rsvps_count > 0 %}
+            <a href="{{ page_excerpt.url }}">{{ page_excerpt.event.rsvps_count }} rsvp{% if page_excerpt.event.rsvps_count > 1 %}s{% endif %}</a>
+          {% endif %}
+        </div>
+        {% if page_excerpt.event.is_maximum_capacity? %}
+          <a class="btn btn-danger" href="{{ page_excerpt.url }}">Sold out</a>
+        {% elsif page_excerpt.event.is_past? == false %}
+          <a class="btn btn-primary" href="{{ page_excerpt.url }}">RSVP</a>
+        {% endif %}
+
+      {% when 'FAQ' %}
+        {% if page_excerpt.faq.content.size > 0 %}
+          {{ page_excerpt.faq.content }}
+        {% endif %}
+        <ul class="question-list">
+          {% for child in page_excerpt.children %}
+          {% if child.type_name == 'Question' %}
+          <li><a href="{{ child.url }}">{{ child.headline }}</a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+
+      {% when 'Feedback' %}
+        {% if page_excerpt.feedback.content.size > 0 %}
+          {{ page_excerpt.feedback.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">{{ page_excerpt.feedback.submit_button_name }}</a>
+
+      {% when 'Find Friends' %}
+
+      {% when 'Follows' %}
+
+      {% when 'Followers' %}
+
+      {% when 'Leaderboard' %}
+        {% if page_excerpt.leaderboard.content.size > 0 %}
+          {{ page_excerpt.leaderboard.content }}
+        {% endif %}
+        {% for leaderboard in page_excerpt.page_leaderboards %}
+          {% if leaderboard.has_goal? %}
+            <div class="leaderboard card-body {% unless forloop.last %}border-bottom{% endunless %}">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{ leaderboard.percent_of_goal | times:100 }}%;" aria-valuenow="{{ leaderboard.percent_of_goal | times:100 }}" aria-valuemin="0" aria-valuemax="100">
+                  {{ leaderboard.total }} {{ leaderboard.goal_name_short }}
+                </div>
+              </div>
+              <small class="text-muted">{{ leaderboard.goal }} {{ leaderboard.goal_name }}</small>
+            </div>
+          {% endif %}
+          {% if leaderboard.display_number_results > 0 %}
+            <div class="card-header">
+              <h4 class="h6 mb-0">Top 5 {{ leaderboard.display_name }}</h4>
+            </div>
+            <ul class="list-group list-group-flush">
+            {% for entry in leaderboard.entries limit: 5 %}
+              <li class="list-group-item list-group-item d-flex justify-content-between align-items-center people-list {% cycle 'odd', 'even' %}">
+                <span class="leaderboard-rank badge badge-pill">{{ entry.position }}</span>
+                <span class="people-list-pic px-2"><img src="{{entry.signup.profile_image_url}}" class="rounded-circle" width="24" height="24"/></span>
+                <span class="people-name" style="width: 100%;">{{ entry.signup.published_name_linked }}</span>
+                <small class="text-muted pl-2">{{ entry.total }}</small>
+              </li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
+
+      {% when 'Moneybomb' %}
+        {% if page_excerpt.moneybomb.content.size > 0 %}
+          {{ page_excerpt.moneybomb.content }}
+        {% endif %}
+        {% if page_excerpt.moneybomb.has_start_at? and page_excerpt.moneybomb.is_active? == false and page_excerpt.moneybomb.is_past? == false %}
+          <div class="event-detail mb-3">
+            <div class="lead mb-3">Countdown to {{ page_excerpt.moneybomb.local_start_at | moneybomb_time }}</div>
+            <div id="pre-countdown-{{ page_excerpt.slug }}" class="countdown"></div>
+          </div>
+        {% elsif page_excerpt.moneybomb.is_active? %}
+          <div class="event-detail mb-3">
+            <div class="lead mb-3">Time left to donate</div>
+            <div id="active-countdown-{{ page_excerpt.slug }}" class="countdown"></div>
+          </div>
+        {% endif %}
+        {% if page_excerpt.moneybomb.has_amount_goal? %}
+          <div class="mb-3">
+            {% include "progress"
+              percent: page_excerpt.moneybomb.percent_of_amount_goal,
+              count: page_excerpt.pledges_count,
+              amount: page_excerpt.pledges_amount_format,
+              goal: page_excerpt.moneybomb.amount_goal_format,
+              label: "pledged"
+            %}
+          </div>
+        {% elsif page_excerpt.moneybomb.has_pledger_goal? %}
+          <div class="mb-3">
+            {% include "progress"
+              percent: page_excerpt.moneybomb.percent_of_pledger_goal,
+              count: page_excerpt.pledges_count,
+              goal: page_excerpt.moneybomb.pledger_goal,
+              label: "pledgers"
+            %}
+          </div>
+        {% endif %}
+        <!--[if IE]>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/countdown_ie.css" media="all"/>
+        <![endif]-->
+        <script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+        <script type="text/javascript" src="/assets/liquid/money-bomb.js"></script>
+        <script type="text/javascript">
+          $(function () {
+            var moneyBomb = new NB.Liquid.MoneyBomb();
+            moneyBomb.setCountdown({
+              $el : $('#pre-countdown-{{ page_excerpt.slug }}'),
+              until: +{{ page_excerpt.moneybomb.seconds_until }}
+            });
+            moneyBomb.setCountdown({
+              $el : $('#active-countdown-{{ page_excerpt.slug }}'),
+              until: +{{ page_excerpt.moneybomb.seconds_left }}
+            });
+          });
+        </script>
+        {% if page_excerpt.moneybomb.is_active? %}
+          <a class="btn btn-primary" href="{{ page_excerpt.moneybomb.donation_page.url }}">Donate now</a>
+        {% else %}
+          <a class="btn btn-primary" href="{{ page_excerpt.url }}">Pledge now</a>
+        {% endif %}
+
+      {% when 'Paid Membership' %}
+        {% if page_excerpt.paid_membership.content.size > 0 %}
+          {{ page_excerpt.paid_membership.content }}
+        {% endif %}
+        {% for membership_option in page_excerpt.paid_membership.membership_options %}
+          <p><strong><a href="{{ membership_option.purchase_url }}">{{ membership_option.membership_level_name }}</strong></a>: Purchase for <a href="{{ membership_option.purchase_url }}">{{ membership_option.amount }} every {% if membership_option.num_time_periods > 1 %}{{ membership_option.num_time_periods }}{% endif %} {{ membership_option.time_period_type | downcase }}</a></p>
+        {% endfor %}
+
+      {% when 'Petition' %}
+        {% if page_excerpt.petition.intro.size > 0 %}
+          {{ page_excerpt.petition.intro }}
+        {% endif %}
+        {% if page_excerpt.petition.has_goal? %}
+          <div class="mb-3">
+            {% include "progress"
+              percent: page_excerpt.petition.percent_of_goal,
+              count: page_excerpt.petition.signatures_count,
+              goal: page_excerpt.petition.goal,
+              label: page_excerpt.petition.signature_name
+            %}
+          </div>
+        {% elsif page_excerpt.petition.signatures_count > 4 %}
+          <div class="lead">
+            {{ page_excerpt.petition.signatures_count | number_with_commas }} {{ page_excerpt.petition.signature_name | pluralize | downcase }}
+          </div>
+        {% endif %}
+        {% if page_excerpt.petition.content.size > 0 %}
+          <div id="petition-content">
+            {{ page_excerpt.petition.content }}
+          </div>
+        {% endif %}
+        <p><a class="btn btn-primary" href="{{ page_excerpt.url }}">Add {{ page_excerpt.petition.signature_name }}</a>
+
+      {% when 'Political Capital' %}
+
+      {% when 'Press Release' %}
+        <div class="released-at text-muted small">
+          {{ page_excerpt.published_at | date: '%B %d, %Y' }}
+        </div>
+        {% if page_excerpt.has_author? %}
+          <div class="contact vcard">
+            <div class="contact-name">
+              Contact: <span class="n">{{ page_excerpt.author.published_name }}</span>
+            </div>
+            {% if page_excerpt.author.has_phone? %}
+              <a href="tel:{{ page_excerpt.author.phone_number }}" class="tel">
+                {{ page_excerpt.author.phone_format }}
+              </a>
+            {% endif %}
+            {% if page_excerpt.author.has_email? %}
+              <div class="email">
+                {{ page_excerpt.author.email | enkode_email }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        {{ page_excerpt.press_release.content }}
+
+      {% when 'Question' %}
+        {% if page_excerpt.question.content.size > 0 %}
+          {{ page_excerpt.question.content }}
+        {% endif %}
+        {% if page_excerpt.question.answer.size > 0 %}
+          <h5>Answer</h5>
+          {{ page_excerpt.question.answer }}
+        {% endif %}
+
+      {% when 'Recruiting' %}
+        {% if page_excerpt.recruiting.content.size > 0 %}
+          {{ page_excerpt.recruiting.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Start recruiting</a>
+
+      {% when 'Redirect' %}
+
+      {% when 'Rules' %}
+        {% if page_excerpt.rule.content.size > 0 %}
+          {{ page_excerpt.rule.content }}
+        {% endif %}
+        <ol class="rule-list list-group align-self-baseline">
+          {% for rule in page_excerpt.rule.rules %}
+            <li class="list-group-item">
+              <div class="rule font-weight-bold">{{forloop.index}}. {{ rule.name }}</div>
+              {{ rule.content }}
+            </li>
+          {% endfor %}
+        </ol>
+
+      {% when 'Signup' %}
+        {% if page_excerpt.signup.content.size > 0 %}
+          {{ page_excerpt.signup.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Sign up</a>
+
+      {% when 'Suggestion Box' %}
+        {% if page_excerpt.suggestion_box.content.size > 0 %}
+          {{ page_excerpt.suggestion_box.content }}
+        {% endif %}
+
+      {% when 'Suggestion' %}
+        {% if page_excerpt.suggestion.content.size > 0 %}
+          {{ page_excerpt.suggestion.content }}
+        {% endif %}
+        {% if page_excerpt.suggestion.is_answered? %}
+          <div class="answer">
+            Official response from {{ page_excerpt.suggestion.answer_author.published_name_linked }}
+            {% if page_excerpt.suggestion.is_answer_type? %}
+              {{ page_excerpt.suggestion.answer_type_html }}
+            {% endif %}
+            {% if page_excerpt.suggestion.answer.size > 0 %}
+              <div class="answer-wrap">
+                {{ page_excerpt.suggestion.answer }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      {% when 'Survey' %}
+        {% if page_excerpt.survey.content.size > 0 %}
+          {{ page_excerpt.survey.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Take the survey</a>
+
+      {% when 'Unsubscribe' %}
+
+      {% when 'Volunteer Signup' %}
+        {% if page_excerpt.volunteer_signup.content.size > 0 %}
+          {{ page_excerpt.volunteer_signup.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Become a volunteer</a>
+
+      {% when 'Vote Pledge' %}
+        {% if page_excerpt.vote_pledge.has_yes_goal? %}
+          <div class="mb-3">
+            {% include "progress"
+              percent: page_excerpt.vote_pledge.percent_of_yes_goal,
+              count: page_excerpt.vote_pledge.yes_votes_count,
+              goal: page_excerpt.vote_pledge.yes_goal,
+              label: "votes"
+            %}
+          </div>
+        {% endif %}
+        {% if page_excerpt.vote_pledge.content.size > 0 %}
+          {{ page_excerpt.vote_pledge.content }}
+        {% endif %}
+        <a class="btn btn-primary" href="{{ page_excerpt.url }}">Pledge your vote</a>
+
+      {% when 'Voter Registration' %}
+
+    {% endcase %}
+  </div> <!-- /.excerpt -->
+</div> <!-- /.page-excerpt -->

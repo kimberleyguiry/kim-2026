@@ -1,0 +1,24 @@
+{% assign widget_count = tag.most_recent_published_pages.size %}
+
+{% if widget_count == 2 and request.is_sidebar? == false %}
+  {% for post in tag.most_recent_published_pages %}
+    {% cycle '<div class="homepage_excerpt-list card-deck">', '', '' %}
+      <div class="excerpt-block card mb-4 shadow-sm">
+        {% include "homepage_excerpt" with post %}
+      </div>
+    {% cycle '', '', '</div>' %}
+  {% endfor %}
+{% else %}
+  {% comment %}
+    If you would like for homepage widgets to be full-width all the time
+    keep just this part of the if/else statement and remove the "unless"
+    conditional in the classes on line 17
+  {% endcomment %}
+  <div class="homepage_excerpt-list {% unless widget_count == 1 or request.is_sidebar? %}card-columns{% endunless%}">
+    {% for post in tag.most_recent_published_pages %}
+      <div class="excerpt-block card mb-4 shadow-sm">
+        {% include "homepage_excerpt" with post %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

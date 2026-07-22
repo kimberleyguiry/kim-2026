@@ -1,0 +1,68 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Upcoming events</a>
+  </h3>
+</div>
+
+{% if homepage_excerpt.calendar.show_map? %}
+  {% if homepage_excerpt.calendar.events_upcoming_count > 0 %}
+    <div class="card-body">
+      <div class="event-map">{{ homepage_excerpt.calendar.events_upcoming_map }}</div>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% for event in homepage_excerpt.calendar.events_upcoming limit:2 %}
+  <div class="card-body {% unless forloop.last %}border-bottom{% endunless %}">
+    <div class="event-blocks">
+      <h4 class="excerpt-title">
+        <a href="{{ event.url }}">{{ event.name }}</a>
+      </h4>
+      <p>
+        {{ event.event.local_start_at | date: '%A, %B %d, %Y at %l:%M %p' }}
+        {% if event.event.is_multi_day? %}
+          through {{ event.event.local_end_at | event_date }}
+        {% endif %}
+        {% if event.event.has_venue? %}
+          <br>
+          {% if event.event.has_venue_address? %}
+            <a href="{{ event.event.venue_address.google_map_link }}">{{ event.event.venue_name }}</a> in {{ event.event.venue_address.location }}
+          {% else %}
+            {{ event.event.venue_name }}
+          {% endif %}
+        {% endif %}
+        <br>
+        {% if event.event.is_ticket_required? %}
+          <span class="badge badge-success">{{ event.event.ticket_price_with_currency }}</span>
+        {% elsif event.event.is_user_ticket_required? %}
+          <span class="badge badge-success">{{ event.event.user_ticket_price_with_currency }}</span>
+        {% endif %}
+        {% if event.event.show_guests? and event.event.rsvps_count > 0 %}
+          <span class="badge badge-secondary">{{ event.event.rsvps_count }} RSVP{% if event.event.rsvps_count > 1 %}s{% endif %}</span>
+        {% endif %}
+      </p>
+
+    <div class="truncate-200" data-truncate="200">
+      {{ event.event.content }}
+    </div>
+
+    {% if event.event.is_maximum_capacity? %}
+      <div><a class="btn btn-sm btn-danger" href="{{ event.url }}">Sold out</a></div>
+    {% elsif event.event.is_past? == false and event.event.accept_rsvps? %}
+      <div><a href="{{ event.url }}">RSVP &rarr;</a></div>
+    {% else %}
+      <div><a href="{{ event.url }}">View event &rarr;</a></div>
+    {% endif %}
+
+    </div>
+  </div>
+{% endfor %}
+
+<div class="card-footer">
+  <small>
+    <a class="button submit-link" href="{{ homepage_excerpt.url }}">See all events</a>
+    {% if homepage_excerpt.calendar.allow_user_submitted? %}
+      or <a href="{{ homepage_excerpt.calendar.new_event_url }}">Host your own</a>
+    {% endif %}
+  </small>
+</div>

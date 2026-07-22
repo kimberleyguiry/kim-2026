@@ -1,0 +1,183 @@
+<div class="row">
+  <div class="col-lg-9 mx-auto">
+
+    {% if page.nation_signup.content.size > 0 %}
+      {{ page.nation_signup.content }}
+    {% endif %}
+
+    <div class="form individual-errors">
+      {% if request.sorta_logged_in? %}
+        <h2 class="headline">Hi {{ request.current_signup.name_or_email }}! Start your new nation.</h2>
+        {% if request.logged_in? == false %}
+          <p>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">sign out</a>.</p>
+        {% endif %}
+      {% else %}
+        <h2 class="headline">Start your new nation.</h2>
+      {% endif %}
+      {% form_for nation_signup %}
+        <div class="form_errors form-errors">{% error_messages_for nation_signup %}</div>
+        {% hidden_field_tag "nation_signup[package_name]", package_name %}
+        {% hidden_field_tag "nation_signup[months_count]", months_count %}
+
+        <div class="form-group">
+          <label for="nation_signup_slug">Choose your NationBuilder URL</label>
+          <div class="input-group">
+            {% text_field "slug", class:"form-control" %}
+            <div class="input-group-append">
+              <div class="input-group-text">.nationbuilder.com</div>
+            </div>
+          </div>
+          <small class="text-muted"><i>You can add your own domain later</i></small>
+        </div>
+
+        {% if page.nation_signup.install_deprecated? %}
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="nation_signup_official_name">Organization name</label>
+            {% text_field "official_name", class:"form-control" %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="nation_signup_first_name">First name</label>
+            {% text_field "first_name", class:"form-control" %}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="nation_signup_last_name">Last name</label>
+            {% text_field "last_name", class:"form-control" %}</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="nation_signup_email">Email</label>
+            {% email_field "email", class:"form-control" %}
+          </div>
+        </div>
+
+        {% if page.nation_signup.install_deprecated? %}
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_country_code">Country</label>
+              {{ page.nation_signup.country_code_dropdown }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_state">State (US only)</label>
+              {{ page.nation_signup.state_dropdown }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_zip">Zip code (US only)</label>
+              {% text_field "zip", class:"form-control" %}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_phone_country_code">Phone country code</label>
+              {{ page.nation_signup.phone_country_code_dropdown }}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="nation_signup_phone">Phone number</label>
+            {% text_field "phone", class:"form-control" %}
+          </div>
+        </div>
+
+        {% if page.nation_signup.install_deprecated? %}
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_currency">Currency</label>
+              {{ page.nation_signup.currency_dropdown }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_time_zone">Default time zone</label>
+              {{ page.nation_signup.timezone_dropdown }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_use_case">Use case</label>
+              {{ page.nation_signup.use_case_dropdown }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% unless page.nation_signup.has_plan? %}
+          {% if page.nation_signup.has_edition? == false %}
+            <div class="form-group">
+              <label>Edition</label>
+              <div>
+                {{ page.nation_signup.form_edition_options }}
+              </div>
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="nation_signup_nation_plan_id">Plan</label>
+              <div>
+                {{ page.nation_signup.form_plan_dropdown }}
+              </div>
+            </div>
+          </div>
+        {% endunless %}
+
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="nation_signup_locale">Language</label>
+            {{ page.nation_signup.form_locales }}
+          </div>
+        </div>
+
+        {% if page.nation_signup.ask_for_cc? %}
+          <hr />
+          <h3>Enter your billing information</h3>
+          <h4>14 day free trial</h4>
+          <p><b>You won't be billed unless you keep your account open past your 14 day free trial.</b> We need your billing information to reduce fraud and verify you have a valid credit card should you keep your nation. This prevents any interruption in service. <b>You can change your plan or cancel at anytime.</b></p>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label>Credit card number</label>
+              {% payment_field "card" %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            {% check_box "accept_tos", class:"custom-control-input" %}
+            <label for="nation_signup_accept_tos" class="custom-control-label"> I agree to the <a href="https://nationbuilder.com/tos" target="_blank">NationBuilder terms of service</a></label>
+          </div>
+        </div>
+
+        {% if page.show_consent_form? %}
+          <div class="form-group">
+            {% include "consent_form" %}
+          </div>
+        {% endif %}
+
+        <div class="form-group">
+          {% submit_tag "Start your nation", class:"btn btn-primary submit-button" %}
+        </div>
+        <div class="form_submit"></div>
+      {% endform_for %}
+
+    </div><!--/.form -->
+
+  </div>
+</div>

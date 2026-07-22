@@ -1,0 +1,33 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured suggestion</a>
+  </h3>
+</div>
+
+<div class="card-body">
+  <h4 class="excerpt-title">
+    <a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a>
+  </h4>
+  <div class="byline text-muted small mb-3">
+    Posted by {{ homepage_excerpt.author.published_name_linked }} <span class="pc badge badge-secondary">{{ homepage_excerpt.author.capital_amount_format }}</span> on {{ homepage_excerpt.published_at | date: '%B %d, %Y' }}
+  </div>
+
+  {% if homepage_excerpt.suggestion.content.size > 0 %}
+    {{ homepage_excerpt.suggestion.content }}
+  {% endif %}
+
+  {% if homepage_excerpt.suggestion.is_answered? %}
+    <div class="answer clearfix">
+      Official response from {{ homepage_excerpt.suggestion.answer_author.published_name_linked }}
+      {% if homepage_excerpt.suggestion.is_answer_type? %}
+        {{ homepage_excerpt.suggestion.answer_type_html }}
+      {% endif %}
+      {% if homepage_excerpt.suggestion.answer.size > 0 %}
+        <div class="answer-wrap">
+          {{ homepage_excerpt.suggestion.answer }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+  <a class="btn btn-primary submit-link" href="{{ homepage_excerpt.url }}">Post your reaction</a>
+</div>

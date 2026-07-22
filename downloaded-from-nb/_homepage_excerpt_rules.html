@@ -1,0 +1,26 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Rules</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+{% if homepage_excerpt.rule.content.size > 0 %}
+  <div class="card-body align-self-baseline h-auto">
+      {{ homepage_excerpt.rule.content }}
+  </div>
+{% endif %}
+
+<ol class="rule-list list-group list-group-flush align-self-baseline">
+  {% for rule in homepage_excerpt.rule.rules %}
+    <li class="list-group-item">
+      <div class="rule font-weight-bold">{{forloop.index}}. {{ rule.name }}</div>
+      {{ rule.content }}
+    </li>
+  {% endfor %}
+</ol>

@@ -1,0 +1,53 @@
+{% if page.headline.size > 0 %}
+  <h2 class="mb-3">{{ page.headline }}</h2>
+{% endif %}
+
+
+{% if page.leaderboard.content.size > 0 %}
+  <div id="intro" class="intro">
+    {{ page.leaderboard.content }}
+  </div>
+{% endif %}
+
+{% for leaderboard in page.page_leaderboards %}
+  <div class="{% unless forloop.last == true %}mb-4{% endunless %}">
+    {% if leaderboard.display_number_results > 0 %}
+      <h4>Top {{ leaderboard.display_number_results }} {{ leaderboard.display_name }}</h4>
+
+      {% if leaderboard.has_goal? %}
+        <div class="my-4">
+          {% include "progress"
+            percent: leaderboard.percent_of_goal,
+            count: leaderboard.total,
+            goal: leaderboard.goal,
+            label: leaderboard.goal_name
+          %}
+        </div>
+      {% endif %}
+
+      <ul class="list-unstyled mt-4">
+        {% for entry in leaderboard.entries %}
+          {% if entry.signup.is_leaderboardable? == true %}
+            <li class="py-3 border-top">
+              <div class="d-flex">
+                <div class="mr-3">
+                  {% include "avatar" signup: entry.signup, size: 64 %}
+                </div>
+
+                <div class="w-100">
+                  <p class="d-inline-flex align-items-center m-0">
+                    <span class="h5 mb-0">{{ entry.signup.published_name_linked }}</span> <span
+                      class="badge badge-secondary ml-1">{{ entry.position }}</span>
+                  </p>
+                  <p class="m-0">{{ entry.total }} {{ leaderboard.goal_name }}</p>
+                </div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{% include "like_page" heading: "Do you like this?" %}

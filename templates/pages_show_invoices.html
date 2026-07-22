@@ -1,0 +1,242 @@
+
+{% if page.headline.size > 0 %}
+	<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div class="invoices">
+
+	{% if page.invoice.content.size > 0 %}
+		<div id="intro" class="intro">{{ page.invoice.content }}</div>
+	{% endif %}
+
+	{% if outstanding_invoices.size == 0 %}
+		<div class="form-row">
+			<div class="form-group col">You have no outstanding invoices.</div>
+		</div>
+	{% else %}
+		{% if outstanding_invoices.size == 1 %}
+			{% for invoice in outstanding_invoices %}
+				<h4>{{ invoice.name }}</h4>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th width="12%">Quantity</th>
+							<th>Name</th>
+							<th class="amount">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in invoice.items %}
+							<tr>
+								<td class="invoice-quantity">{{ item.quantity }}</td>
+								<td>{{ item.name }}</td>
+								<td class="amount">{{ item.amount }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2" class="invoice-total">Total</td>
+							<td class="price-invoice">{{ invoice.amount_due_format }}</td>
+						</tr>
+					</tfoot>
+				</table>
+			{% endfor %}
+		{% else %}
+			{% for invoice in outstanding_invoices %}
+				<div class="expand card mb-3">
+					<div class="card-header border-0 {% unless forloop.first %}collapsed{% endunless %}" data-toggle="collapse" data-target="#invoice-{{ forloop.index0 }}" aria-expanded="{% unless forloop.first %}false{%else%}true{% endunless %}" aria-controls="invoice-{{ forloop.index0 }}">
+						<h3 class="mb-0 h5">
+							{{ invoice.name }}
+						</h3>
+					</div>
+					<div id="invoice-{{ forloop.index0 }}" class="collapse {% if forloop.first %}show{% endif %}">
+						<div class="card-body p-0">
+							<table class="table table-hover m-0">
+								<thead>
+									<tr>
+										<th width="12%">Quantity</th>
+										<th>Name</th>
+										<th class="amount">Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in invoice.items %}
+										<tr>
+											<td class="invoice-quantity">{{ item.quantity }}</td>
+											<td>{{ item.name }}</td>
+											<td class="amount">{{ item.amount }}</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="2" class="invoice-total">Total</td>
+										<td class="price-invoice">{{ invoice.amount_due_format }}</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div><!-- /.expander-content -->
+				</div><!-- /.expander -->
+			{% endfor %}
+		{% endif %}
+
+		{% form_for invoice_payment %}
+
+			<div class="form">
+				<div class="form-errors">
+					{% error_messages_for invoice_payment %}
+				</div>
+				{% if page.invoice.merchant_account.is_test_mode? %}
+					<div class="form-row">
+						<div class="form-group col">
+							<p class="text-danger"><strong>Testing mode:</strong> Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.</p>
+						</div>
+					</div>
+				{% endif %}
+
+				{% if outstanding_invoices.size > 1 %}
+					<div class="form-row">
+						<div class="form-group col">
+							<label for="invoice_payment_invoice_id">Invoice to pay</label>
+							{% select_field "invoice_id", outstanding_invoices, "id", "name", class:"form-control" %}
+						</div>
+					</div>
+				{% else %}
+					<input type="hidden" name="invoice_payment[invoice_id]" id="invoice_payment_invoice_id" value="{{ outstanding_invoices[0].id }}">
+				{% endif %}
+
+				<div class="form-row">
+					<div class="form-group col-12 col-md-6">
+						<label for="invoice_payment_first_name">First Name</label>
+						{% text_field "first_name", class:"form-control" %}
+					</div>
+						<div class="form-group col-12 col-md-6">
+							<label for="invoice_payment_last_name">Last Name</label>
+							{% text_field "last_name", class:"form-control" %}
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col">
+						<label for="invoice_payment_billing_address_country_code">Country</label>{% select_field "billing_address.country_code", page.invoice.countries, "code", "name", class:"form-control select" %}
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col"><label for="invoice_payment_billing_address_address1">Billing Address</label>
+						{% text_field "billing_address.address1", class:"form-control" %}
+						{% text_field "billing_address.address2", class:"form-control mt-2" %}
+						{% text_field "billing_address.address3", class:"form-control not-us-or-canada mt-2" %}
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-4">
+						<label for="invoice_payment_billing_address_city">City</label>
+						{% text_field "billing_address.city", class:"form-control" %}
+					</div>
+					<div class="form-group col-4 us-or-canada us-only">
+						<label for="invoice_payment_billing_address_state">State</label>
+						{% select_field "billing_address.state", page.invoice.us_states, "code", "name", class:"form-control select" %}
+					</div>
+					<div class="form-group col-4 us-or-canada canada-only">
+						<label for="invoice_payment_billing_address_state">State</label>
+						{% text_field "billing_address.state", class:"form-control" %}
+					</div>
+					<div class="form-group col-4">
+						<label for="invoice_payment_billing_address_zip">Postal code</label>
+						{% text_field "billing_address.zip", class:"form-control" %}
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-12 col-md-6">
+						<label for="invoice_payment_email">Email</label>
+						{% email_field "email", class:"form-control" %}
+					</div>
+					<div class="form-group col-12 col-md-6">
+						<label for="invoice_payment_phone">Phone</label>
+						{% text_field "billing_address.phone_number", class:"form-control" %}
+					</div>
+				</div>
+
+				{% if page.invoice.merchant_account.is_paypal_express? %}
+					<div class="form-row">
+						<div class="form-group col">
+							{% submit_tag "Continue to PayPal", class:"btn btn-success" %}
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col">
+							{{ page.invoice.merchant_account.accepted_card_icons }}
+						</div>
+					</div>
+				{% endif %}
+
+				{% if page.invoice.merchant_account.is_paypal_express? == false %}
+					<div class="form-row">
+						<div class="form-group col-12 col-md-6">
+							<label for="invoice_payment_card_number">Credit card number</label>
+							{% text_field "card_number", class:"form-control" %}
+							<div class="cc">{{ page.invoice.merchant_account.accepted_card_icons }}</div>
+						</div>
+						<div class="form-group col-3">
+							<label for="invoice_payment_card_expires_on_1i">Expires</label>
+							<div class="expiration-selects">
+								{{ page.invoice.form_card_expires_on }}
+							</div>
+						</div>
+						<div class="form-group col-3">
+							<label for="invoice_payment_card_verification">Security code (on back)</label>
+							{% text_field "card_verification", class:"form-control" %}
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-12 col-md-6">
+							{% submit_tag "Process Payment", class:"btn btn-success" %}
+						</div>
+					</div>
+					<div class="form-group col-12">
+						<div class="form-submit"></div>
+					</div>
+				{% endif %}
+
+			</div><!-- /.form -->
+		{% endform_for %}
+	{% endif %}
+
+	{% if closed_invoices.size > 0 %}
+		<h4>Closed invoices</h4>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Invoice</th>
+					<th>Amount</th>
+					<th>Closed on</th>
+					<th>PDF</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for invoice in closed_invoices %}
+				<tr>
+					<td>{{ invoice.name }}</td>
+					<td>{{ invoice.amount_with_discount_format }}</td>
+					<td>{{ invoice.closed_at | date_to_string }}</td>
+					<td><a href="{{ invoice.pdf_url }}">PDF</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+
+	{% if page.show_stream? %}
+		{% include "page_stream" %}
+	{% endif %}
+
+	<script src="/assets/liquid/invoices.js"></script>
+	<script>
+		jQuery(function () {
+			NB.Liquid.Invoices.init();
+		});
+	</script>
+
+</div><!-- /.invoices -->

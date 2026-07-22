@@ -1,0 +1,112 @@
+{% if page.headline.size > 0 %}
+  <h2 class="mb-3">{{ page.headline }}</h2>
+{% endif %}
+
+{% if request.logged_in? %}
+  <div class="my-4 card-group">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="m-0 h2 font-weight-bold">{{ request.current_signup.capital_amount_format }}</h4>
+        <span class="text-muted">Balance</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="m-0 h2 font-weight-bold">{{ request.current_signup.received_capital_amount_format }}</h4>
+        <span class="text-muted">Earned</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="m-0 h2 font-weight-bold">{{ request.current_signup.spent_capital_amount_format }}</h4>
+        <span class="text-muted">Spent</span>
+      </div>
+    </div>
+  </div>
+
+  {% if request.current_signup.capitals.size > 0 %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th><span class="desktop-visible nowrap">Date</span></th>
+        </tr>
+      </thead>
+      {% for capital in request.current_signup.capitals %}
+      {% if capital.receiver_id == request.current_signup.id %}
+      <tr>
+        <td>{{ capital.activity.show_oneliner_view }}</td>
+        <td>{{ capital.amount_format }}</td>
+        <td><div class="desktop-visible nowrap">{{ capital.created_at | date_to_string }}</div></td>
+      </tr>
+      {% elsif capital.spender_id == request.current_signup.id %}
+      <tr>
+        <td>{{ capital.activity.show_oneliner_view }}</td>
+        <td>{{ capital.amount_spent_format }}</td>
+        <td><div class="desktop-visible nowrap">{{ capital.created_at | date_to_string }}</div></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+  {% endif %}
+
+  {{ request.current_signup.capitals | paginate prev_label: "Previous" next_label: "Next" }}
+
+{% else %}
+
+  <div class="my-4">
+    {% if request.sorta_logged_in? and request.current_signup.has_a_login? == true %}
+      <strong>Please verify your password</strong>
+    {% elsif request.sorta_logged_in? and request.current_signup.has_a_login? == false and settings.allow_account_creation? %}
+      <strong>Please activate your account</strong>
+    {% else %}
+      <strong>Sign in to view political capital</strong>
+    {% endif %}
+  </div>
+
+  {% if request.sorta_logged_in? and request.current_signup.has_a_login? == true %}
+    {% form_for user_session %}
+
+      <div class="form-errors">{% error_messages_for user_session %}</div>
+
+      {% hidden_field_tag "user_session[email]", request.current_signup.email %}
+
+      <div class="form-group">
+        {% submit_tag "Sign in", class:"btn btn-primary submit-button" %}
+        <div class="form-submit"></div>
+      </div>
+
+      <div class="form-group"><a href="{{ request.new_password_reset_url }}">Forgot your password?</a></div>
+
+      <div align="center" class="mt-2">
+        If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">sign out</a>.
+      </div>
+
+    {% endform_for %}
+  {% elsif request.sorta_logged_in? and request.current_signup.has_a_login? == false %}
+  {% else %}
+    <div class="row">
+      <div class="col-12 col-md-8 mt-3 mt-md-0">
+        {% form_for user_session %}
+          <h4 class="h5">Sign in with email</h4>
+          <div class="form-errors">{% error_messages_for user_session %}</div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              {% email_field "email", class:"form-control", placeholder:"Email Address" %}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              {% submit_tag "Sign in", class:"btn btn-primary submit-button post-comment" %}
+              <div class="form_submit"></div>
+            </div>
+            <div class="form-submitting"></div>
+          </div>
+        {% endform_for %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

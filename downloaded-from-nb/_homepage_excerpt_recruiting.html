@@ -1,0 +1,23 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Spread the word</a>
+  </h3>
+</div>
+
+<div class="card-body">
+  <h4 class="excerpt-title"><a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a></h4>
+
+  {% if request.sorta_logged_in? %}
+    <p>Anyone referred through your personal tracking link will credited to you.</p>
+  {% else %}
+    <p>Sign in to get your personal tracking link.</p>
+    <a class="btn btn-outline-primary mt-1 w-100" href="/login">Sign in with Email</a>
+  {% endif %}
+  {% if request.sorta_logged_in? %}
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" id="tracking_link" onclick="this.focus();this.select();" readonly="readonly" value="{{ homepage_excerpt.recruiting.featured_page.full_url_with_recruiter }}" />
+      </div>
+    </form>
+  {% endif %}
+</div>

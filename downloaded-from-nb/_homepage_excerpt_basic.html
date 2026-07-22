@@ -1,0 +1,14 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured page</a>
+  </h3>
+</div>
+<div class="card-body">
+  <h4 class="excerpt-title">
+    <a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a>
+  </h4>
+  <div class="truncate-500" data-truncate="500">{{ homepage_excerpt.basic.content }}</div>
+</div>
+<div class="card-footer">
+  <a href='{{ post.url }}' class="btn btn-link p-0">Continue reading &rarr;</a>
+</div>

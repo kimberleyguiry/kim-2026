@@ -1,0 +1,78 @@
+<div class="card-header">
+  <div class="row align-items-center">
+    <div class="col">
+      {% unless homepage_excerpt.headline %}
+        <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+          <a href="{{ homepage_excerpt.url }}" class="text-muted">Vote Pledge</a>
+        </h3>
+      {% else %}
+        <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+          <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+        </h3>
+      {% endunless %}
+    </div>
+    {% unless homepage_excerpt.vote_pledge.has_yes_goal? %}
+      <div class="col-auto">
+        <span class="badge badge-pill badge-primary">{{ homepage_excerpt.vote_pledge.yes_votes_count | number_with_commas }} votes</span>
+      </div>
+    {% endunless %}
+  </div>
+</div>
+<div class="card-body">
+  {% if homepage_excerpt.vote_pledge.has_yes_goal? %}
+    <div class="mb-3">
+      {% include "progress"
+        percent: homepage_excerpt.vote_pledge.percent_of_yes_goal,
+        count: homepage_excerpt.vote_pledge.yes_votes_count,
+        goal: homepage_excerpt.vote_pledge.yes_goal,
+        label: "votes"
+      %}
+    </div>
+  {% endif %}
+
+  {% if homepage_excerpt.vote_pledge.content.size > 0 %}
+    {{ homepage_excerpt.vote_pledge.content }}
+  {% endif %}
+
+  {% if homepage_excerpt.vote_pledge.is_pledged? %}
+    <h4 class="h6">
+      You
+      {% if homepage_excerpt.vote_pledge.current_vote_pledge.is_no? %}
+        pledged not
+      {% elsif homepage_excerpt.vote_pledge.current_vote_pledge.is_unsure? %}
+        said you were not sure whether
+      {% elsif homepage_excerpt.vote_pledge.current_vote_pledge.is_yes? %}
+        pledged
+      {% endif %}
+      to
+      {% if homepage_excerpt.vote_pledge.current_vote_pledge.could_vote? %}
+        vote for
+      {% else %}
+        support
+      {% endif %}
+      {{ site.candidate_first_name_or_site_name }}.
+    </h4>
+    <p>{{ homepage_excerpt.vote_pledge.current_vote_pledge | delete_link message: "Remove pledge" class_name: "text-danger" }}</p>
+  {% else %}
+
+    <div class="form">
+      <div class="form-errors">{% error_messages_for vote_pledge %}</div>
+      <div id="vote_pledge_form" class="vote-pledge-form">
+        <a href="{{ homepage_excerpt.vote_pledge.yes_url }}" class="btn btn-primary btn-block get">
+          Yes, I support {{ site.candidate_first_name_or_site_name }}.
+        </a>
+        <a href="{{ homepage_excerpt.vote_pledge.unsure_url }}" class="btn btn-secondary btn-block get">
+          I might support {{ site.candidate_first_name_or_site_name }}.
+        </a>
+        <a href="{{ homepage_excerpt.vote_pledge.no_url }}" class="btn btn-danger btn-block get">
+          No, I do not support {{ site.candidate_first_name_or_site_name }}.
+        </a>
+      </div>
+    </div>
+    {% if homepage_excerpt.text_keyword_instructions.size > 0 %}
+      <div class="mt-3">
+        or {{ homepage_excerpt.text_keyword_instructions }}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>

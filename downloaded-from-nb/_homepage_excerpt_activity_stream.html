@@ -1,0 +1,30 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Activity stream</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+{% if request.logged_in? %}
+  <div id="stream">
+    <div class="reaction-wrap" id="reactions">
+      <ul id="stream-activities" class="activities list-group list-group-flush">
+        {% for activity in homepage_excerpt.activity_stream.activities_following limit:5 %}
+          <li class="activity list-group-item list-group-item d-flex bg-transparent">
+            <div class="stream-pic pr-2">
+              <img src="{{ activity.signup.profile_image_url }}" width="24" height="24" class="rounded-circle" />
+            </div>
+            {{ activity.show }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
+{% comment %} Not signed in or authenticated {% endcomment %}

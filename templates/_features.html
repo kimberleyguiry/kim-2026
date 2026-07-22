@@ -1,0 +1,39 @@
+{% if page.features_count > 0 %}
+  {% if page.features.size > 0 %}
+
+    {% assign first_feature_height = page.features.first.image_height %}
+
+    {% if page.features.size == 1 %}
+      {% assign first_feature_height = 'none' %}
+    {% endif %}
+
+    <div class="container mb-4">
+      <div id="page-features" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+        {% for feature in page.features %}
+          <li data-target="#page-features" data-slide-to="{{forloop.index0}}" {% if forloop.first %}class="active"{% endif %}></li>
+        {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+          {% for feature in page.features %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <a href="{{ feature.page.url }}" class="d-block position-relative">
+              <img src="{{ feature.image_url }}" class="d-block w-100 h-auto" height="{{ feature.image_height }}" width="{{ feature.image_width }}"/>
+              {% if feature.headline.size > 0 %}
+              <div class="container display-4 text-light position-absolute p-md-5">
+                <div class="row">
+                  <div class="col col-md-8">
+                    {{ feature.headline }}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  {% endif %}
+{% endif %}

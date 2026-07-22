@@ -1,0 +1,243 @@
+<div class="row">
+  <div class="col-lg-9 mx-auto">
+    {% if page.headline.size > 0 %}
+      <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+
+    {% if page.payments.content.size > 0 %}
+      <div id="intro" class="intro">
+        {{ page.payments.content }}
+      </div>
+    {% endif %}
+
+    {% form_for donation %}
+      <div class="form">
+        <div class="form-errors">{% error_messages_for donation %}</div>
+
+        {% if page.payments.has_merchant_account? == false %}\
+          <p class="text-danger"><strong>No bank account:</strong> This page will not work until you add a bank account</p>
+        {% elsif page.payments.merchant_account.is_test_mode? %}
+          <p class="text-danger"><strong>Testing mode:</strong> Transactions will not be processed. Use <u><a href="https://stripe.com/docs/testing#cards" class="red">testing cards</a></u> only.</p>
+        {% endif %}
+
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="donation_first_name">First Name</label>
+            {% text_field "first_name", class:"form-control" %}
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="donation_last_name">Last Name</label>
+            {% text_field "last_name", class:"form-control" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="donation_billing_address_country_code">Country</label>
+          {% select_field "billing_address.country_code", page.payments.countries, "code", "name", class:"form-control select" %}
+        </div>
+        <div class="form-group">
+          <label for="donation_billing_address_address1">Billing Address</label>
+          {% text_field "billing_address.address1", class:"form-control" %}
+          {% text_field "billing_address.address2", class:"form-control" %}
+          {% text_field "billing_address.address3", class:"form-control not-us-or-canada hide" %}
+        </div>
+        <div class="form-row">
+          <div class="form-group col col-md-4">
+            <label for="donation_billing_address_city">City</label>
+            {% text_field "billing_address.city", class:"form-control" %}
+          </div>
+          <div class="form-group col col-md-4 us-or-canada us-only hide">
+            <label for="donation_state">State</label>
+            {% select_field "billing_address.state", page.payments.us_states, "code", "name", class:"form-control select" %}
+          </div>
+          <div class="form-group col col-md-4 us-or-canada canada-only hide">
+            <label for="donation_billing_address_state">State</label>
+            {% text_field "billing_address.state", class:"form-control" %}
+          </div>
+          <div class="form-group col col-md-4">
+            <label for="donation_billing_address_zip">Postal code</label>
+            {% text_field "billing_address.zip", class:"form-control" %}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label for="donation_email">Email</label>
+            {% email_field "email", class:"form-control" %}
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="donation_billing_address_phone_number">Phone</label>
+            {% phone_field "billing_address.phone_number", class:"form-control" %}
+          </div>
+        </div>
+        {% unless page.show_consent_form? %}
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              {% check_box "email_opt_in", class:'custom-control-input' %}
+              <label class="custom-control-label" for="donation_email_opt_in">Send email updates</label>
+            </div>
+          </div>
+        {% endunless %}
+
+        {% if page.payments.merchant_account.is_employer_and_occupation_required? %}
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label for="donation_employer">Employer</label>
+              {% text_field "employer", class:"form-control", required:"required" %}
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label for="donation_occupation">Occupation</label>
+              {% text_field "occupation", class:"form-control", required:"required" %}
+            </div>
+          </div>
+          {% if page.payments.merchant_account.is_employer_address_required? %}
+            <div class="form-row">
+              <div class="form-group">
+                <label for="donation_work_address_country">Employer Country</label>
+                {% select_field "work_address.country_code", page.payments.countries, "code", "name", class:"form-control select", required:"required" %}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="donation_work_address_address1">Employer Address</label>
+                {% text_field "work_address.address1", class:"form-control", required:"required" %}
+                {% text_field "work_address.address2", class:"form-control" %}
+                {% text_field "work_address.address3", class:"form-control work-not-us-or-canada hide" %}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col col-md-4">
+                <label for="donation_work_address_city">Employer City</label>
+                {% text_field "work_address.city", class:"form-control", required:"required" %}
+              </div>
+              <div class="form-group col col-md-5 work-us-or-canada">
+                <label for="donation_work_address_state">State</label>
+                {% text_field "work_address.state", class:"form-control", required:"required" %}
+              </div>
+              <div class="form-group col-md-3">
+                <label for="donation_work_address_zip">Postal code</label>
+                {% text_field "work_address.zip", class:"form-control", required:"required" %}
+              </div>
+            </div>
+          {% elsif page.payments.merchant_account.is_employer_city_required? %}
+            <div class="form-row">
+              <div class="form-group">
+                <label for="donation_work_address_country">Employer Country</label>
+                {% select_field "work_address.country_code", page.payments.countries, "code", "name", class:"form-control select", required:"required" %}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col col-md-4">
+                <label for="donation_work_address_city">Employer City</label>
+                {% text_field "work_address.city", class:"form-control", required:"required" %}
+              </div>
+              <div class="form-group col col-md-5 work-us-or-canada hide">
+                <label for="donation_work_address_state">State</label>
+                {% text_field "work_address.state", class:"form-control", required:"required" %}
+              </div>
+              <div class="form-group col-md-3">
+                <label for="donation_work_address_zip">Postal code</label>
+                {% text_field "work_address.zip", class:"form-control", required:"required" %}
+              </div>
+            </div>
+          {% endif %}
+          <div class="form-row">
+            <div class="form-group">
+              <p>Law requires we ask for your employer and occupation. If you don't have an employer or are retired, put N/A, and if you are self-employed put "self-employed" in employer and describe your occupation.</p>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if page.payments.merchant_account.is_corporate_contribution_required? %}
+          <div class="form-row">
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                {% check_box "is_corporate_contribution", class:"custom-control-input" %}
+                <label class="custom-control-label" for="donation_is_corporate_contribution">This is a contribution from a business.</label>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% for cf in custom_fields.donation %}
+          {% assign custom_field = cf[1] %}
+          {% assign custom_field_id = 'custom_values.' | append: custom_field.slug %}
+          <div class="form-row">
+            <div class="form-group col">
+              {% if custom_field.is_text? or custom_field.is_number? %}
+                <label for="donation_custom_values_{{ custom_field.slug }}_custom">{{ custom_field.name }}</label>
+                {% text_field custom_field_id, class:"form-control" %}
+              {% elsif custom_field.is_boolean? %}
+                <div class="custom-control custom-checkbox">
+                  <label class="custom-control-input" for="donation_custom_values_{{ custom_field.slug }}_custom">{{ custom_field.name }}</label>
+                  {% check_box custom_field_id, class:"custom-control-label" %}
+                </div>
+              {% elsif custom_field.is_multiple_choice? %}
+                <label for="donation_custom_values_{{ custom_field.slug }}_custom">{{ custom_field.name }}</label>
+                {% select_field custom_field_id, custom_fields.donation[custom_field.slug].multiple_choice_options, class:"form-control select" %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+
+        {% if page.payments.merchant_account.is_taxable? %}
+          <p>Contributions are <i>not</i> tax deductible.</p>
+        {% else %}
+          <p>Contributions are tax deductible.</p>
+        {% endif %}
+
+        <div class="form-group col-12 col-md-6">
+          <label for="donation_amounts">Amount</label>
+          {% if page.payments.amount_in_cents != 0 %}
+            <h4 class="mb-0">{{ page.payments.amount_formatted }}</h4>
+          {% else %}
+            {{ page.payments.form_amount_options }}
+          {% endif %}
+
+          {% if page.payments.donation_frequency == "any" %}
+            {{ page.payments.monthly_recurring_check_box }}
+          {% elsif page.payments.donation_frequency == "monthly" %}
+            <p>Your credit card will be billed automatically every month</p>
+          {% endif %}
+        </div>
+
+        <div class="form-group col-12 col-md-6">
+          {% payment_field 'card' %}
+        </div>
+
+        {% if page.payments.merchant_account.has_contribution_rules? %}
+          <div class="form-group">
+            <label for="is_confirmation_text"><strong>Contribution rules</strong></label>
+            {{ page.payments.merchant_account.contribution_rules }}
+            <div class="custom-control custom-checkbox">
+              {% check_box "is_confirmed", class:"custom-control-input" %}
+              <label for="donation_is_confirmed" class="custom-control-label">I confirm that the above statements are true and accurate.</label>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if site.ask_to_publish_to_stream? and page.show_stream? %}
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <label for="donation_is_private" class="custom-control-input">
+              {% check_box "is_private", class:"custom-control-label" %} Don't publish my donation on the website.</label>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="form-group">
+          {% submit_tag "Process Donation", class:"btn btn-primary submit-button" %}
+        </div>
+        <div class="form-submit"></div>
+      </div>
+    {% endform_for %}
+
+    {% if page.tags_count > 0 %}
+      <div class="page-tags">
+        {% include "page_tags" with page %}
+      </div>
+    {% endif %}
+
+    {% if page.show_stream? %}
+      {% include "page_stream" %}
+    {% endif %}
+  </div>
+</div>

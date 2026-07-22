@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page_title }}</title>
+
+    <link href="theme.scss" rel="stylesheet" />
+
+    <!-- start of content for header -->
+    {{ content_for_header }}
+    <!-- end of content for header -->
+
+    <script type="text/javascript">
+      NB.appConfig.userIsLoggedIn = {{ request.logged_in? }};
+    </script>
+
+  </head>
+  <body class="bootstrap-theme v3-theme {%if page.is_homepage? %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
+
+    {% unless page.type_name == "Donation (v2)" %}
+      {% include "header" %}
+      {% if site.has_header_image? %}
+        <div class="container mb-4">
+          <img src="{{ site.header_image_url_1026 }}" class="mw-100" border="0" />
+        </div>
+      {% endif %}
+      {% if page.features_count > 0 %}
+        {% include "features" %}
+      {% endif %}
+      <main id="content" role="main">
+        {% include "content", sidebar: request.is_sidebar? %}
+      </main>
+      {% include "footer" %}
+    {% else %}
+      {% yield %}
+    {% endunless %}
+
+    {{ content_for_notifications }}
+
+    {{ content_for_footer }}
+
+    {% if site.has_background_image? %}
+    <style>
+      body {
+        background: url('{{ site.background_image_url }}') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+    {% endif %}
+
+    <script src="bootstrap.min.js"></script>
+    <script src="bs-custom-file-input.min.js"></script>
+    <script src="theme.js"></script>
+  </body>
+</html>

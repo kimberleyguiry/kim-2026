@@ -1,0 +1,68 @@
+{% if page.headline.size > 0 %}
+  <h2 class="mb-3">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+  {% if page.blog.is_posting_public? %}
+    <div class="card bg-light mb-4">
+      <div class="card-body">
+      {% form_for blog_post_page %}
+        <div class="form-errors">{% error_messages_for blog_post_page %}</div>
+
+        <div id="blog-post-page-page-headline-input" class="blog-post-page-page-headline-input form-group mb-0">
+          {% text_field "page_headline", class:"form-control text", placeholder: page.blog.public_posting_prompt %}
+        </div>
+
+        <div id="blog-post-page-form-expanded" class="blog-post-page-form-expanded mt-4 hide">
+          <div class="form-group">
+            {% text_area "content_editable", class:"form-control textarea-tinymce" %}
+          </div>
+          {% if page.show_consent_form? %}
+            {% include "consent_form" %}
+          {% endif %}
+          <div class="form-group">
+            {% submit_tag "Post", class:"btn btn-primary submit-button" %}
+            <div class="form-submit"></div>
+          </div>
+        </div>
+      {% endform_for %}
+
+      {% unless request.logged_in? %}
+        <div class="user-session-form-container hide">
+          {% include "user_session_form" %}
+        </div>
+      {% endunless %}
+      </div>
+    </div>
+  {% endif %}
+
+  <ul class="list-unstyled mb-4" id="blog-page-{{ page.id }}">
+    {% for post in page.blog.most_recent_blog_posts %}
+      <li class="{% unless forloop.last == true %}mb-4 pb-4 border-bottom{% endunless %}" id="blog-post-page-{{ post.id }}">
+        <header class="mb-3">
+          <h3 class="mb-1"><a href="{{ post.url }}">{{ post.headline }}</a></h3>
+
+          <p class="small text-muted">
+            Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+            {% if post.show_stream? and post.public_activities_count > 0 %}
+              &middot;
+              <a href="{{ post.url }}#addreaction">
+                {{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}
+              </a>
+            {% endif %}
+          </p>
+        </header>
+
+        <div class="mb-2">
+          {{ post.blog_post.content }}
+          {% if post.blog_post.is_extended? %}
+            <p class="mt-2"><a href="{{ post.url }}">Read more</a></p>
+          {% endif %}
+        </div>
+
+      </li>
+    {% endfor %}
+  </ul>
+
+  {{ page.blog.most_recent_blog_posts | paginate prev_label: "Previous" next_label: "Next" }}
+</div>

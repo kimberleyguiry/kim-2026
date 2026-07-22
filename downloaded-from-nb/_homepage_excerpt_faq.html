@@ -1,0 +1,30 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Frequently asked questions</a>
+    </h3>
+  {% else %}
+    <h4 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h4>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+  {% if homepage_excerpt.faq.content.size > 0 %}
+    {{ homepage_excerpt.faq.content }}
+  {% endif %}
+</div>
+<ul class="question-list list-group list-group-flush">
+  {% for child in homepage_excerpt.children %}
+    {% if child.type_name == 'Question' %}
+      <li class="list-group-item">
+        <a href="{{ child.url }}">{{ child.headline }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+<div class="card-footer continue">
+  <small><a href="{{ post.url }}">Read all FAQs</a></small>
+</div>

@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-body">
+    {% include "profile_excerpt" %}
+  </div>
+
+  {% if request.current_signup.has_parent? %}
+    <div class="card-body border-top">
+      <div class="media">
+        <div class="point-pic-left mr-3">
+          {% include "avatar", signup: request.current_signup.parent, size: 24 %}
+        </div>
+        <div class="point-pic-right media-body">
+          <div class="byline text-muted small">
+            Point person: {{ request.current_signup.parent.published_name_linked }}
+          </div>
+          {% if request.current_signup.parent.has_twitter_info? %}
+            <a href="{{ request.current_signup.parent.twitter_profile_url }}">{% include "svg_icon", name: "twitter" %}</a>
+          {% endif %}
+
+          {% if request.current_signup.parent.has_facebook_info? %}
+            <a href="{{ request.current_signup.parent.facebook_profile_url }}">{% include "svg_icon", name: "facebook" %}</a>
+          {% endif %}
+
+          {% if request.current_signup.parent.has_email? %}
+            <a href="mailto:{{ request.current_signup.parent.email }}">{% include "svg_icon", name: "mail" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="supporter-nav list-group list-group-flush">
+    <a class="list-group-item list-group-item-action {% if page_type == 'User Page' %}active{% endif %}" href="{{ site.edit_pages_url }}">Your pages</a>
+    {% for child in site.supporter_pages %}
+      <a class="list-group-item list-group-item-action {% if page == child %}active{% endif %}" href="{{ child.url }}">{{ child.name }}</a>
+    {% endfor %}
+  </div>
+
+  {% include "site_buttons" %}
+
+  {% if page and page.has_rss? or page and page.has_parent? and page.parent.has_rss? %}
+    <div class="card-footer">
+      {% if page and page.has_rss? %}
+        <a class="small" href="{{ page.rss_url }}">{% include "svg_icon" name: "rss", class: "mr-1" %} Subscribe with RSS</a>
+      {% elsif page and page.has_parent? and page.parent.has_rss? %}
+        <a class="small" href="{{ page.parent.rss_url }}">{% include "svg_icon" name: "rss", class: "mr-1" %} Subscribe with RSS</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+</div>

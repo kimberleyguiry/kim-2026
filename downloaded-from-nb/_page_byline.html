@@ -1,0 +1,4 @@
+<div class="byline text-muted small">
+  Posted by {{ page.author.published_name_linked }} <span class="badge badge-secondary">{{ page.author.capital_amount_format }}</span> on {{ page.published_at | date: '%B %d, %Y' }}
+  {% if site.has_rule_page? and request.logged_in? %}&middot; <a href="{{ page.flag_url }}" class="flag get">Flag</a>{% endif %}
+</div>

@@ -1,0 +1,89 @@
+{% if request.sorta_logged_in? and request.current_signup.has_a_login? == true %}
+  {% form_for user_session %}
+    <div class="form-errors">{% error_messages_for user_session %}</div>
+    {% hidden_field_tag "user_session[email]", request.current_signup.email %}
+    <div class="form-row">
+      <div class="form-group col-auto">
+        {% submit_tag "Sign in", class:"btn btn-primary submit-button" %}
+      </div>
+      <div class="form-group col">
+        <a href="{{ request.new_password_reset_url }}">Forgot your password?</a>
+      </div>
+    </div>
+    <div class="form-submit"></div>
+    <p>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">sign out</a>.</p>
+  {% endform_for %}
+{% elsif request.sorta_logged_in? and request.current_signup.has_a_login? == false and settings.allow_account_creation? %}
+  {% form_for account %}
+    <div class="form-group">
+      {% hidden_field_tag "account[email]", request.current_signup.email %}
+      {% submit_tag "Email account activation instructions" , class:"btn btn-primary submit-button" %}
+    </div>
+    <div class="form-submit"></div>
+  {% endform_for %}
+  <p>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">sign out</a>.</p>
+{% else %}
+  <div class="row">
+    <div class="sign-in-with-email col-12 col-md-8 mt-3 mt-md-0">
+      {% form_for user_session %}
+        <h4 class="h5">Sign in with email</h4>
+        <div class="form-row">
+          {% error_messages_for user_session %}
+          <div class="form-group col-sm-6">
+            {% email_field "email", class:"form-control", placeholder:"Email Address" %}
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="hidden" name="ajax" value="true">
+          <ul class="errors warning"></ul>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            {% if page.suggestion %}
+              {% submit_tag "Post your reaction", class:"btn btn-primary post-comment" %}
+            {% elsif page.blog %}
+              {% submit_tag "Sign in to add your post", class:"btn btn-primary post" %}
+            {% else %}
+              {% submit_tag "Post your comment", class:"btn btn-primary post-comment" %}
+            {% endif %}
+
+            {% if settings.allow_account_creation? %}
+              <span class="or-create-account">
+                or
+                <a href="#" class="create-account-link">Create an account</a>
+              </span>
+            {% endif %}
+          </div>
+          <div class="form-submitting"></div>
+        </div>
+      {% endform_for %}
+    </div>
+    {% if settings.allow_account_creation? %}
+      <div class="form-group col-md-8 sign-up" style="display: none;">
+        {% form_for account %}
+          <h4>Create an account</h4>
+          {% error_messages_for account %}
+          <div class="form-group">
+          {% email_field "email", class:"form-control text", placeholder:"Email Address" %}
+          </div>
+          <input type="hidden" name="ajax" value="true"/>
+          <ul class="errors warning"></ul>
+          <div class="form-row">
+            <div class="form-group">
+              {% submit_tag "Create account", class:"btn btn-primary submit-button post-comment" %}
+              <span class="email-sign-in">
+                or
+                <a href="#" class="sign-in-with-email-link">Sign in with email</a>
+              </span>
+            </div>
+            <div class="form-submitting"></div>
+          </div>
+        {% endform_for %}
+        </div>
+      </div>
+      <a name="activation"></a>
+      <div class="form-group activation-message d-none">
+          Please check your e-mail for a link to activate your account.
+      </div>
+    {% endif %}
+{% endif %}

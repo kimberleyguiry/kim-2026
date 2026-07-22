@@ -1,0 +1,33 @@
+<article class="d-flex">
+  <div class="mr-3">
+    {% include "avatar" signup: signup, size: 64 %}
+  </div>
+
+  <div class="d-md-flex w-100">
+    <div>
+      <p class="d-inline-flex align-items-center m-0"><span class="h5 mb-0">{{ signup.published_name_linked }}</span> <span class="badge badge-secondary ml-1">{{ signup.capital_amount_format }}</span></p>
+      {% if signup.has_facebook_info? or signup.has_twitter_info? %}
+      <p class="mt-1 mb-2">
+        {% if signup.has_facebook_info? %}
+        <a class="mr-1" href="{{ signup.facebook_profile_url }}">
+          <span class="sr-only">Facebook</span>
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="24" fill="currentcolor" viewBox="-143 145 512 512"><path d="M329 145h-432c-22.1 0-40 17.9-40 40v432c0 22.1 17.9 40 40 40h432c22.1 0 40-17.9 40-40V185c0-22.1-17.9-40-40-40zM169.5 357.6l-2.9 38.3h-39.3v133H77.7v-133H51.2v-38.3h26.5v-25.7c0-11.3.3-28.8 8.5-39.7 8.7-11.5 20.6-19.3 41.1-19.3 33.4 0 47.4 4.8 47.4 4.8l-6.6 39.2s-11-3.2-21.3-3.2-19.5 3.7-19.5 14v29.9h42.2z"/></svg>
+        </a>
+        {% endif %}
+        {% if signup.has_twitter_info? %}
+        <a href="{{ signup.twitter_profile_url }}">
+          <span class="sr-only">Twitter</span>
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="24" fill="currentcolor" viewBox="-143 145 512 512"><path d="M329 145h-432c-22.1 0-40 17.9-40 40v432c0 22.1 17.9 40 40 40h432c22.1 0 40-17.9 40-40V185c0-22.1-17.9-40-40-40zM215.2 361.2c.1 2.2.1 4.5.1 6.8 0 69.5-52.9 149.7-149.7 149.7-29.7 0-57.4-8.7-80.6-23.6 4.1.5 8.3.7 12.6.7 24.6 0 47.3-8.4 65.3-22.5-23-.4-42.5-15.6-49.1-36.5 3.2.6 6.5.9 9.9.9 4.8 0 9.5-.6 13.9-1.9-24.1-4.8-42.2-26.1-42.2-51.6v-.6c7.1 3.9 15.2 6.3 23.8 6.6-14.1-9.4-23.4-25.6-23.4-43.8 0-9.6 2.6-18.7 7.1-26.5 26 31.9 64.7 52.8 108.4 55-.9-3.8-1.4-7.8-1.4-12 0-29 23.6-52.6 52.6-52.6 15.1 0 28.8 6.4 38.4 16.6 12-2.4 23.2-6.7 33.4-12.8-3.9 12.3-12.3 22.6-23.1 29.1 10.6-1.3 20.8-4.1 30.2-8.3-7 10.6-15.9 19.8-26.2 27.3z"/></svg>
+        </a>
+        {% endif %}
+      </p>
+      {% endif %}
+    </div>
+
+    <div class="ml-auto text-md-right people-list-follow">
+      <div id="signup_follow_{{ signup.id }}">
+        {% include "signup_follow" with signup %}
+      </div>
+    </div>
+  </div>
+</article>

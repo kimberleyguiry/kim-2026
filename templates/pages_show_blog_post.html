@@ -1,0 +1,31 @@
+<header class="mb-3">
+  <h2 class="mb-0">{{ page.headline }}</h2>
+
+  {% if page.has_author? %}
+  <div class="mt-1">
+    {% include "page_byline" %}
+  </div>
+  {% endif %}
+</header>
+
+<div id="content">
+
+  <div id="intro" class="intro">
+    <div class="content">
+      {{ page.blog_post.content_full }}
+    </div>
+  </div>
+
+  {% if page.tags_count > 0 %}
+  <div class="page-tags mt-4">
+    {% include "page_tags" with page %}
+  </div>
+  {% endif %}
+
+  {% include "like_page" %}
+
+  {% if page.show_stream? %}
+    {% include "page_stream" %}
+  {% endif %}
+
+</div>

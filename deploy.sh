@@ -18,9 +18,9 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-NB_HOST="https://KIM_NB_SLUG.nationbuilder.com"
-NB_THEME_ID="REPLACE_WITH_THEME_ID"
-NB_UPLOAD_URL="$NB_HOST/admin/sites/REPLACE_WITH_SITE_ID/themes/$NB_THEME_ID/attachments?browser_id=default"
+NB_HOST="http://kimguiry-langford2026electioncampaign.nationbuilder.com/" 
+NB_THEME_ID="100"
+NB_UPLOAD_URL="$NB_HOST/admin/sites/100/themes/$NB_THEME_ID/attachments?browser_id=default"
 
 DEPLOY_SHA_FILE=".last-deploy-sha"
 COOKIE_FILE=".nb-cookies"

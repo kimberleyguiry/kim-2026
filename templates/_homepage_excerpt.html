@@ -1,0 +1,75 @@
+
+  {% case homepage_excerpt.type_name %}
+  <!-- Activity stream page -->
+  {% when "Activity Stream" %}
+    {% include "homepage_excerpt_activity_stream" %}
+  <!-- Basic page -->
+  {% when "Basic" %}
+    {% include "homepage_excerpt_basic" %}
+  <!-- Blog page -->
+  {% when "Blog" %}
+    {% include "homepage_excerpt_blog" %}
+  <!-- Blog post page -->
+  {% when "Blog Post" %}
+    {% include "homepage_excerpt_blog_post" %}
+  <!-- Calendar page -->
+  {% when "Calendar" %}
+    {% include "homepage_excerpt_calendar" %}
+  <!-- Donation page -->
+  {% when "Donation" %}
+    {% include "homepage_excerpt_donation" %}
+  <!-- Donation page v2 -->
+  {% when "Donation (v2)" %}
+    {% include "homepage_excerpt_donation_v2" %}
+  <!-- Endorsement page -->
+  {% when "Endorsement" %}
+    {% include "homepage_excerpt_endorsement" %}
+  <!-- Event page -->
+  {% when "Event" %}
+    {% include "homepage_excerpt_event" %}
+  <!-- FAQ page -->
+  {% when "FAQ" %}
+    {% include "homepage_excerpt_faq" %}
+  <!-- Feedback page -->
+  {% when "Feedback" %}
+    {% include "homepage_excerpt_feedback" with homepage_excerpt.slug %}
+  <!-- Leaderboard page -->
+  {% when "Leaderboard" %}
+    {% include "homepage_excerpt_leaderboard" %}
+  <!-- Moneybomb page -->
+  {% when "Moneybomb" %}
+    {% include "homepage_excerpt_moneybomb" %}
+  <!-- Petition page -->
+  {% when "Petition" %}
+    {% include "homepage_excerpt_petition" with homepage_excerpt.slug %}
+  <!-- Press release page -->
+  {% when "Press Release" %}
+    {% include "homepage_excerpt_press_release" %}
+  <!-- Question page -->
+  {% when "Question" %}
+    {% include "homepage_excerpt_question" %}
+  <!-- Recruiting page -->
+  {% when "Recruiting" %}
+    {% include "homepage_excerpt_recruiting" %}
+  <!-- Rules page -->
+  {% when "Rules" %}
+    {% include "homepage_excerpt_rules" %}
+  <!-- Signup page -->
+  {% when "Signup" %}
+    {% include "homepage_excerpt_signup" with homepage_excerpt.slug %}
+  <!-- Suggestion box page -->
+  {% when "Suggestion Box" %}
+    {% include "homepage_excerpt_suggestion_box" %}
+  <!-- Suggestion page -->
+  {% when "Suggestion" %}
+    {% include "homepage_excerpt_suggestion" %}
+  <!-- Survey page -->
+  {% when "Survey" %}
+    {% include "homepage_excerpt_survey" %}
+  <!-- Volunteer signup page -->
+  {% when "Volunteer Signup" %}
+    {% include "homepage_excerpt_volunteer_signup" with homepage_excerpt.slug %}
+  <!-- Vote pledge page -->
+  {% when "Vote Pledge" %}
+    {% include "homepage_excerpt_vote_pledge" with homepage_excerpt.slug %}
+  {% endcase %}

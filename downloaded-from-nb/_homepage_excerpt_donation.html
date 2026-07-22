@@ -1,0 +1,47 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Donate</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+  {% if homepage_excerpt.donation.has_amount_goal? %}
+    <div class="mb-3">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{ homepage_excerpt.donation.percent_of_amount_goal | times:100 }}%;" aria-valuenow="{{ homepage_excerpt.donation.percent_of_amount_goal | times:100 }}" aria-valuemin="0" aria-valuemax="100">
+          {% if homepage_excerpt.donations_count < 1 %}
+            <span class="px-1 text-muted">Just started</span>
+          {% else %}
+            {{ homepage_excerpt.donations_amount_format }} <span class="sr-only">raised</span>
+          {% endif %}
+        </div>
+      </div>
+      <small class="text-muted">Raised goal of {{ homepage_excerpt.donation.amount_goal_format }}</small>
+    </div>
+  {% elsif homepage_excerpt.donation.has_donor_goal? %}
+    <div class="mb-3">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{ homepage_excerpt.donation.percent_of_donor_goal | times:100 }}%;" aria-valuenow="{{ thermo_width }}" aria-valuemin="0" aria-valuemax="100">
+          {% if homepage_excerpt.donations_count < 2 %}
+            <span class="px-1 text-muted">Just started</span>
+          {% else %}
+            {{ homepage_excerpt.donations_count }} <span class="sr-only">donors</span>
+          {% endif %}
+        </div>
+      </div>
+      <small class="text-muted">{{ homepage_excerpt.donation.donor_goal }} donors</small>
+    </div>
+  {% endif %}
+
+  {% if homepage_excerpt.donation.content.size > 0 %}
+    {{ homepage_excerpt.donation.content }}
+  {% endif %}
+
+  <a class="btn btn-primary" href="{{ homepage_excerpt.url }}">Donate</a>
+</div>

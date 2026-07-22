@@ -1,0 +1,57 @@
+<div class="col-12 col-md-4 pt-4 pt-md-0">
+
+  {% include "subnav" %}
+
+  {% if request.logged_in? %}
+    {% include "supporter_nav" %}
+  {% else %}
+    <div class="card">
+      <div class="card-body">
+        {% if site.has_signup_page? %}
+          {% if request.logged_in? %}
+          {% elsif request.sorta_logged_in? %}
+            <p class="mb-0">
+              Hi <strong>{{ request.current_signup.name_or_email }}!</strong><br/>
+              Sign in with <a href="/login">email</a>.<br/>
+              <small class="d-block text-muted">If you are not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}" class="text-reset">sign out</a>.</small>
+            </p>
+          {% else %}
+            <a class="btn btn-outline-primary w-100 mt-1" href="/login">Sign in with Email</a>
+            {% if settings.allow_account_creation? %}
+              <p class="text-center mb-0 mt-2"> or <a href="{{ site.signup_page.url }}">Create an account</a></p>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          <a class="btn btn-outline-primary w-100" href="/login">Sign in with Email</a>
+        {% endif %}
+      </div>
+
+      {% unless request.logged_in? or request.sorta_logged_in? %}
+        <div class="card-body border-top">
+          {% form_for signup %}
+            {% hidden_field_tag "page_id", page.id %} <div class="form-errors">{% error_messages_for signup %}</div>
+            <div class="input-group">
+              {% email_field "email", class:"form-control", placeholder:"Email address", required: "required" %}
+              <div class="input-group-append">
+              {% submit_tag "Join", class:"btn btn-primary" %}
+              </div>
+            </div>
+            <div class="form-submit"></div>
+          {% endform_for %}
+        </div>
+      {% endunless %}
+
+      {% include "site_buttons" %}
+
+      {% if page and page.has_rss? or page and page.has_parent? and page.parent.has_rss? %}
+        <div class="card-footer">
+          {% if page and page.has_rss? %}
+            <a class="small" href="{{ page.rss_url }}">{% include "svg_icon" name: "rss", class: "mr-1" %} Subscribe with RSS</a>
+          {% elsif page and page.has_parent? and page.parent.has_rss? %}
+            <a class="small" href="{{ page.parent.rss_url }}">{% include "svg_icon" name: "rss", class: "mr-1" %} Subscribe with RSS</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

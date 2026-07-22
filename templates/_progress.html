@@ -1,0 +1,38 @@
+{% comment %}
+
+  Use this to display a progress bar.
+  -------
+  EXAMPLE
+  -------
+  {% include "progress"
+    percent: page.endorsement.percent_of_goal,
+    amount: page.endorsement.percent_of_goal,
+    count: page.endorsement.endorsements_count,
+    goal: page.endorsement.goal,
+    label: "endorsement"
+  %}
+
+{% endcomment %}
+
+{% if percent <= 1 %}
+  {% assign finalPercent = percent | times: 100 %}
+{% else %}
+  {% assign finalPercent = percent %}
+{% endif %}
+
+{% assign count_num = count | plus: 0 %}
+
+<div class="progress bg-dark" data-percent="{{ finalPercent }}" data-count="{{ count_num }}" data-goal="{{goal}}" data-amount="{{ amount }}" style="height:{%if size%}{{ size }}{%else%}2rem{%endif%};">
+  <div class="progress-bar py-2" role="progressbar" style="width: {{ finalPercent }}%;" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100">
+    <span class="px-2 d-block">
+      {% if count_num < 2 %}
+        Just started
+      {% else %}
+        {% if amount %}{{ amount }}{% else %}{{ count | number_with_commas }}{% endif %} {{ label }}
+      {% endif %}
+    </span>
+  </div>
+</div>
+<small class="text-muted">
+  Goal: {{ goal }} {{ label }}
+</small>

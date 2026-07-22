@@ -1,0 +1,26 @@
+<footer class="{% unless page.type_name == 'Donation (v2)' %}mt-5{% endunless %} py-5 bg-light border-top">
+  <div class="container {% if page.type_name == 'Donation (v2)' %}px-md-5{% endif %}" {% if site.has_background_image? %}style="{% if page.type_name == 'Donation (v2)' %}max-width:740px;{% endif %}"{% endif %}>
+    <div class="row justify-content-between">
+      <div class="col-12 col-md-8">
+        {% if site.footer_content.size > 0 %}
+          {{ site.footer_content }}
+        {% endif %}
+        {% if request.logged_in? %} Hi
+        <a href="{{ request.current_signup.settings_url }}">{{
+          request.current_signup.name_or_email
+        }}</a
+        >. View your {% if site.show_public_profiles? %}
+        <a href="{{ request.current_signup.profile_url }}">public profile</a>, {%
+        endif %}
+        <a href="{{ request.current_signup.settings_url }}">account settings</a>,
+        or <a href="{{ request.current_signup.logout_url }}">sign out</a>. {% else
+        %} Sign in with <a href="/login">Email</a>. {% endif %}
+      </div>
+      <div class="col-12 col-md-auto">
+        <!-- The NationBuilder link below is required. If it is removed, we may add it back ourselves.
+              You can style it or move it in different ways, but please leave it in the footer. -->
+        Created with <a href="{{ site.attribution_url }}">NationBuilder</a>
+      </div>
+    </div>
+  </div>
+</footer>

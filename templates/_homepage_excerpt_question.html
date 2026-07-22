@@ -1,0 +1,18 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured question</a>
+  </h3>
+</div>
+
+<div class="card-body">
+  <h4 class="excerpt-title">
+    <a href="{{ post.url }}">{{ homepage_excerpt.headline }}</a>
+  </h4>
+  {% if homepage_excerpt.question.content.size > 0 %}
+    {{ homepage_excerpt.question.content }}
+  {% endif %}
+  {% if homepage_excerpt.question.answer.size > 0 %}
+    <h5>Answer</h5>
+    {{ homepage_excerpt.question.answer }}
+  {% endif %}
+</div>

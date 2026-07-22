@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-lg-9 mx-auto">
+
+    {% if page.nation_sandbox_signup.content.size > 0 %}
+      {{ page.nation_sandbox_signup.content }}
+    {% endif %}
+
+    <div class="form">
+      {% if request.sorta_logged_in? %}
+        <h2 class="headline">Hi {{ request.current_signup.name_or_email }}! Start your new nation.</h2>
+        {% if request.logged_in? == false %}
+          <p>If you're not {{ request.current_signup.name_or_email }}, <a href="{{ request.current_signup.logout_url }}">sign out</a>.</p>
+        {% endif %}
+      {% else %}
+        <h2 class="headline">Start your sandbox nation.</h2>
+      {% endif %}
+
+      {% form_for nation_sandbox_signup %}
+
+        <div class="form_errors">{% error_messages_for nation_sandbox_signup %}</div>
+
+      <div class="form-row">
+        <div class="form-group col col-md-6">
+          <label for="nation_sandbox_signup_first_name">Your First Name</label>
+          {% text_field "first_name", class:"form-control" %}
+        </div>
+        <div class="form-group col col-md-6">
+          <label for="nation_sandbox_signup_last_name">Your Last Name</label>
+          {% text_field "last_name", class:"form-control" %}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col col-md-6">
+          <label for="nation_sandbox_signup_email">Your Email</label>
+          {% email_field "email", class:"form-control" %}
+        </div>
+        <div class="form-group col col-md-6">
+          <label for="nation_sandbox_signup_phone">Your Phone Number</label>
+          {% text_field "phone", class:"form-control" %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+        {% check_box "accept_tos", class:"custom-control-input" %}
+        <label class="custom-control-label">I agree to the <a href="https://nationbuilder.com/tos" target="_blank">NationBuilder terms of service</a></label>
+      </div>
+
+      <div class="form-group ">
+        {% submit_tag "Start your sandbox nation", class:"btn btn-primary submit-button" %}
+      </div>
+      <div class="form_submit"></div>
+      {% endform_for %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Donate</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+
+  {% if homepage_excerpt.donation_v2.has_amount_goal? %}
+    <div class="mb-3">
+      {% include "progress"
+        percent: homepage_excerpt.donation_v2.percent_of_amount_goal,
+        count: homepage_excerpt.donations_count,
+        amount: homepage_excerpt.donations_amount_format,
+        goal: homepage_excerpt.donation_v2.amount_goal_format,
+        label: "raised"
+      %}
+    </div>
+  {% elsif homepage_excerpt.donation_v2.has_donor_goal? %}
+    <div class="mb-3">
+      {% include "progress"
+        percent: homepage_excerpt.donation_v2.percent_of_donor_goal,
+        count: homepage_excerpt.donations_count,
+        goal: homepage_excerpt.donation_v2.donor_goal
+        label: "donors"
+      %}
+    </div>
+  {% endif %}
+
+  {% if homepage_excerpt.donation_v2.content.size > 0 %}
+    {{ homepage_excerpt.donation_v2.content }}
+  {% endif %}
+
+  <a href="{{ homepage_excerpt.url }}" class="btn btn-primary">Donate</a>
+</div>

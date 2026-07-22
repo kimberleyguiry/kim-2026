@@ -1,0 +1,13 @@
+{% unless page.is_homepage? or page.level == 0 or page.level == nil %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb border-0 bg-transparent pl-0">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      {% for ancestor in page.ancestors %}
+        {% unless ancestor.is_homepage? %}
+          <li class="breadcrumb-item"><a href="{{ ancestor.url }}">{{ ancestor.name }}</a></li>
+        {% endunless %}
+      {% endfor %}
+      <li class="breadcrumb-item active" aria-current="page" data-page-level="{{page.level}}">{{page.name}}</li>
+    </ol>
+  </nav>
+{% endunless %}

@@ -1,0 +1,65 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured event</a>
+  </h3>
+  {% else %}
+  <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+  </h3>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+  <h4 class="card-title excerpt-title">
+    <a href="{{ post.url }}">{{ homepage_excerpt.name }}</a>
+  </h4>
+
+  {% if homepage_excerpt.event.content.size > 0 %}
+    <div class="card-text">{{ homepage_excerpt.event.content }}</div>
+  {% endif %}
+
+  <small class="text-muted text-uppercase">When</small>
+  <p class="card-text">
+    {% if homepage_excerpt.event.is_multi_day? %}
+    {{ homepage_excerpt.event.local_start_at | event_time }} - {{ homepage_excerpt.event.local_end_at | event_time }}
+    {% else %}
+    {{ homepage_excerpt.event.local_start_at | event_time }}
+    {% endif %}
+  </p>
+
+  {% if homepage_excerpt.event.has_venue? %}
+    <small class="text-muted text-uppercase">Where</small>
+    <p class="card-text">
+      {% if homepage_excerpt.event.venue_name.size > 0 %}
+      {{ homepage_excerpt.event.venue_name }}<br/>
+      {% endif %}
+      {% for line in homepage_excerpt.event.venue_address.multi_line %}
+      {{ line }}<br/>
+      {% endfor %}
+      {% if homepage_excerpt.event.has_venue_address? %}
+      <a href="{{ homepage_excerpt.event.venue_address.google_map_link }}">Google map and directions</a>
+      {% endif %}
+    </p>
+  {% endif %}
+
+  <p class="card-text">
+    {% if homepage_excerpt.event.is_ticket_required? %}
+      <span class="badge badge-success">{{ homepage_excerpt.event.ticket_price_with_currency }}</span>
+    {% elsif homepage_excerpt.event.is_user_ticket_required? %}
+      <span class="badge badge-success">{{ homepage_excerpt.event.user_ticket_price_with_currency }}</span>
+    {% endif %}
+    {% if homepage_excerpt.event.show_guests? and homepage_excerpt.event.rsvps_count > 0 %}
+      <a href="{{ homepage_excerpt.url }}" class="badge badge-secondary">{{ homepage_excerpt.event.rsvps_count }} rsvp{% if homepage_excerpt.event.rsvps_count > 1 %}s{% endif %}</a>
+    {% endif %}
+  </p>
+
+</div>
+
+<div class="card-footer">
+  {% if homepage_excerpt.event.is_maximum_capacity? %}
+    <a class="btn btn-danger" href="{{ homepage_excerpt.url }}">Sold out</a>
+  {% elsif homepage_excerpt.event.is_past? == false %}
+    <a class="btn btn-primary" href="{{ homepage_excerpt.url }}">RSVP</a>
+  {% endif %}
+</div>

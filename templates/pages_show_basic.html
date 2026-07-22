@@ -1,0 +1,25 @@
+<div id="content">
+
+  {% if page.headline.size > 0 %}
+    <h2 class="mb-3">{{ page.headline }}</h2>
+  {% endif %}
+
+  {{ page.basic.content }}
+
+  {% include "page_tags" with page %}
+
+  {% if page.is_homepage? == true and site.page_tags contains "homepage" %}
+    <div class="mt-4">
+      {% tag "homepage" with "homepage_widget" %}
+    </div>
+  {% endif %}
+
+  {% include "like_page" %}
+
+  {% if page.show_stream? %}
+    <div class="mt-4">
+      {% include "page_stream" %}
+    </div>
+  {% endif %}
+
+</div>

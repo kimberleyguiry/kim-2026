@@ -1,0 +1,79 @@
+<div class="card-header">
+  {% unless homepage_excerpt.headline %}
+    <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+      <a href="{{ homepage_excerpt.url }}" class="text-muted">Moneybomb</a>
+    </h3>
+  {% else %}
+    <h3 class="excerpt-title h6 mb-0 font-weight-normal">
+      <a href="{{ post.url }}" class="text-muted">{{ homepage_excerpt.headline }}</a>
+    </h3>
+  {% endunless %}
+</div>
+
+<div class="card-body">
+
+  {% if homepage_excerpt.moneybomb.content.size > 0 %}
+    {{ homepage_excerpt.moneybomb.content }}
+  {% endif %}
+
+  {% if homepage_excerpt.moneybomb.has_start_at? and homepage_excerpt.moneybomb.is_active? == false and homepage_excerpt.moneybomb.is_past? == false %}
+    <div class="event-detail mb-3">
+      <div class="lead mb-3">Countdown to {{ homepage_excerpt.moneybomb.local_start_at | moneybomb_time }}</div>
+      <div id="pre-countdown-{{ homepage_excerpt.slug }}" class="countdown"></div>
+    </div>
+  {% elsif homepage_excerpt.moneybomb.is_active? %}
+    <div class="event-detail mb-3">
+      <div class="lead mb-3">Time left to donate</div>
+      <div id="active-countdown-{{ homepage_excerpt.slug }}" class="countdown"></div>
+    </div>
+  {% endif %}
+
+  {% if homepage_excerpt.moneybomb.has_amount_goal? %}
+    <div class="mb-3">
+      {% include "progress"
+        percent: homepage_excerpt.moneybomb.percent_of_amount_goal,
+        count: homepage_excerpt.pledges_count,
+        amount: homepage_excerpt.pledges_amount_format,
+        goal: homepage_excerpt.moneybomb.amount_goal_format,
+        label: "pledged"
+      %}
+    </div>
+  {% elsif homepage_excerpt.moneybomb.has_pledger_goal? %}
+    <div class="mb-3">
+      {% include "progress"
+        percent: homepage_excerpt.moneybomb.percent_of_pledger_goal,
+        count: homepage_excerpt.pledges_count,
+        goal: homepage_excerpt.moneybomb.pledger_goal,
+        label: "pledgers"
+      %}
+    </div>
+  {% endif %}
+
+  <!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/countdown_ie.css" media="all"/>
+  <![endif]-->
+
+  <script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+  <script type="text/javascript" src="/assets/liquid/money-bomb.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      var moneyBomb = new NB.Liquid.MoneyBomb();
+
+      moneyBomb.setCountdown({
+        $el : $('#pre-countdown-{{ homepage_excerpt.slug }}'),
+        until: +{{ homepage_excerpt.moneybomb.seconds_until }}
+      });
+
+      moneyBomb.setCountdown({
+        $el : $('#active-countdown-{{ homepage_excerpt.slug }}'),
+        until: +{{ homepage_excerpt.moneybomb.seconds_left }}
+      });
+    });
+  </script>
+
+  {% if homepage_excerpt.moneybomb.is_active? %}
+    <a class="btn btn-primary" href="{{ homepage_excerpt.moneybomb.donation_page.url }}">Donate now</a>
+  {% else %}
+    <a class="btn btn-primary" href="{{ homepage_excerpt.url }}">Pledge now</a>
+  {% endif %}
+</div>

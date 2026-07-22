@@ -1,0 +1,35 @@
+<div class="consent-form-container">
+
+  {% if page.consent_form.headline != "" %}
+    <h4>{{page.consent_form.headline}}</h4>
+  {% endif %}
+
+  {% if page.consent_form.content != "" %}
+    <div class="consent-form__content">
+      {{page.consent_form.content}}
+    </div>
+  {% endif %}
+
+  {% for consent_option in page.consent_form.consent_options %}
+    <div class="consent-form__option">
+      <div class="form-group">
+        {% if consent_option.description != "" %}
+          <p class="mb-1 option-heading">{{consent_option.description}}</p>
+        {% endif %}
+        <div class="custom-control custom-radio custom-control-inline">
+          {{ consent_option.yes_radio_button }}
+          <label class="custom-control-label radio" for="{{consent_option.yes_radio_name}}">
+            Yes
+          </label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          {{ consent_option.no_radio_button }}
+          <label class="custom-control-label radio" for="{{consent_option.no_radio_name}}">
+            No
+          </label>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+</div>

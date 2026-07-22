@@ -1,0 +1,37 @@
+<div class="card-header">
+  <h3 class="excerpt-type h6 mb-0 font-weight-normal">
+    <a href="{{ homepage_excerpt.url }}" class="text-muted">Featured post</a>
+  </h3>
+</div>
+
+<div class="card-body">
+  <h4 class="excerpt-title">
+    <a href="{{ post.url }}">{{ post.headline }}</a>
+  </h4>
+  <div class="byline text-muted small mb-3">
+    Posted by {{ post.author.published_name_linked }} on {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}
+  </div>
+  <div class="truncate-500" data-truncate="500">{{ homepage_excerpt.blog_post.content }}</div>
+  {% if homepage_excerpt.blog_post.is_extended? %}
+    <a href="{{ homepage_excerpt.url }}" class="btn btn-link p-0">Continue reading &rarr;</a>
+  {% endif %}
+</div>
+
+<div class="card-footer">
+  <div class="row align-items-center">
+    <div class="col">
+      {{ "Share" | share_button page_id: post.id }}
+    </div>
+    <div class="col-auto">
+      {% if post.show_stream? %}
+        <a href="{{ post.url }}#addreaction" class="small">
+        {% if post.public_activities_count > 0 %}
+          {{ post.public_activities_count }} reaction{% if post.public_activities_count > 1 %}s{% endif %}
+        {% else %}
+          Add your reaction
+        {% endif %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
