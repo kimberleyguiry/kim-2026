@@ -18,7 +18,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-NB_HOST="http://kimguiry-langford2026electioncampaign.nationbuilder.com/" 
+NB_HOST="https://kimguiry-langford2026electioncampaign.nationbuilder.com"
 NB_THEME_ID="6a61495296e98f3c61a49839"
 NB_UPLOAD_URL="$NB_HOST/admin/sites/100/themes/$NB_THEME_ID/attachments?browser_id=default"
 
