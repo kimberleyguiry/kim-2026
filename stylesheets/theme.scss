@@ -80,6 +80,26 @@
   background-color: var(--km-cream);
 }
 
+.km-page h1,
+.km-page h2,
+.km-page h3,
+.km-page h4,
+.km-page h5,
+.km-page h6,
+.km-page .h1,
+.km-page .h2,
+.km-page .h3,
+.km-page .h4,
+.km-page .h5,
+.km-page .h6 {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.km-page p {
+  font-family: 'Inter', sans-serif;
+}
+
 /* ── Header / nav ─────────────────────────────────────────────────────── */
 
 .km-header {
