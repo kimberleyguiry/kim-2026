@@ -272,6 +272,185 @@
     </div>
   </section>
 
+  <section class="km-cta">
+    <div class="km-cta__stripes" aria-hidden="true">
+      <span class="km-cta__stripe km-cta__stripe--purple"></span>
+      <span class="km-cta__stripe km-cta__stripe--red"></span>
+      <span class="km-cta__stripe km-cta__stripe--orange"></span>
+    </div>
+
+    <div class="km-cta__content">
+
+      <div class="km-momentum">
+        <div class="km-momentum__row">
+          <h2 class="km-momentum__heading">Help keep up the momentum</h2>
+          <p class="km-momentum__text">I&rsquo;m fighting for a city built for people, not developers. As a grassroots movement without big-money backing, we rely entirely on you. If you believe in this vision, please step up today; <strong>every contribution is the fuel we need to keep people at the heart of Langford</strong></p>
+        </div>
+
+        <div class="km-momentum__tiles">
+          <a href="#" class="km-tile">
+            <span class="km-tile__heading">Give feedback</span>
+            <span class="km-tile__text">Help shape my platform</span>
+            <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+          </a>
+          <a href="#" class="km-tile">
+            <span class="km-tile__heading">Volunteer</span>
+            <span class="km-tile__text">Join the ground team</span>
+            <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+          </a>
+          <a href="#" class="km-tile">
+            <span class="km-tile__heading">Get a Lawn Sign</span>
+            <span class="km-tile__text">Spread the word</span>
+            <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+          </a>
+          {% if site.has_donation_page? %}
+            <a href="{{ site.donation_page.url }}" class="km-tile km-tile--donate">
+          {% else %}
+            <a href="/donate" class="km-tile km-tile--donate">
+          {% endif %}
+            <span class="km-tile__heading">Donate</span>
+            <span class="km-tile__text">Fuel the movement</span>
+            <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="km-issues">
+        <h2 class="km-issues__heading">On the issues</h2>
+
+        <div class="km-accordion">
+          <div class="km-accordion__item km-accordion__item--open">
+            <button type="button" class="km-accordion__title" aria-expanded="true">
+              <span>Housing &amp; Affordability</span>
+              <i class="fa-solid fa-minus km-accordion__icon" aria-hidden="true"></i>
+            </button>
+            <div class="km-accordion__body">
+              <div class="km-accordion__body-inner">
+                <div class="km-accordion__text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  <blockquote class="km-quote">
+                    <span class="km-quote__stripes" aria-hidden="true"></span>
+                    <p>For too long, the livability of our city has been neglected in favor of decisions driven by short-term optics rather than long-term stability</p>
+                  </blockquote>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
+                <div class="km-accordion__video">
+                  <span class="km-accordion__video-kicker">Hear it from Kim</span>
+                  <div class="km-accordion__video-frame">
+                    <img src="{{ theme['issues-video-kim.jpg'] }}" alt="Kimberley Guiry" loading="lazy" />
+                    <button type="button" class="km-play-button" aria-label="Play video">
+                      <i class="fa-solid fa-play" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {# TODO: real copy for these 4 issue areas wasn't in the Figma design (only the expanded "Housing & Affordability" panel had content) — placeholder text below #}
+          <div class="km-accordion__item">
+            <button type="button" class="km-accordion__title" aria-expanded="false">
+              <span>Traffic &amp; Infrastructure</span>
+              <i class="fa-solid fa-plus km-accordion__icon" aria-hidden="true"></i>
+            </button>
+            <div class="km-accordion__body">
+              <div class="km-accordion__body-inner">
+                <div class="km-accordion__text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="km-accordion__item">
+            <button type="button" class="km-accordion__title" aria-expanded="false">
+              <span>Youth &amp; Families</span>
+              <i class="fa-solid fa-plus km-accordion__icon" aria-hidden="true"></i>
+            </button>
+            <div class="km-accordion__body">
+              <div class="km-accordion__body-inner">
+                <div class="km-accordion__text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="km-accordion__item">
+            <button type="button" class="km-accordion__title" aria-expanded="false">
+              <span>Greenspace &amp; Recreation</span>
+              <i class="fa-solid fa-plus km-accordion__icon" aria-hidden="true"></i>
+            </button>
+            <div class="km-accordion__body">
+              <div class="km-accordion__body-inner">
+                <div class="km-accordion__text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="km-accordion__item">
+            <button type="button" class="km-accordion__title" aria-expanded="false">
+              <span>Public Safety</span>
+              <i class="fa-solid fa-plus km-accordion__icon" aria-hidden="true"></i>
+            </button>
+            <div class="km-accordion__body">
+              <div class="km-accordion__body-inner">
+                <div class="km-accordion__text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="km-news">
+        <h2 class="km-news__heading">Latest News</h2>
+
+        <div class="km-news__grid">
+          <article class="km-story">
+            <div class="km-story__image">
+              <img src="{{ theme['intro-photo-clinic.jpg'] }}" alt="" loading="lazy" />
+            </div>
+            <div class="km-story__body">
+              <p class="km-story__kicker">Goldstream Gazette</p>
+              <h3 class="km-story__heading">Story title</h3>
+              <p class="km-story__excerpt">The progress we&rsquo;ve made this term marks the beginning of a stronger, more sustainable Langford. A foundation built on action, not just words.</p>
+              <div class="km-story__footer">
+                <div class="km-story__author">
+                  <span class="km-story__author-name">Keith Yacucha</span>
+                  <span class="km-story__date">June 26th, 2026</span>
+                </div>
+                <a href="#" class="km-story__link">Read More <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="km-story">
+            <div class="km-story__image">
+              <img src="{{ theme['intro-photo-clinic.jpg'] }}" alt="" loading="lazy" />
+            </div>
+            <div class="km-story__body">
+              <p class="km-story__kicker">Goldstream Gazette</p>
+              <h3 class="km-story__heading">Story title</h3>
+              <p class="km-story__excerpt">The progress we&rsquo;ve made this term marks the beginning of a stronger, more sustainable Langford. A foundation built on action, not just words.</p>
+              <div class="km-story__footer">
+                <div class="km-story__author">
+                  <span class="km-story__author-name">Keith Yacucha</span>
+                  <span class="km-story__date">June 26th, 2026</span>
+                </div>
+                <a href="#" class="km-story__link">Read More <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   {% include "footer" %}
 
 </div>
