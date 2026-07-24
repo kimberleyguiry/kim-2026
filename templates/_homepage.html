@@ -200,7 +200,6 @@
           </div>
         </div>
 
-        {# TODO: point at the real "Progress" page once it exists in NB admin #}
         <a href="/progress" class="km-btn km-btn--donate km-progress-cta__button">See more progress</a>
       </div>
     </div>
@@ -248,7 +247,6 @@
           <p class="km-fighting__signup-text">I&rsquo;m taking the time to listen before I launch my full platform. Sign up to receive a notification the moment my full platform is released.</p>
 
           {% assign fighting_signup_page_id = 999 %}
-          {# TODO: replace with the real NB page_id for this signup once the page exists in admin #}
           <form class="km-fighting__form" method="post" action="/forms/signups">
             <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}" />
             <input type="hidden" name="page_id" value="{{ fighting_signup_page_id }}" />
@@ -288,7 +286,7 @@
         </div>
 
         <div class="km-momentum__tiles">
-          <a href="#" class="km-tile">
+          <a href="/issues" class="km-tile">
             <span class="km-tile__heading">Give feedback</span>
             <span class="km-tile__text">Help shape my platform</span>
             <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
@@ -347,7 +345,6 @@
             </div>
           </div>
 
-          {# TODO: real copy for these 4 issue areas wasn't in the Figma design (only the expanded "Housing & Affordability" panel had content) — placeholder text below #}
           <div class="km-accordion__item">
             <button type="button" class="km-accordion__title" aria-expanded="false">
               <span>Traffic &amp; Infrastructure</span>
