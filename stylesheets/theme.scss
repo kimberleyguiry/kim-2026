@@ -259,7 +259,7 @@
 .km-hero__inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--km-page-margin) 72px;
+  padding: 0 var(--km-page-margin);
   display: flex;
   align-items: center;
   gap: 40px;
@@ -1541,6 +1541,7 @@
   .km-hero__inner {
     flex-direction: column;
     align-items: stretch;
+    padding-bottom: 48px;
   }
 
   .km-hero__gallery {
