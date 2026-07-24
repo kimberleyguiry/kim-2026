@@ -1081,11 +1081,6 @@
   &::-moz-focus-inner {
     border: 0;
   }
-
-  &:focus-visible {
-    outline: 2px solid var(--km-blue-900);
-    outline-offset: -2px;
-  }
 }
 
 .km-accordion__icon {
