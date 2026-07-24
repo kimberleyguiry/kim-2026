@@ -1,0 +1,112 @@
+<div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+
+  <header class="km-header">
+    <div class="km-header__inner">
+
+      <a href="/" class="km-header__logo-link">
+        <img src="{{ theme['kim-logo-dark-2x.png'] }}" alt="Re-Elect Kimberley Guiry for Langford Council" class="km-header__logo" width="171" height="62" />
+      </a>
+
+      <nav class="km-nav" aria-label="Main navigation">
+        {% for child in site.root_nav_pages %}
+          {% unless site.has_donation_page? and child.id == site.donation_page.id %}
+            {% if child.nav_children.size > 0 %}
+              <div class="km-nav__item km-nav__item--dropdown">
+                <a href="{{ child.url }}" class="km-nav__link km-nav__link--dropdown" id="km-dropdown-{{ child.id }}" aria-haspopup="true" aria-expanded="false">
+                  {{ child.name }}
+                  <i class="fa-solid fa-chevron-down km-nav__chevron" aria-hidden="true"></i>
+                </a>
+                <div class="km-nav__dropdown-menu" aria-labelledby="km-dropdown-{{ child.id }}">
+                  {% for grandchild in child.nav_children %}
+                    <a href="{{ grandchild.url }}" class="km-nav__dropdown-link">{{ grandchild.name }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <a href="{{ child.url }}" class="km-nav__link{% if child.is_or_is_ancestor_of_current_page? %} km-nav__link--active{% endif %}">{{ child.name }}</a>
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+
+        {% if site.has_donation_page? %}
+          <a href="{{ site.donation_page.url }}" class="km-btn km-btn--donate">Donate</a>
+        {% else %}
+          <a href="/donate" class="km-btn km-btn--donate">Donate</a>
+        {% endif %}
+      </nav>
+
+      <button class="km-hamburger" aria-expanded="false" aria-label="Open menu" aria-controls="km-mobile-nav">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="km-mobile-nav" id="km-mobile-nav">
+      <div class="km-mobile-nav__header">
+        <button class="km-hamburger km-mobile-nav__close" aria-label="Close menu">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <ul class="km-mobile-nav__links">
+        {% for child in site.root_nav_pages %}
+          {% unless site.has_donation_page? and child.id == site.donation_page.id %}
+            <li><a href="{{ child.url }}" class="km-mobile-nav__link">{{ child.name }}</a></li>
+          {% endunless %}
+        {% endfor %}
+      </ul>
+      {% if site.has_donation_page? %}
+        <a href="{{ site.donation_page.url }}" class="km-btn km-btn--donate">Donate</a>
+      {% else %}
+        <a href="/donate" class="km-btn km-btn--donate">Donate</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <section class="km-hero">
+    <div class="km-hero__inner">
+
+      <div class="km-hero__content">
+        <div class="km-stripes" aria-hidden="true">
+          <span class="km-stripes__band km-stripes__band--purple"></span>
+          <span class="km-stripes__band km-stripes__band--red"></span>
+          <span class="km-stripes__band km-stripes__band--orange"></span>
+        </div>
+
+        <div class="km-hero__text">
+          <h1 class="km-hero__heading">Keeping <span class="km-hero__heading-accent">people</span> at the heart of Langford</h1>
+          <p class="km-hero__body">We&rsquo;ve moved past the era of short-sighted planning and taken the hard steps to put Langford on solid ground. Let&rsquo;s keep building this city together: a Langford where everyone belongs.</p>
+        </div>
+
+        <div class="km-stripes" aria-hidden="true">
+          <span class="km-stripes__band km-stripes__band--orange"></span>
+          <span class="km-stripes__band km-stripes__band--red"></span>
+          <span class="km-stripes__band km-stripes__band--purple"></span>
+        </div>
+      </div>
+
+      <div class="km-hero__gallery" role="img" aria-label="Photos of Kimberley Guiry campaigning and working in Langford">
+        <div class="km-polaroid km-polaroid--1">
+          <img src="{{ theme['hero-photo-1.jpg'] }}" alt="" loading="eager" />
+        </div>
+        <div class="km-polaroid km-polaroid--2">
+          <img src="{{ theme['hero-photo-2.jpg'] }}" alt="" loading="eager" />
+        </div>
+        <div class="km-polaroid km-polaroid--3">
+          <img src="{{ theme['hero-photo-3.jpg'] }}" alt="" loading="eager" />
+        </div>
+        <p class="km-caption km-caption--1">Building Porcher Park</p>
+        <p class="km-caption km-caption--2">Opening the Goldstream Medical Clinic</p>
+        <p class="km-caption km-caption--3">Langford&rsquo;s first rainbow crosswalk</p>
+        <div class="km-polaroid km-polaroid--4">
+          <img src="{{ theme['hero-photo-4.jpg'] }}" alt="" loading="eager" />
+        </div>
+        <div class="km-polaroid km-polaroid--5">
+          <img src="{{ theme['hero-photo-5.jpg'] }}" alt="" loading="eager" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {% include "footer" %}
+
+</div>

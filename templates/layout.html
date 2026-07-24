@@ -7,6 +7,20 @@
     <title>{{ page_title }}</title>
 
     <link href="theme.scss" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=La+Belle+Aurore&display=swap"
+          rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=La+Belle+Aurore&display=swap" rel="stylesheet" />
+    </noscript>
+
+    {% if page.is_homepage? and page.type_slug == 'basic' %}
+      <link rel="preload" as="image" href="{{ theme['hero-photo-4.jpg'] }}" />
+      <link rel="preload" as="image" href="{{ theme['kim-logo-dark-2x.png'] }}" />
+    {% endif %}
 
     <!-- start of content for header -->
     {{ content_for_header }}
@@ -19,7 +33,11 @@
   </head>
   <body class="bootstrap-theme v3-theme {%if page.is_homepage? %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
 
-    {% unless page.type_name == "Donation (v2)" %}
+    {% if page.is_homepage? and page.type_slug == 'basic' %}
+      {% include "homepage" %}
+    {% elsif page.type_name == "Donation (v2)" %}
+      {% yield %}
+    {% else %}
       {% include "header" %}
       {% if site.has_header_image? %}
         <div class="container mb-4">
@@ -33,9 +51,7 @@
         {% include "content", sidebar: request.is_sidebar? %}
       </main>
       {% include "footer" %}
-    {% else %}
-      {% yield %}
-    {% endunless %}
+    {% endif %}
 
     {{ content_for_notifications }}
 
@@ -56,5 +72,8 @@
     <script src="bootstrap.min.js"></script>
     <script src="bs-custom-file-input.min.js"></script>
     <script src="theme.js"></script>
+    {% if page.is_homepage? and page.type_slug == 'basic' %}
+      <script src="km-nav.js"></script>
+    {% endif %}
   </body>
 </html>
