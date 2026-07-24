@@ -24,14 +24,21 @@ NationBuilder theme for Kimberley Guiry's 2026 Langford City Council campaign, b
   - Responsive behavior added for tablet/laptop (`<1279px`, showcase/progress stack into a single column) and mobile (`<767px`, stripes go horizontal, counters stack).
   - 4 new photos downloaded from the Figma asset server and converted PNG → JPEG, committed to `files/intro-photo-{sidewalks,tree,clinic,kimberley}.jpg`.
   - Not yet verified against the live NationBuilder render or in a browser — visual QA is being done directly by the user rather than via local mockups going forward.
+- **Homepage "What I'm fighting for" section** implemented from the Figma `content-container` node (`templates/_homepage.html`, CSS appended to `stylesheets/theme.scss`):
+  - Dark navy full-bleed section with the dark grain texture (`files/grain-for-dark-bks.png`) behind the text column, matching the `.km-page--light` treatment used elsewhere but inverted for dark sections.
+  - Three priority groups (orange/red/purple left-border accent bars), each with a Cal Sans heading and a Font Awesome `circle-check` checklist.
+  - Email signup block (name + email fields, "Stay informed" button) wired as a real NationBuilder `/forms/signups` POST per the `CLAUDE.md` form conventions — `page_id` is a placeholder (`999`) pending a real NB signup page.
+  - Responsive stacking for tablet/laptop and mobile, mirroring the pattern used in the intro section.
+  - **Right-column photo** — the Figma MCP tool could not export the bus-stop/tree photo fill on the `right-50` frame programmatically (every `get_design_context`/`get_metadata` call returned it as an empty node, despite the screenshot clearly showing a photo); the user exported it manually from Figma and it's committed as `files/fighting-photo-bus-stop.jpg`.
 
 ### Next steps
 
 1. **Verify the live render.** Log into the NationBuilder admin and check the homepage actually renders as expected — Liquid tags (`site.root_nav_pages`, `theme[...]`, etc.) can only be fully verified against real site data.
 2. **Confirm nav pages exist in NationBuilder** matching the design (About, Issues, Progress, Get Involved [with children for a dropdown], Contact) and that a donation page is set up so the Donate button links correctly.
 3. **"See more progress" button target** — currently links to `/progress`, a guessed slug. Confirm the real Progress page exists in NB admin and update the href if it differs.
-4. **Footer** — `_homepage.html` currently includes the stock NationBuilder `_footer.html` unstyled. It needs a custom footer matching the campaign brand once that part of the Figma design is reviewed.
-5. **Dropdown menu content** — the "Get Involved" nav item renders a dropdown shell (`.km-nav__dropdown-menu`) driven by `child.nav_children`; it needs actual NationBuilder child pages under "Get Involved" to populate it.
-6. **Cal Sans licensing/hosting** — currently loaded from the `cal-sans` npm package via jsdelivr CDN. Confirm this is acceptable for production (uptime/licensing) or self-host the font files in `files/` instead.
-7. **Non-homepage pages** (About, Issues, Contact, etc.) still render through the stock NationBuilder header/footer/content flow — only the homepage has custom styling so far.
-8. **Remaining homepage sections below the intro/progress block** (if any further sections exist in Figma past `intro-section`) still need to be scoped and implemented.
+4. **"Stay informed" signup page_id** — currently a placeholder (`999`). Create the real NB signup page for this form and update `fighting_signup_page_id` in `_homepage.html`.
+5. **Footer** — `_homepage.html` currently includes the stock NationBuilder `_footer.html` unstyled. It needs a custom footer matching the campaign brand once that part of the Figma design is reviewed.
+6. **Dropdown menu content** — the "Get Involved" nav item renders a dropdown shell (`.km-nav__dropdown-menu`) driven by `child.nav_children`; it needs actual NationBuilder child pages under "Get Involved" to populate it.
+7. **Cal Sans licensing/hosting** — currently loaded from the `cal-sans` npm package via jsdelivr CDN. Confirm this is acceptable for production (uptime/licensing) or self-host the font files in `files/` instead.
+8. **Non-homepage pages** (About, Issues, Contact, etc.) still render through the stock NationBuilder header/footer/content flow — only the homepage has custom styling so far.
+9. **Remaining homepage sections below "What I'm fighting for"** (if any further sections exist in Figma) still need to be scoped and implemented.
