@@ -1069,6 +1069,7 @@
   padding: 24px;
   background: none;
   border: none;
+  outline: none;
   font-family: 'Cal Sans', 'Inter', sans-serif;
   font-weight: 400;
   font-size: 24px;
@@ -1076,6 +1077,11 @@
   color: var(--km-blue-900);
   text-align: left;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--km-blue-900);
+    outline-offset: -2px;
+  }
 }
 
 .km-accordion__icon {
