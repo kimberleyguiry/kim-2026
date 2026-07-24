@@ -719,6 +719,8 @@
 
 .km-fighting {
   background-color: var(--km-blue-900);
+  background-repeat: repeat;
+  background-size: 200px 200px;
 }
 
 .km-fighting__inner {
@@ -736,8 +738,6 @@
   flex-direction: column;
   justify-content: center;
   padding: var(--km-section-padding) 64px var(--km-section-padding) 0;
-  background-repeat: repeat;
-  background-size: 200px 200px;
 }
 
 .km-fighting__heading {
