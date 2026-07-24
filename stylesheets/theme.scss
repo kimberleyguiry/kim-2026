@@ -758,7 +758,7 @@
 .km-fighting__inner {
   display: flex;
   align-items: stretch;
-  padding-left: max(var(--km-page-margin), calc((100vw - 1440px) / 2 + var(--km-page-margin)));
+  padding-left: unquote("max(var(--km-page-margin), calc((100vw - 1440px) / 2 + var(--km-page-margin)))");
 }
 
 .km-fighting__content {
