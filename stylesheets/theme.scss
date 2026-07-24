@@ -1081,6 +1081,10 @@
   &::-moz-focus-inner {
     border: 0;
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .km-accordion__icon {
