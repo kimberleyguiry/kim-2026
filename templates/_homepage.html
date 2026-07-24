@@ -379,43 +379,40 @@
         <h2 class="km-news__heading">Latest News</h2>
 
         <div class="km-news__grid">
-          <article class="km-story">
-            <div class="km-story__image">
-              <img src="{{ theme['intro-photo-clinic.jpg'] }}" alt="" loading="lazy" />
-            </div>
-            <div class="km-story__body">
-              <p class="km-story__kicker">Goldstream Gazette</p>
-              <h3 class="km-story__heading">Story title</h3>
-              <p class="km-story__excerpt">The progress we&rsquo;ve made this term marks the beginning of a stronger, more sustainable Langford. A foundation built on action, not just words.</p>
-              <div class="km-story__footer">
-                <div class="km-story__author">
-                  <span class="km-story__author-name">Keith Yacucha</span>
-                  <span class="km-story__date">June 26th, 2026</span>
-                </div>
-                <a href="#" class="km-story__link">Read More <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-              </div>
-            </div>
-            <div class="km-story__corner-shadow" aria-hidden="true"></div>
-          </article>
-
-          <article class="km-story">
-            <div class="km-story__image">
-              <img src="{{ theme['intro-photo-clinic.jpg'] }}" alt="" loading="lazy" />
-            </div>
-            <div class="km-story__body">
-              <p class="km-story__kicker">Goldstream Gazette</p>
-              <h3 class="km-story__heading">Story title</h3>
-              <p class="km-story__excerpt">The progress we&rsquo;ve made this term marks the beginning of a stronger, more sustainable Langford. A foundation built on action, not just words.</p>
-              <div class="km-story__footer">
-                <div class="km-story__author">
-                  <span class="km-story__author-name">Keith Yacucha</span>
-                  <span class="km-story__date">June 26th, 2026</span>
-                </div>
-                <a href="#" class="km-story__link">Read More <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-              </div>
-            </div>
-            <div class="km-story__corner-shadow" aria-hidden="true"></div>
-          </article>
+          {% assign km_news_count = 0 %}
+          {% for post in site.most_recent_blog_post_pages %}
+            {% if km_news_count < 2 and post.parent.slug == 'news' %}
+              {% assign km_is_featured = false %}
+              {% for ptag in post.tags %}
+                {% if ptag.name == 'featured' %}{% assign km_is_featured = true %}{% endif %}
+              {% endfor %}
+              {% if km_is_featured %}
+                <article class="km-story">
+                  <div class="km-story__image">
+                    {% if post.has_meta_image? %}
+                      <img src="{{ post.meta_image_url }}" alt="" loading="lazy" />
+                    {% else %}
+                      <img src="{{ theme['intro-photo-clinic.jpg'] }}" alt="" loading="lazy" />
+                    {% endif %}
+                  </div>
+                  <div class="km-story__body">
+                    <p class="km-story__kicker">Goldstream Gazette</p>
+                    <h3 class="km-story__heading">{{ post.headline }}</h3>
+                    <p class="km-story__excerpt">{{ post.blog_post.content_full | strip_html | truncatewords: 30 }}</p>
+                    <div class="km-story__footer">
+                      <div class="km-story__author">
+                        <span class="km-story__author-name">{{ post.author.full_name }}</span>
+                        <span class="km-story__date">{{ post.published_at | date: "%B %-d, %Y" }}</span>
+                      </div>
+                      <a href="{{ post.url }}" class="km-story__link">Read More <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                  <div class="km-story__corner-shadow" aria-hidden="true"></div>
+                </article>
+                {% assign km_news_count = km_news_count | plus: 1 %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
 

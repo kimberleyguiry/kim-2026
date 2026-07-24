@@ -457,7 +457,7 @@
   z-index: 8;
 }
 
-.km-caption {
+.km-hero .km-caption {
   position: absolute;
   margin: 0;
   font-family: 'La Belle Aurore', cursive;
@@ -1285,7 +1285,7 @@
   border-radius: 0 0 4px 4px;
 }
 
-.km-story__kicker {
+.km-story .km-story__kicker {
   font-family: 'La Belle Aurore', cursive;
   font-size: 24px;
   color: var(--km-blue-800);
