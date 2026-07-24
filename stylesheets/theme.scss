@@ -465,9 +465,13 @@
 
 /* ── Intro section ────────────────────────────────────────────────────── */
 
-.km-intro {
+.km-intro__inner {
   display: flex;
   align-items: stretch;
+  gap: var(--km-page-margin);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--km-page-margin);
 }
 
 .km-intro__stripes {
@@ -495,9 +499,7 @@
 .km-intro__content {
   flex: 1 1 0;
   min-width: 0;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: var(--km-page-margin) var(--km-page-margin) var(--km-section-padding);
+  padding: var(--km-page-margin) 0 var(--km-section-padding);
 }
 
 .km-intro__heading {
@@ -905,9 +907,13 @@
 
 /* ── CTA sections: momentum / issues / news ──────────────────────────── */
 
-.km-cta {
+.km-cta__inner {
   display: flex;
   align-items: stretch;
+  gap: var(--km-page-margin);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--km-page-margin);
 }
 
 .km-cta__stripes {
@@ -940,7 +946,7 @@
 .km-momentum,
 .km-issues,
 .km-news {
-  padding: 0 var(--km-page-margin) var(--km-section-padding);
+  padding: 0 0 var(--km-section-padding);
 }
 
 .km-momentum {
@@ -1542,7 +1548,7 @@
   }
 
   .km-intro__content {
-    padding: 48px var(--km-page-margin) 96px;
+    padding: 48px 0 96px;
   }
 
   .km-intro__heading {
@@ -1737,8 +1743,10 @@
     display: none;
   }
 
-  .km-intro {
+  .km-intro__inner {
     flex-direction: column;
+    gap: 0;
+    padding: 0 24px;
   }
 
   .km-intro__stripes {
@@ -1747,7 +1755,7 @@
   }
 
   .km-intro__content {
-    padding: 32px 24px 64px;
+    padding: 32px 0 64px;
   }
 
   .km-intro__heading {
@@ -1823,15 +1831,10 @@
     height: 24px;
   }
 
-  .km-cta {
+  .km-cta__inner {
     flex-direction: column;
-  }
-
-  .km-momentum,
-  .km-issues,
-  .km-news {
-    padding-left: 24px;
-    padding-right: 24px;
+    gap: 0;
+    padding: 0 24px;
   }
 
   .km-momentum__heading {
