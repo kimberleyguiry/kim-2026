@@ -36,7 +36,10 @@
     {% if page.is_homepage? and page.type_slug == 'basic' %}
       {% include "homepage" %}
     {% elsif page.type_name == "Donation (v2)" %}
-      {% yield %}
+      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+        {% include "header" %}
+        {% yield %}
+      </div>
     {% else %}
       <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
         {% include "header" %}

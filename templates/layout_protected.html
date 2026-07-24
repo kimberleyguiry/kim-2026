@@ -32,7 +32,10 @@
         {% include "footer" %}
       </div>
     {% else %}
-      {% yield %}
+      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+        {% include "header" %}
+        {% yield %}
+      </div>
     {% endunless %}
 
     {{ content_for_notifications }}
