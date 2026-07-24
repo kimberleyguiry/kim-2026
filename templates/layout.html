@@ -17,9 +17,9 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=La+Belle+Aurore&display=swap" rel="stylesheet" />
     </noscript>
 
+    <link rel="preload" as="image" href="{{ theme['kim-logo-dark-2x.png'] }}" />
     {% if page.is_homepage? and page.type_slug == 'basic' %}
       <link rel="preload" as="image" href="{{ theme['hero-photo-4.jpg'] }}" />
-      <link rel="preload" as="image" href="{{ theme['kim-logo-dark-2x.png'] }}" />
     {% endif %}
 
     <!-- start of content for header -->
@@ -72,8 +72,8 @@
     <script src="bootstrap.min.js"></script>
     <script src="bs-custom-file-input.min.js"></script>
     <script src="theme.js"></script>
+    <script src="km-nav.js"></script>
     {% if page.is_homepage? and page.type_slug == 'basic' %}
-      <script src="km-nav.js"></script>
       <script src="km-accordion.js"></script>
     {% endif %}
   </body>

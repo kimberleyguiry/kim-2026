@@ -1,12 +1,60 @@
-<header id="header" class="navbar navbar-expand-lg navbar-light py-4">
-  <div class="container">
-    <a class="navbar-brand w-25" href="/">
-      {% if site.has_meta_image? %}
-        <img src="{{ site.meta_image_url }}" class="navbar-brand-img mw-100" alt="{{ site.long_name }}"/>
-      {% else %}
-        {{ site.long_name }}
-      {% endif %}
+<header class="km-header">
+  <div class="km-header__inner">
+
+    <a href="/" class="km-header__logo-link">
+      <img src="{{ theme['kim-logo-dark-2x.png'] }}" alt="Re-Elect Kimberley Guiry for Langford Council" class="km-header__logo" width="171" height="62" />
     </a>
-    {% include "nav" %}
+
+    <nav class="km-nav" aria-label="Main navigation">
+      {% for child in site.root_nav_pages %}
+        {% unless site.has_donation_page? and child.id == site.donation_page.id %}
+          {% if child.nav_children.size > 0 %}
+            <div class="km-nav__item km-nav__item--dropdown">
+              <a href="{{ child.url }}" class="km-nav__link km-nav__link--dropdown" id="km-dropdown-{{ child.id }}" aria-haspopup="true" aria-expanded="false">
+                {{ child.name }}
+                <i class="fa-solid fa-chevron-down km-nav__chevron" aria-hidden="true"></i>
+              </a>
+              <div class="km-nav__dropdown-menu" aria-labelledby="km-dropdown-{{ child.id }}">
+                {% for grandchild in child.nav_children %}
+                  <a href="{{ grandchild.url }}" class="km-nav__dropdown-link">{{ grandchild.name }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <a href="{{ child.url }}" class="km-nav__link{% if child.is_or_is_ancestor_of_current_page? %} km-nav__link--active{% endif %}">{{ child.name }}</a>
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+
+      {% if site.has_donation_page? %}
+        <a href="{{ site.donation_page.url }}" class="km-btn km-btn--donate">Donate</a>
+      {% else %}
+        <a href="/donate" class="km-btn km-btn--donate">Donate</a>
+      {% endif %}
+    </nav>
+
+    <button class="km-hamburger" aria-expanded="false" aria-label="Open menu" aria-controls="km-mobile-nav">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="km-mobile-nav" id="km-mobile-nav">
+    <div class="km-mobile-nav__header">
+      <button class="km-hamburger km-mobile-nav__close" aria-label="Close menu">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+    <ul class="km-mobile-nav__links">
+      {% for child in site.root_nav_pages %}
+        {% unless site.has_donation_page? and child.id == site.donation_page.id %}
+          <li><a href="{{ child.url }}" class="km-mobile-nav__link">{{ child.name }}</a></li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+    {% if site.has_donation_page? %}
+      <a href="{{ site.donation_page.url }}" class="km-btn km-btn--donate">Donate</a>
+    {% else %}
+      <a href="/donate" class="km-btn km-btn--donate">Donate</a>
+    {% endif %}
   </div>
 </header>
