@@ -54,6 +54,7 @@
 
 :root {
   --km-blue-900: #1b2b3d;
+  --km-blue-800: #173454;
   --km-red-600: #d1430f;
   --km-orange: #ff8b00;
   --km-purple: #4d3f5c;
@@ -62,6 +63,7 @@
   --km-overlay: rgba(149, 125, 217, 0.25);
   --km-page-margin: 64px;
   --km-stripes-width: 108px;
+  --km-section-padding: 144px;
 }
 
 .km-page {
@@ -430,6 +432,285 @@
   width: 15.2%;
 }
 
+/* ── Intro section ────────────────────────────────────────────────────── */
+
+.km-intro {
+  display: flex;
+  align-items: stretch;
+}
+
+.km-intro__stripes {
+  display: flex;
+  width: var(--km-stripes-width);
+  flex-shrink: 0;
+}
+
+.km-intro__stripe {
+  flex: 1 1 0;
+
+  &--purple {
+    background-color: var(--km-purple);
+  }
+
+  &--red {
+    background-color: var(--km-red-600);
+  }
+
+  &--orange {
+    background-color: var(--km-orange);
+  }
+}
+
+.km-intro__content {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--km-page-margin) var(--km-page-margin) var(--km-section-padding);
+}
+
+.km-intro__heading {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.4;
+  color: var(--km-blue-800);
+  margin: 0 0 20px;
+}
+
+.km-intro__row {
+  display: flex;
+  gap: 48px;
+}
+
+.km-intro__lead {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--km-text-on-light);
+  margin: 0 0 16px;
+  flex: 0 0 325px;
+}
+
+.km-intro__lead--wide {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.km-intro__hr {
+  border: none;
+  border-top: 1px solid var(--km-blue-900);
+  margin: 48px 0;
+}
+
+/* ── Showcase (3-photo row) ───────────────────────────────────────────── */
+
+.km-showcase {
+  display: flex;
+  align-items: stretch;
+  gap: 48px;
+}
+
+.km-showcase__col {
+  flex: 0 0 327px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.km-showcase__col--tall {
+  flex: 1 1 0;
+}
+
+.km-showcase__heading {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.3;
+  color: var(--km-blue-900);
+  margin: 0 0 10px;
+}
+
+.km-showcase__text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--km-text-on-light);
+  margin: 0;
+}
+
+.km-showcase__image {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--km-overlay);
+    pointer-events: none;
+  }
+}
+
+.km-showcase__image--sidewalks {
+  aspect-ratio: 327 / 588;
+}
+
+.km-showcase__image--clinic {
+  aspect-ratio: 327 / 524;
+}
+
+.km-showcase__image--tall {
+  height: 100%;
+}
+
+/* ── Regional progress ────────────────────────────────────────────────── */
+
+.km-progress {
+  display: flex;
+  align-items: stretch;
+  gap: 48px;
+  padding: 16px 0;
+}
+
+.km-progress__text {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.km-progress__heading {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.3;
+  color: var(--km-blue-900);
+  margin: 0 0 10px;
+}
+
+.km-progress__body {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--km-text-on-light);
+  margin: 0 0 32px;
+}
+
+.km-progress__lists {
+  display: flex;
+  gap: 48px;
+}
+
+.km-progress__list {
+  flex: 1 1 0;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 16px 0;
+
+  li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding-bottom: 16px;
+  }
+
+  i {
+    color: var(--km-blue-900);
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  span {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--km-text-on-light);
+  }
+}
+
+.km-progress__image {
+  flex: 0 0 323px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--km-overlay);
+    pointer-events: none;
+  }
+}
+
+/* ── Counters + CTA ───────────────────────────────────────────────────── */
+
+.km-progress-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.km-counters {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--km-blue-900);
+}
+
+.km-counter {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 32px;
+  border-right: 1px solid var(--km-blue-900);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.km-counter__number {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1;
+  color: var(--km-blue-900);
+}
+
+.km-counter__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--km-blue-900-80, rgba(27, 43, 61, 0.8));
+  margin-top: 4px;
+}
+
+.km-progress-cta__button {
+  margin-top: -1px;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────────── */
 
 @media (max-width: 1279px) {
@@ -440,6 +721,68 @@
 
   .km-hero__gallery {
     max-width: 100%;
+  }
+
+  .km-intro__content {
+    padding: 48px var(--km-page-margin) 96px;
+  }
+
+  .km-intro__heading {
+    font-size: 40px;
+  }
+
+  .km-intro__row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .km-intro__lead {
+    flex: 0 0 auto;
+  }
+
+  .km-showcase {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .km-showcase__col,
+  .km-showcase__col--tall {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .km-showcase__image--tall {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .km-progress {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+
+  .km-progress__image {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .km-progress__lists {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .km-counters {
+    flex-wrap: wrap;
+  }
+
+  .km-counter {
+    flex: 1 1 50%;
+    border-bottom: 1px solid var(--km-blue-900);
+
+    &:nth-child(2n) {
+      border-right: none;
+    }
   }
 }
 
@@ -487,6 +830,55 @@
 
   .km-caption {
     display: none;
+  }
+
+  .km-intro {
+    flex-direction: column;
+  }
+
+  .km-intro__stripes {
+    width: 100%;
+    height: 24px;
+  }
+
+  .km-intro__content {
+    padding: 32px 24px 64px;
+  }
+
+  .km-intro__heading {
+    font-size: 32px;
+  }
+
+  .km-showcase__heading,
+  .km-progress__heading {
+    font-size: 26px;
+  }
+
+  .km-counters {
+    flex-direction: column;
+  }
+
+  .km-counter {
+    flex: 1 1 auto;
+    width: 100%;
+    border-right: none;
+
+    &:nth-child(2n) {
+      border-right: none;
+    }
+  }
+
+  .km-counter__number {
+    font-size: 40px;
+  }
+
+  .km-progress-cta {
+    align-items: stretch;
+  }
+
+  .km-progress-cta__button {
+    width: 100%;
+    justify-content: center;
   }
 }
 
