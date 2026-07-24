@@ -52,25 +52,4 @@
     </div>
 
   </div>
-
-  <div class="km-footer__meta">
-    {% if request.logged_in? %}
-      <p>
-        Hi <a href="{{ request.current_signup.settings_url }}">{{ request.current_signup.name_or_email }}</a>.
-        View your
-        {% if site.show_public_profiles? %}
-          <a href="{{ request.current_signup.profile_url }}">public profile</a>,
-        {% endif %}
-        <a href="{{ request.current_signup.settings_url }}">account settings</a>,
-        or <a href="{{ request.current_signup.logout_url }}">sign out</a>.
-      </p>
-    {% else %}
-      <p>Sign in with <a href="/login">Email</a>.</p>
-    {% endif %}
-
-    <!-- The NationBuilder link below is required. If it is removed, we may add it back ourselves.
-         You can style it or move it in different ways, but please leave it in the footer. -->
-    <p>Created with <a href="{{ site.attribution_url }}">NationBuilder</a></p>
-  </div>
-
 </footer>
