@@ -130,6 +130,8 @@
   color: var(--km-blue-900);
   text-decoration: none;
   white-space: nowrap;
+  background: none;
+  cursor: pointer;
 
   &:hover,
   &--active {

@@ -10,10 +10,10 @@
         {% unless site.has_donation_page? and child.id == site.donation_page.id %}
           {% if child.nav_children.size > 0 %}
             <div class="km-nav__item km-nav__item--dropdown">
-              <a href="{{ child.url }}" class="km-nav__link km-nav__link--dropdown" id="km-dropdown-{{ child.id }}" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="km-nav__link km-nav__link--dropdown" id="km-dropdown-{{ child.id }}" aria-haspopup="true" aria-expanded="false">
                 {{ child.name }}
                 <i class="fa-solid fa-chevron-down km-nav__chevron" aria-hidden="true"></i>
-              </a>
+              </button>
               <div class="km-nav__dropdown-menu" aria-labelledby="km-dropdown-{{ child.id }}">
                 {% for grandchild in child.nav_children %}
                   <a href="{{ grandchild.url }}" class="km-nav__dropdown-link">{{ grandchild.name }}</a>
