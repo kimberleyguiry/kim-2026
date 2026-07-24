@@ -21,14 +21,16 @@
   <body class="bootstrap-theme v3-theme {%if page.is_homepage? %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
 
     {% unless page.type_name == "Donation (v2)" %}
-      {% include "header" %}
-      {% if page.features_count > 0 %}
-        {% include "features" %}
-      {% endif %}
-      <main id="content" role="main">
-        {% include "content", sidebar: request.is_sidebar? %}
-      </main>
-      {% include "footer" %}
+      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+        {% include "header" %}
+        {% if page.features_count > 0 %}
+          {% include "features" %}
+        {% endif %}
+        <main id="content" role="main">
+          {% include "content", sidebar: request.is_sidebar? %}
+        </main>
+        {% include "footer" %}
+      </div>
     {% else %}
       {% yield %}
     {% endunless %}

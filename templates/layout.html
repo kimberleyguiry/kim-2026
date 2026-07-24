@@ -38,19 +38,21 @@
     {% elsif page.type_name == "Donation (v2)" %}
       {% yield %}
     {% else %}
-      {% include "header" %}
-      {% if site.has_header_image? %}
-        <div class="container mb-4">
-          <img src="{{ site.header_image_url_1026 }}" class="mw-100" border="0" />
-        </div>
-      {% endif %}
-      {% if page.features_count > 0 %}
-        {% include "features" %}
-      {% endif %}
-      <main id="content" role="main">
-        {% include "content", sidebar: request.is_sidebar? %}
-      </main>
-      {% include "footer" %}
+      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+        {% include "header" %}
+        {% if site.has_header_image? %}
+          <div class="container mb-4">
+            <img src="{{ site.header_image_url_1026 }}" class="mw-100" border="0" />
+          </div>
+        {% endif %}
+        {% if page.features_count > 0 %}
+          {% include "features" %}
+        {% endif %}
+        <main id="content" role="main">
+          {% include "content", sidebar: request.is_sidebar? %}
+        </main>
+        {% include "footer" %}
+      </div>
     {% endif %}
 
     {{ content_for_notifications }}
