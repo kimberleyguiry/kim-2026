@@ -1,10 +1,6 @@
 <div class="row">
   <div class="{% if page.is_homepage? %}col{% else %}col-12 col-lg-9 mx-auto{% endif %}">
 
-    {% if page.headline.size > 0 %}
-      <h2 class="mb-3">{{ page.headline }}</h2>
-    {% endif %}
-
     {{ page.basic.content }}
 
     {% include "page_tags" with page %}

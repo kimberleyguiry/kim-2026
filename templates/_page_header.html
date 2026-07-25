@@ -1,0 +1,14 @@
+{% if page.headline.size > 0 %}
+<header class="km-page-header">
+  <div class="km-page-header__bg" style="background-image: url('{{ theme['grain-for-dark-bks.png'] }}');">
+    <div class="km-page-header__inner">
+      <h1 class="km-page-header__heading">{{ page.headline }}</h1>
+    </div>
+  </div>
+  <div class="km-page-header__stripes" aria-hidden="true">
+    <span class="km-page-header__stripe km-page-header__stripe--purple"></span>
+    <span class="km-page-header__stripe km-page-header__stripe--red"></span>
+    <span class="km-page-header__stripe km-page-header__stripe--orange"></span>
+  </div>
+</header>
+{% endif %}

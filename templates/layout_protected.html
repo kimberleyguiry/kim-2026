@@ -23,6 +23,7 @@
     {% unless page.type_name == "Donation (v2)" %}
       <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
         {% include "header" %}
+        {% include "page_header" %}
         {% if page.features_count > 0 %}
           {% include "features" %}
         {% endif %}
