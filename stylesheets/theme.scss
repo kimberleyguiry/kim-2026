@@ -220,7 +220,7 @@ a:hover {
   color: var(--km-cream);
 
   &:hover {
-    background-color: darken(#d1430f, 8%);
+    background-color: var(--km-orange);
     color: var(--km-cream);
   }
 }
