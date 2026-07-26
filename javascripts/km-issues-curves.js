@@ -1,4 +1,11 @@
 (function () {
+  // The curve's bottom border (its horizontal "right edge") is a 36px-thick
+  // strip drawn upward from the box's bottom edge, so its own vertical
+  // center sits 18px above wherever the box height points to. Adding that
+  // back here is what actually centers the right edge on the heading's
+  // line-height instead of leaving it sitting above center.
+  var BORDER_THICKNESS = 36;
+
   function positionCurves() {
     var list = document.querySelector('.km-issues-list');
     if (!list) return;
@@ -12,7 +19,7 @@
       if (!heading) return;
 
       var headingRect = heading.getBoundingClientRect();
-      var headingCenter = headingRect.top + headingRect.height / 2;
+      var headingCenter = headingRect.top + headingRect.height / 2 + BORDER_THICKNESS / 2;
 
       // Curve is absolute-positioned against the list, so its height is
       // measured from the list's top.
