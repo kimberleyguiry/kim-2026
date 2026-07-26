@@ -30,6 +30,8 @@
         <main id="content" role="main">
           {% if page.slug == 'progress' %}
             {% include "progress_page" %}
+          {% elsif page.slug == 'about' %}
+            {% include "about" %}
           {% else %}
             {% include "content", sidebar: request.is_sidebar? %}
           {% endif %}
