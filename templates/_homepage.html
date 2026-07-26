@@ -176,70 +176,7 @@
     </div>
   </section>
 
-  <section class="km-fighting" style="background-image: url('{{ theme['grain-for-dark-bks.png'] }}');">
-    <div class="km-fighting__inner">
-      <div class="km-fighting__content">
-        <h2 class="km-fighting__heading">What I&rsquo;m fighting for</h2>
-
-        <div class="km-fighting__groups">
-          <div class="km-fighting__group km-fighting__group--orange">
-            <h3 class="km-fighting__group-heading">A city that plans for tomorrow</h3>
-            <ul class="km-fighting__list">
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Stable taxation and financial resiliency</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Protecting our natural assets/parks</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Proactive investment in public safety</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Long term vision on infrastructure</span></li>
-            </ul>
-          </div>
-
-          <div class="km-fighting__group km-fighting__group--red">
-            <h3 class="km-fighting__group-heading">A community where you belong</h3>
-            <ul class="km-fighting__list">
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Building community through sports, arts, culture and placemaking</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Streets that feel good to be on, and a city people want to explore</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Connected communities attract skilled neighbors ready to give back.</span></li>
-            </ul>
-          </div>
-
-          <div class="km-fighting__group km-fighting__group--purple">
-            <h3 class="km-fighting__group-heading">A city that works for you</h3>
-            <ul class="km-fighting__list">
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Transportation options to meet diverse needs</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Supporting youth with safe routes, arts, and sports</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Housing opportunities that meet needs</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Supporting local business at every stage of growth</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>A government that works hard to be efficient and effective</span></li>
-              <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Easier access to government information</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="km-fighting__signup">
-          <p class="km-fighting__signup-text">I&rsquo;m taking the time to listen before I launch my full platform. Sign up to receive a notification the moment my full platform is released.</p>
-
-          {% assign fighting_signup_page_id = 999 %}
-          <form class="km-fighting__form" method="post" action="/forms/signups">
-            <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}" />
-            <input type="hidden" name="page_id" value="{{ fighting_signup_page_id }}" />
-
-            <div class="km-form-field">
-              <label for="fighting-name">Name</label>
-              <input type="text" id="fighting-name" name="signup[first_name]" />
-            </div>
-            <div class="km-form-field">
-              <label for="fighting-email">Email</label>
-              <input type="email" id="fighting-email" name="signup[email]" required />
-            </div>
-            <button type="submit" class="km-btn km-btn--donate km-fighting__submit">Stay informed</button>
-          </form>
-        </div>
-      </div>
-
-      <div class="km-fighting__photo">
-        <img src="{{ theme['fighting-photo-bus-stop.jpg'] }}" alt="Kimberley Guiry standing next to a Langford bus stop sign" loading="lazy" />
-      </div>
-    </div>
-  </section>
+  {% include "fighting_for" %}
 
   <section class="km-cta">
     <div class="km-cta__inner">
