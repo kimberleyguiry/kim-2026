@@ -1341,10 +1341,6 @@ a:hover {
   border-radius: 4px 4px 0 0;
   max-height: 300px;
 
-  .km-story__image--wide {
-    max-height: 400px;
-  }
-
   img {
     display: block;
     width: 100%;
@@ -1486,6 +1482,7 @@ a:hover {
   aspect-ratio: auto;
   height: 100%;
   border-radius: 4px 0 0 4px;
+  max-height: 400px;
 }
 
 .km-story--wide .km-story__body {
