@@ -1890,6 +1890,10 @@ a:hover {
 
   &--filled {
     background-color: var(--km-red-600);
+    &:hover {
+      color: var(--km-cream);
+      background-color: var(--km-orange);
+    }
   }
 }
 
