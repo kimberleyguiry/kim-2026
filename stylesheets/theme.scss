@@ -156,6 +156,8 @@
   &:hover,
   &--active {
     background-color: var(--km-cream);
+    color: var(--km-red-600);
+    text-decoration: none;
   }
 }
 
