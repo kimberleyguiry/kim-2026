@@ -1555,6 +1555,10 @@
   line-height: 1.2;
   color: var(--km-blue-800);
   text-align: right;
+
+  &--left {
+    text-align: left;
+  }
 }
 
 .km-about-polaroid {
