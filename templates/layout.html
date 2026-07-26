@@ -53,7 +53,11 @@
           {% include "features" %}
         {% endif %}
         <main id="content" role="main">
-          {% include "content", sidebar: request.is_sidebar? %}
+          {% if page.slug == 'progress' %}
+            {% include "progress_page" %}
+          {% else %}
+            {% include "content", sidebar: request.is_sidebar? %}
+          {% endif %}
         </main>
         {% include "footer" %}
       </div>
@@ -79,9 +83,9 @@
     <script src="bs-custom-file-input.min.js"></script>
     <script src="theme.js"></script>
     <script src="km-nav.js"></script>
+    <script src="km-counter-animations.js"></script>
     {% if page.is_homepage? and page.type_slug == 'basic' %}
       <script src="km-accordion.js"></script>
-      <script src="km-counter-animations.js"></script>
     {% endif %}
   </body>
 </html>

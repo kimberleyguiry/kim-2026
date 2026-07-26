@@ -1392,6 +1392,86 @@
   white-space: nowrap;
 }
 
+/* ── Progress page ────────────────────────────────────────────────────── */
+
+.km-progress-section__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--km-section-padding) var(--km-page-margin);
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.km-progress-section__heading {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.4;
+  color: var(--km-blue-800);
+  margin: 0;
+}
+
+.km-progress-stories {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.km-progress-stories__grid {
+  display: flex;
+  gap: 48px;
+  align-items: stretch;
+}
+
+.km-story--wide {
+  flex-direction: row;
+  height: 454px;
+}
+
+.km-story__image--wide {
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: auto;
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+}
+
+.km-story--wide .km-story__body {
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: center;
+  padding: 36px 144px 36px 48px;
+  border-radius: 0 4px 4px 0;
+}
+
+.km-story--wide .km-story__excerpt {
+  flex: 0 1 auto;
+  margin-bottom: 0;
+}
+
+.km-story__corner-shadow--right {
+  left: auto;
+  right: 1%;
+  transform: rotate(7deg) skewX(-0.77deg);
+}
+
+.km-story__sticker {
+  position: absolute;
+  right: -48px;
+  bottom: -48px;
+  width: 160px;
+  height: 160px;
+  z-index: 4;
+}
+
+.km-progress-section__hr {
+  border: none;
+  border-top: 1px solid var(--km-blue-900);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 /* ── Footer ───────────────────────────────────────────────────────────── */
 
 .km-footer {
@@ -1644,6 +1724,41 @@
     height: 72px;
   }
 
+  .km-progress-section__inner {
+    padding: 96px var(--km-page-margin);
+  }
+
+  .km-progress-section__heading {
+    font-size: 40px;
+  }
+
+  .km-progress-stories__grid {
+    flex-direction: column;
+  }
+
+  .km-story--wide {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .km-story__image--wide {
+    aspect-ratio: 16 / 11;
+    height: auto;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .km-story--wide .km-story__body {
+    padding: 36px 48px;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .km-story__sticker {
+    width: 120px;
+    height: 120px;
+    right: -24px;
+    bottom: -24px;
+  }
+
   .km-hero__inner {
     flex-direction: column;
     align-items: stretch;
@@ -1818,6 +1933,23 @@
 
   .km-page-header__stripes {
     height: 24px;
+  }
+
+  .km-progress-section__inner {
+    padding: 48px 24px;
+    gap: 40px;
+  }
+
+  .km-progress-section__heading {
+    font-size: 32px;
+  }
+
+  .km-story--wide .km-story__body {
+    padding: 24px;
+  }
+
+  .km-story__sticker {
+    display: none;
   }
 
   .km-nav {
