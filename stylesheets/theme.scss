@@ -610,7 +610,7 @@
 .km-intro__hr {
   border: none;
   border-top: 1px solid var(--km-blue-900);
-  margin: 48px 0;
+  margin: 64px 0;
 }
 
 /* ── Showcase (3-photo row) ───────────────────────────────────────────── */
@@ -672,10 +672,12 @@
 
 .km-showcase__image--sidewalks {
   aspect-ratio: 327 / 588;
+  margin-top: 2rem;
 }
 
 .km-showcase__image--clinic {
   aspect-ratio: 327 / 524;
+  margin-bottom: 2rem;
 }
 
 .km-showcase__image--tall {
