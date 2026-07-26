@@ -1090,6 +1090,9 @@ a:hover {
   &:last-child {
     border-right: none;
   }
+  &:hover {
+    background-color: rgba(27, 43, 61, 0.1);
+  }
 }
 
 .km-tile__heading {
@@ -1123,6 +1126,9 @@ a:hover {
   .km-tile__text,
   .km-tile__arrow {
     color: var(--km-cream);
+  }
+  &:hover {
+    background-color: var(--km-orange);
   }
 }
 
