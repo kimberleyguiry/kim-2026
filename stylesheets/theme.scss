@@ -843,6 +843,7 @@ a:hover {
   display: flex;
   align-items: stretch;
   padding-left: unquote("max(var(--km-page-margin), calc((100vw - 1440px) / 2 + var(--km-page-margin)))");
+  margin-bottom: 144px;
 }
 
 .km-fighting__content {
