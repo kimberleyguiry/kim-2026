@@ -1695,11 +1695,11 @@ a:hover {
   width: var(--km-stripes-width);
 }
 
-/* The last item's curve has nothing below it to connect to, so its line
-   must stop where the curve flares out rather than stretching through
-   the row's remaining padding. km-issues-curves.js sets the matching
-   inline height once it knows where that curve actually ends. */
-.km-issues-item--terminal .km-issues-item__stripes {
+/* Any row whose curve flares off should have its straight line stop right
+   there instead of stretching through the rest of the row. This class is
+   added by km-issues-curves.js (which also sets the matching inline
+   height) to whichever rows actually contain a curve. */
+.km-issues-item__stripes--curved {
   align-self: flex-start;
 }
 
