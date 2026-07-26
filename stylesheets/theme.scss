@@ -1426,6 +1426,12 @@
   align-items: stretch;
 }
 
+.km-progress-stories__grid--2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
 .km-story--wide {
   flex-direction: row;
   height: 454px;
@@ -1796,6 +1802,10 @@
 
   .km-progress-stories__grid {
     flex-direction: column;
+  }
+
+  .km-progress-stories__grid--2x2 {
+    grid-template-columns: 1fr;
   }
 
   .km-story--wide {
