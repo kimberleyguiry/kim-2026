@@ -1722,30 +1722,38 @@ a:hover {
 /* The stripe "peels off" one lane toward the heading using the classic
    two-sided-border + border-radius corner trick: a box with only its
    left + bottom borders colored, curving smoothly where they meet.
-   Every curve shares the same left offset and width, so the flare's
-   right edge always lands the same x-distance from its heading. Height
-   is set per-instance by km-issues-curves.js to the actual distance from
-   the top of the list down to that curve's own heading — the lower the
-   heading, the taller (and later-arriving) the curve. */
+   --km-curve-lane is each color's x-offset within the 3-lane stripe
+   (0/36/72px), so the curve's vertical piece lines up with its own
+   colored lane. Width is the fixed right-edge target (--km-curve-reach-x)
+   minus that lane offset, so every curve's flare still lands at the same
+   x-distance from its heading regardless of which lane it started in.
+   Height is set per-instance by km-issues-curves.js to the actual distance
+   from the top of the list down to that curve's own heading — the lower
+   the heading, the taller (and later-arriving) the curve. */
 .km-issues-item__curve {
+  --km-curve-reach-x: 160px;
+
   position: absolute;
   top: 0;
-  left: 0;
-  width: 160px;
+  left: var(--km-curve-lane, 0px);
+  width: calc(var(--km-curve-reach-x) - var(--km-curve-lane, 0px));
   border-style: solid;
   border-width: 0 0 36px 36px;
   border-bottom-left-radius: 100px;
   pointer-events: none;
 
   &--purple {
+    --km-curve-lane: 0px;
     border-color: transparent transparent var(--km-purple) var(--km-purple);
   }
 
   &--red {
+    --km-curve-lane: 36px;
     border-color: transparent transparent var(--km-red-600) var(--km-red-600);
   }
 
   &--orange {
+    --km-curve-lane: 72px;
     border-color: transparent transparent var(--km-orange) var(--km-orange);
   }
 }
@@ -2079,7 +2087,7 @@ a:hover {
   }
 
   .km-issues-item__curve {
-    width: 110px;
+    --km-curve-reach-x: 110px;
     border-bottom-left-radius: 70px;
   }
 
