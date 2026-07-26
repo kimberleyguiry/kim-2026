@@ -438,6 +438,7 @@
   padding: 10px 10px 32px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  transition: transform 0.35s ease;
 
   img {
     display: block;
@@ -457,6 +458,11 @@
     background-color: var(--km-overlay);
     border-radius: 3px;
     pointer-events: none;
+  }
+
+  &:hover {
+    transform: rotate(0deg) scale(1.08);
+    z-index: 20;
   }
 }
 
