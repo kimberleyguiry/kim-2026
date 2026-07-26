@@ -1676,6 +1676,10 @@ a:hover {
 }
 
 .km-issues-list {
+  /* Curves are positioned absolute against this ancestor (not their own
+     row) so their height can span from the very top of the list down to
+     their own heading — km-issues-curves.js measures and sets this. */
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -1683,26 +1687,20 @@ a:hover {
 .km-issues-item {
   display: flex;
   align-items: stretch;
-
-  /* Vertical distance from the row's top to the middle of the heading —
-     shared by the curve (where it flares out) and by the terminal item's
-     stripe (where the line itself needs to stop). */
-  --km-curve-reach: 106px;
-}
-
-/* The last item's curve has nothing below it to connect to, so the
-   straight part of its line must stop right where the curve flares out
-   instead of continuing down through the row's remaining padding. */
-.km-issues-item--terminal .km-issues-item__stripes {
-  align-self: flex-start;
-  height: var(--km-curve-reach);
 }
 
 .km-issues-item__stripes {
-  position: relative;
   flex-shrink: 0;
   display: flex;
   width: var(--km-stripes-width);
+}
+
+/* The last item's curve has nothing below it to connect to, so its line
+   must stop where the curve flares out rather than stretching through
+   the row's remaining padding. km-issues-curves.js sets the matching
+   inline height once it knows where that curve actually ends. */
+.km-issues-item--terminal .km-issues-item__stripes {
+  align-self: flex-start;
 }
 
 .km-issues-stripe {
@@ -1724,13 +1722,14 @@ a:hover {
 /* The stripe "peels off" one lane toward the heading using the classic
    two-sided-border + border-radius corner trick: a box with only its
    left + bottom borders colored, curving smoothly where they meet.
-   Height is pinned to --km-curve-reach (the row-top-to-heading-middle
-   distance) so the horizontal flare lines up with the heading text
-   itself, not the vertical middle of the whole row. */
+   Every curve shares the same left offset and width, so the flare's
+   right edge always lands the same x-distance from its heading. Height
+   is set per-instance by km-issues-curves.js to the actual distance from
+   the top of the list down to that curve's own heading — the lower the
+   heading, the taller (and later-arriving) the curve. */
 .km-issues-item__curve {
   position: absolute;
   top: 0;
-  height: var(--km-curve-reach);
   left: 0;
   width: 160px;
   border-style: solid;
@@ -1739,17 +1738,14 @@ a:hover {
   pointer-events: none;
 
   &--purple {
-    left: 0;
     border-color: transparent transparent var(--km-purple) var(--km-purple);
   }
 
   &--red {
-    left: 36px;
     border-color: transparent transparent var(--km-red-600) var(--km-red-600);
   }
 
   &--orange {
-    left: 72px;
     border-color: transparent transparent var(--km-orange) var(--km-orange);
   }
 }
@@ -2074,11 +2070,6 @@ a:hover {
 /* ── Responsive ───────────────────────────────────────────────────────── */
 
 @media (max-width: 1279px) {
-  .km-issues-item {
-    /* padding-top 48px + half of the 40px/1.4 heading line box */
-    --km-curve-reach: 76px;
-  }
-
   .km-issues-item__content {
     padding: 48px 24px 48px 64px;
   }

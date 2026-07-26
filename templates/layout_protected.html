@@ -67,6 +67,9 @@
     <script src="bs-custom-file-input.min.js"></script>
     <script src="km-nav.js"></script>
     <script src="km-counter-animations.js"></script>
+    {% if page.slug == 'issues' %}
+      <script src="km-issues-curves.js"></script>
+    {% endif %}
     <script>
       $(document).ready(function () {
         bsCustomFileInput.init()

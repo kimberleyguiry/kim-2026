@@ -91,5 +91,8 @@
     {% if page.is_homepage? and page.type_slug == 'basic' %}
       <script src="km-accordion.js"></script>
     {% endif %}
+    {% if page.slug == 'issues' %}
+      <script src="km-issues-curves.js"></script>
+    {% endif %}
   </body>
 </html>
