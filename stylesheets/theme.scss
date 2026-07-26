@@ -1458,11 +1458,24 @@
 
 .km-story__sticker {
   position: absolute;
-  right: -48px;
-  bottom: -48px;
   width: 160px;
   height: 160px;
   z-index: 4;
+
+  &--bottom-right {
+    right: -48px;
+    bottom: -48px;
+  }
+
+  &--top-left {
+    left: -48px;
+    top: -48px;
+  }
+
+  &--top-right {
+    right: -48px;
+    top: -48px;
+  }
 }
 
 .km-progress-section__hr {
@@ -1470,6 +1483,53 @@
   border-top: 1px solid var(--km-blue-900);
   max-width: 1440px;
   margin: 0 auto;
+}
+
+.km-services-row {
+  display: flex;
+  gap: 64px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.km-services-row__col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.km-services-stats {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  border: 1px solid var(--km-blue-900);
+}
+
+.km-services-stats__col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--km-blue-900);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.km-counter--grid {
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: flex-start;
+  text-align: left;
+  border-right: none;
+  border-bottom: 1px solid var(--km-blue-900);
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 /* ── Footer ───────────────────────────────────────────────────────────── */
@@ -1755,8 +1815,25 @@
   .km-story__sticker {
     width: 120px;
     height: 120px;
-    right: -24px;
-    bottom: -24px;
+
+    &--bottom-right {
+      right: -24px;
+      bottom: -24px;
+    }
+
+    &--top-left {
+      left: -24px;
+      top: -24px;
+    }
+
+    &--top-right {
+      right: -24px;
+      top: -24px;
+    }
+  }
+
+  .km-services-row {
+    flex-direction: column;
   }
 
   .km-hero__inner {
@@ -1950,6 +2027,23 @@
 
   .km-story__sticker {
     display: none;
+  }
+
+  .km-services-row__col {
+    gap: 40px;
+  }
+
+  .km-services-stats {
+    flex-direction: column;
+  }
+
+  .km-services-stats__col {
+    border-right: none;
+    border-bottom: 1px solid var(--km-blue-900);
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   .km-nav {
