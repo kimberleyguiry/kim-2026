@@ -96,6 +96,11 @@
   font-weight: 400;
 }
 
+a:hover {
+  text-decoration: none;
+  color: var(--km-orange);
+}
+
 .km-page p {
   font-family: 'Inter', sans-serif;
 }
@@ -191,6 +196,8 @@
 
   &:hover {
     background-color: rgba(27, 43, 61, 0.06);
+    color: var(--km-red-600);
+    text-decoration: none
   }
 }
 
