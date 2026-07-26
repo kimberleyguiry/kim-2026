@@ -131,7 +131,7 @@
 .km-nav {
   display: flex;
   align-items: stretch;
-  border: 1px solid var(--km-blue-900);
+  //border: 1px solid var(--km-blue-900);
 }
 
 .km-nav__item--dropdown {
@@ -923,7 +923,7 @@
   font-size: 18px;
   line-height: 1.5;
   color: rgba(255, 243, 229, 0.8);
-  margin: 0 0 16px;
+  margin: 0 0 32px;
 }
 
 .km-fighting__form {
@@ -1064,7 +1064,7 @@
 .km-momentum__tiles {
   display: flex;
   border: 1px solid var(--km-blue-900);
-  margin-top: 32px;
+  margin-top: 64px;
 }
 
 .km-tile {
