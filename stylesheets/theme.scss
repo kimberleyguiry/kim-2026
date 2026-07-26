@@ -1748,7 +1748,15 @@ a:hover {
    x-distance from its heading regardless of which lane it started in.
    Height is set per-instance by km-issues-curves.js to the actual distance
    from the top of the list down to that curve's own heading — the lower
-   the heading, the taller (and later-arriving) the curve. */
+   the heading, the taller (and later-arriving) the curve.
+   Figma's own curves (checked against the "stripes" node) get visibly
+   rounder the lower they sit on the page — purple/red/orange come out to
+   radius:width ratios of ~0.83/0.78/0.92, not a fixed pixel value, and
+   not a clean linear fit against height either. What they do track is
+   their own width: rounder curves have more horizontal room to bend in.
+   Deriving the radius from width (rather than hardcoding it) reproduces
+   that trend and keeps later/wider curves proportionally rounder without
+   pinning to Figma's specific (evidently hand-tuned) numbers. */
 .km-issues-item__curve {
   --km-curve-reach-x: 160px;
 
@@ -1758,7 +1766,9 @@ a:hover {
   width: calc(var(--km-curve-reach-x) - var(--km-curve-lane, 0px));
   border-style: solid;
   border-width: 0 0 36px 36px;
-  border-bottom-left-radius: 100px;
+  border-bottom-left-radius: calc(
+    (var(--km-curve-reach-x) - var(--km-curve-lane, 0px)) * 0.85
+  );
   pointer-events: none;
 
   &--purple {
@@ -2106,8 +2116,9 @@ a:hover {
   }
 
   .km-issues-item__curve {
+    /* radius derives from this via the base rule's calc() — no separate
+       radius override needed */
     --km-curve-reach-x: 110px;
-    border-bottom-left-radius: 70px;
   }
 
   .km-page-header__inner {
