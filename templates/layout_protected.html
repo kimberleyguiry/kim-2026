@@ -32,6 +32,8 @@
             {% include "progress_page" %}
           {% elsif page.slug == 'about' %}
             {% include "about" %}
+          {% elsif page.slug == 'issues' %}
+            {% include "issues" %}
           {% else %}
             {% include "content", sidebar: request.is_sidebar? %}
           {% endif %}

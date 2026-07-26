@@ -1667,6 +1667,103 @@ a:hover {
   color: var(--km-blue-900);
 }
 
+/* ── Issues page ──────────────────────────────────────────────────────── */
+
+.km-issues-page__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--km-page-margin);
+}
+
+.km-issues-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.km-issues-item {
+  display: flex;
+  align-items: stretch;
+}
+
+.km-issues-item__stripes {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  width: var(--km-stripes-width);
+}
+
+.km-issues-stripe {
+  flex: 1 1 0;
+
+  &--purple {
+    background-color: var(--km-purple);
+  }
+
+  &--red {
+    background-color: var(--km-red-600);
+  }
+
+  &--orange {
+    background-color: var(--km-orange);
+  }
+}
+
+/* The stripe "peels off" one lane toward the heading using the classic
+   two-sided-border + border-radius corner trick: a box with only its
+   left + bottom borders colored, curving smoothly where they meet.
+   Sized with top:0/bottom:50% so it always spans row-top to row-middle,
+   regardless of how tall the row's text makes it — no hardcoded pixels. */
+.km-issues-item__curve {
+  position: absolute;
+  top: 0;
+  bottom: 50%;
+  left: 0;
+  width: 160px;
+  border-style: solid;
+  border-width: 0 0 36px 36px;
+  border-bottom-left-radius: 100px;
+  pointer-events: none;
+
+  &--purple {
+    left: 0;
+    border-color: transparent transparent var(--km-purple) var(--km-purple);
+  }
+
+  &--red {
+    left: 36px;
+    border-color: transparent transparent var(--km-red-600) var(--km-red-600);
+  }
+
+  &--orange {
+    left: 72px;
+    border-color: transparent transparent var(--km-orange) var(--km-orange);
+  }
+}
+
+.km-issues-item__content {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 72px 64px 72px 96px;
+}
+
+.km-issues-item__heading {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.4;
+  color: var(--km-blue-800);
+  margin: 0 0 20px;
+}
+
+.km-issues-item__paragraph {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--km-text-on-light);
+  margin: 0;
+  max-width: 1044px;
+}
+
 .km-services-row {
   display: flex;
   gap: 48px;
@@ -1963,6 +2060,19 @@ a:hover {
 /* ── Responsive ───────────────────────────────────────────────────────── */
 
 @media (max-width: 1279px) {
+  .km-issues-item__content {
+    padding: 48px 24px 48px 64px;
+  }
+
+  .km-issues-item__heading {
+    font-size: 40px;
+  }
+
+  .km-issues-item__curve {
+    width: 110px;
+    border-bottom-left-radius: 70px;
+  }
+
   .km-page-header__inner {
     padding: 64px var(--km-page-margin) 40px;
   }
@@ -2214,6 +2324,26 @@ a:hover {
 }
 
 @media (max-width: 767px) {
+  .km-issues-page__inner {
+    padding: 0 24px;
+  }
+
+  .km-issues-item__stripes {
+    width: 24px;
+  }
+
+  .km-issues-item__content {
+    padding: 32px 0 32px 24px;
+  }
+
+  .km-issues-item__heading {
+    font-size: 32px;
+  }
+
+  .km-issues-item__curve {
+    display: none;
+  }
+
   .km-page-header__inner {
     padding: 40px 24px 32px;
   }
