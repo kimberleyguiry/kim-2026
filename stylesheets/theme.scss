@@ -1176,6 +1176,10 @@ a:hover {
     border: 0;
   }
 
+  &:hover {
+    background-color: rgba(27, 43, 61, 0.1);
+  }
+
   &:focus {
     outline: none;
   }
@@ -1887,6 +1891,11 @@ a:hover {
   color: var(--km-cream);
   text-decoration: none;
   text-align: center;
+  
+  &:hover {
+      color: var(--km-cream);
+      background-color: rgba(255, 243, 229, 0.1);
+  }
 
   &:last-child {
     margin-right: 0;
