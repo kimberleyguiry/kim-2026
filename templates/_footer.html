@@ -1,24 +1,26 @@
 <footer class="km-footer" style="background-image: url('{{ theme['grain-for-dark-bks.png'] }}');">
 
-  <div class="km-footer__stripes-row">
-    <div class="km-footer__stripes" aria-hidden="true">
-      <span class="km-footer__stripe km-footer__stripe--purple"></span>
-      <span class="km-footer__stripe km-footer__stripe--red"></span>
-      <span class="km-footer__stripe km-footer__stripe--orange"></span>
-    </div>
-    <div class="km-footer__stripes-endcap" aria-hidden="true">
-      <div class="km-footer__endcap-row km-footer__endcap-row--thick">
+  {% if page.is_homepage? %}
+    <div class="km-footer__stripes-row">
+      <div class="km-footer__stripes" aria-hidden="true">
         <span class="km-footer__stripe km-footer__stripe--purple"></span>
         <span class="km-footer__stripe km-footer__stripe--red"></span>
         <span class="km-footer__stripe km-footer__stripe--orange"></span>
       </div>
-      <div class="km-footer__endcap-row km-footer__endcap-row--thin">
-        <span class="km-footer__stripe km-footer__stripe--purple"></span>
-        <span class="km-footer__stripe km-footer__stripe--red"></span>
-        <span class="km-footer__stripe km-footer__stripe--orange"></span>
+      <div class="km-footer__stripes-endcap" aria-hidden="true">
+        <div class="km-footer__endcap-row km-footer__endcap-row--thick">
+          <span class="km-footer__stripe km-footer__stripe--purple"></span>
+          <span class="km-footer__stripe km-footer__stripe--red"></span>
+          <span class="km-footer__stripe km-footer__stripe--orange"></span>
+        </div>
+        <div class="km-footer__endcap-row km-footer__endcap-row--thin">
+          <span class="km-footer__stripe km-footer__stripe--purple"></span>
+          <span class="km-footer__stripe km-footer__stripe--red"></span>
+          <span class="km-footer__stripe km-footer__stripe--orange"></span>
+        </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 
   <div class="km-footer__inner">
 
