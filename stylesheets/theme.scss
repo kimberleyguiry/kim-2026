@@ -1546,7 +1546,7 @@
   gap: 24px;
 }
 
-.km-about-caption {
+.km-about-photo-row .km-about-caption {
   flex-shrink: 0;
   max-width: 100px;
   margin: 0;
@@ -1585,6 +1585,32 @@
     border-radius: 3px;
     pointer-events: none;
   }
+}
+
+.km-about-quote {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.km-about-quote__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--km-section-padding) var(--km-page-margin);
+  display: flex;
+  min-height: 593px;
+  align-items: flex-end;
+}
+
+.km-about-quote__text {
+  max-width: 592px;
+  margin: 0;
+  padding: 32px 48px;
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.4;
+  color: var(--km-blue-900);
 }
 
 .km-services-row {
@@ -1896,6 +1922,15 @@
     font-size: 40px;
   }
 
+  .km-about-quote__inner {
+    min-height: 400px;
+  }
+
+  .km-about-quote__text {
+    font-size: 26px;
+    padding: 24px;
+  }
+
   .km-progress-section__inner {
     padding: 96px var(--km-page-margin);
   }
@@ -2135,6 +2170,17 @@
 
   .km-about-block__heading {
     font-size: 32px;
+  }
+
+  .km-about-quote__inner {
+    min-height: 320px;
+    padding: 48px 24px;
+  }
+
+  .km-about-quote__text {
+    font-size: 22px;
+    padding: 16px;
+    max-width: none;
   }
 
   .km-about-photo-row {
