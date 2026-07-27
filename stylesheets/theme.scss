@@ -205,7 +205,7 @@
   }
 }
 
-.km-btn {
+.km-btn, .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -219,7 +219,7 @@
   cursor: pointer;
 }
 
-.km-btn--donate {
+.km-btn--donate, .btn-primary {
   background-color: var(--km-red-600);
   color: var(--km-cream);
 
