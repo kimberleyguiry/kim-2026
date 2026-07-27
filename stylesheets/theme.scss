@@ -169,10 +169,14 @@ legend.h3 {
     background-color: var(--km-blue-900-10);
   }
 }
-
 .custom-control-input:checked ~ .custom-control-label::before {
   border-color: var(--km-blue-900);
   background-color: var(--km-blue-900);
+}
+.custom-control-input:focus ~ .custom-control-label::before {
+  outline: 2px solid var(--km-red-600);
+  outline-offset: 1px;
+  box-shadow: none;
 }
 
 .mt-2, .my-2 {
