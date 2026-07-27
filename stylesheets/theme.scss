@@ -1288,6 +1288,14 @@ a:hover {
 
   img {
     border-radius: 20px;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--km-overlay);
+      pointer-events: none;
+    }
   }
 }
 
