@@ -109,6 +109,11 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* --- NB Form overrides ------------------------------------------------- */
+fieldset {
+  margin-top: 32px;
+}
+
 /* ── Header / nav ─────────────────────────────────────────────────────── */
 
 .km-header {
