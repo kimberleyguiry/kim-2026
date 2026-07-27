@@ -1285,18 +1285,18 @@ a:hover {
   display: flex;
   gap: 16px;
   flex-direction: column;
-
-  .km-retro-img {
-    border-radius: 20px;
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: var(--km-overlay);
-      pointer-events: none;
-    }
   }
 }
+
+img.km-retro-img {
+  border-radius: 20px;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--km-overlay);
+    pointer-events: none;
+  }
 
 .km-play-button {
   position: absolute;
