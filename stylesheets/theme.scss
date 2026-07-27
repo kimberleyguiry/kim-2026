@@ -1160,7 +1160,7 @@ a:hover {
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  padding: 24px;
+  padding: 24px 32px;
   background: none;
   border: none;
   outline: none;
@@ -1205,7 +1205,7 @@ a:hover {
   display: flex;
   gap: 36px;
   align-items: flex-start;
-  padding: 0 32px 32px;
+  padding: 16px 32px 32px 32px;
 }
 
 .km-accordion__text {
