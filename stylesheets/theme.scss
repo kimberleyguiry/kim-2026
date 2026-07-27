@@ -130,6 +130,7 @@ fieldset {
     border-radius: 0;
     &:hover {
       background-color: var(--km-blue-900-10);
+  }
     &:focus {
       border-color: var(--km-red-600);
       border-width: 2px;
