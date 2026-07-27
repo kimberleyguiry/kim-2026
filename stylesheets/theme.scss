@@ -226,7 +226,7 @@ a:hover {
 }
 .km-btn--more-news {
     display: inline-block;
-    margin: 48px 0 144px;
+    margin: 48px 0 var(--km-section-padding);
     float: right;
 }
 
