@@ -554,7 +554,8 @@ a:hover {
 .km-intro__inner {
   display: flex;
   align-items: stretch;
-  gap: var(--km-page-margin);
+  //gap: var(--km-page-margin);
+  gap: 72px;
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 var(--km-page-margin);
