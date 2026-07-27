@@ -8,6 +8,9 @@
             {% if page.headline.size > 0 %}
             <h1>{{ page.headline }}</h1>
             {% endif %}
+            {% if page.donation_v2.content.size > 0 %}
+            {{ page.donation_v2.content }}
+            {% endif %} 
           </div>
         </div>
       </div>
@@ -36,9 +39,9 @@
             {% endif %} -->
 
             <!-- Optional goals and page content section -->
-            {% if page.donation_v2.content.size > 0 %}
+            <!--{% if page.donation_v2.content.size > 0 %}
             {{ page.donation_v2.content }}
-            {% endif %}
+            {% endif %} -->
 
             {% if page.donation_v2.has_amount_goal? %}
             <div class="mb-3">
