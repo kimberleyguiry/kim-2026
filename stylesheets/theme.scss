@@ -134,6 +134,7 @@ fieldset {
     &:focus {
       border-color: var(--km-red-600);
       border-width: 2px;
+      box-shadow: none;
   }
 }
 
