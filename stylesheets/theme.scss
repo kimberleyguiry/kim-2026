@@ -62,6 +62,7 @@
   --km-cream-polaroid: #fff9f3;
   --km-text-on-light: rgba(27, 43, 61, 0.8);
   --km-overlay: rgba(149, 125, 217, 0.25);
+  --km-blue-900-10: rgba(27, 43, 61, 0.1);
   --km-page-margin: 64px;
   --km-stripes-width: 108px;
   --km-stripes-gap: 8px;
@@ -127,7 +128,14 @@ fieldset {
     background-color: transparent;
     border: 1px solid var(--km-blue-900);
     border-radius: 0;
+    &:hover {
+      background-color: var(--km-blue-900-10);
+    &:focus {
+      border-color: var(--km-red-600);
+      border-width: 2px;
+  }
 }
+
 .input-group-text {
     color: var(--km-cream);
     background-color: var(--km-blue-900);
@@ -1149,7 +1157,7 @@ fieldset {
     border-right: none;
   }
   &:hover {
-    background-color: rgba(27, 43, 61, 0.1);
+    background-color: var(--km-blue-900-10);
   }
 }
 
@@ -1231,7 +1239,7 @@ fieldset {
   }
 
   &:hover {
-    background-color: rgba(27, 43, 61, 0.1);
+    background-color: var(--km-blue-900-10);
   }
 
   &:focus {
