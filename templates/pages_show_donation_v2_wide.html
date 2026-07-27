@@ -5,7 +5,9 @@
       <div class="container py-4 px-md-5 km-donate-banner" style="max-width:740px;">
         <div class="row">
           <div class="col">
-            <h2>Testing</h2>
+            {% if page.headline.size > 0 %}
+            <h1>{{ page.headline }}</h1>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -17,7 +19,7 @@
       <div class="container py-4 px-md-5" style="max-width:740px;">
         <div class="row">
           <div class="col">
-            <a class="navbar-brand mb-4" href="/" style="max-width: 200px;">
+            <!-- <a class="navbar-brand mb-4" href="/" style="max-width: 200px;">
               {% if site.has_meta_image? %}
               <img src="{{ site.meta_image_url }}" class="navbar-brand-img mw-100" alt="{{ site.name }}">
               {% else %}
@@ -26,7 +28,7 @@
             </a>
             {% if page.headline.size > 0 %}
             <h1>{{ page.headline }}</h1>
-            {% endif %}
+            {% endif %} -->
 
             <!-- Optional goals and page content section -->
             {% if page.donation_v2.content.size > 0 %}
