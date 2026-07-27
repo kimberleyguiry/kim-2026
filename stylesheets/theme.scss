@@ -137,6 +137,10 @@ fieldset {
       box-shadow: none;
   }
 }
+label {
+  margin-bottom: .2rem;
+  font-size: 12px;
+}
 
 .input-group-text {
     color: var(--km-cream);
