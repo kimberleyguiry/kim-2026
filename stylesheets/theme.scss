@@ -114,6 +114,20 @@ fieldset {
   margin-top: 32px;
 }
 
+.form-control, .StripeElement[data-payments-element-type="card"] {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--km-blue-900);
+    background-color: transparent;
+    border: 1px solid var(--km-blue-900);
+    border-radius: 0;
+}
+
 /* ── Header / nav ─────────────────────────────────────────────────────── */
 
 .km-header {
