@@ -96,7 +96,11 @@
   font-weight: 400;
 }
 
-a:hover {
+.btn-link {
+  color: var(--km-red-600);
+}
+
+.btn-link:hover, a:hover {
   text-decoration: none;
   color: var(--km-orange);
 }
