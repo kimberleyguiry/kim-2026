@@ -1,3 +1,7 @@
+{% assign km_is_home = false %}
+{% if page.slug == 'home' or (page.is_homepage? and page.type_slug == 'basic') %}
+  {% assign km_is_home = true %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,7 +22,7 @@
     </noscript>
 
     <link rel="preload" as="image" href="{{ theme['kim-logo-dark-2x.png'] }}" />
-    {% if page.is_homepage? and page.type_slug == 'basic' %}
+    {% if km_is_home %}
       <link rel="preload" as="image" href="{{ theme['hero-photo-4.jpg'] }}" />
     {% endif %}
 
@@ -31,9 +35,11 @@
     </script>
 
   </head>
-  <body class="bootstrap-theme v3-theme {%if page.is_homepage? %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
+  <body class="bootstrap-theme v3-theme {% if km_is_home %}homepage{% endif %} {{ page.page_class_name }} page-{{ request.template | replace: '_', '-' }} js">
 
-    {% if page.is_homepage? and page.type_slug == 'basic' %}
+    {% if page.slug == 'splash' %}
+      {% include "splash" %}
+    {% elsif km_is_home %}
       {% include "homepage" %}
     {% elsif page.type_name == "Donation (v2)" %}
       <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
@@ -88,7 +94,7 @@
     <script src="theme.js"></script>
     <script src="km-nav.js"></script>
     <script src="km-counter-animations.js"></script>
-    {% if page.is_homepage? and page.type_slug == 'basic' %}
+    {% if km_is_home %}
       <script src="km-accordion.js"></script>
     {% endif %}
     {% if page.slug == 'issues' %}

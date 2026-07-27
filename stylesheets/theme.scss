@@ -2796,3 +2796,42 @@ img.km-retro-img {
   }
 }
 
+/* ── Splash page ────────────────────────────────────────────────────────── */
+
+.km-splash {
+  min-height: 100vh;
+  background-color: var(--km-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.km-splash__inner {
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+}
+
+.km-splash__logo-link {
+  display: inline-block;
+  margin-bottom: 32px;
+}
+
+.km-splash__logo {
+  width: 171px;
+  height: auto;
+}
+
+.km-splash__content {
+  font-family: 'Inter', sans-serif;
+  color: var(--km-blue-900);
+}
+
+.km-splash__content h1,
+.km-splash__content h2,
+.km-splash__content h3 {
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+}
+
