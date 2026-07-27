@@ -106,6 +106,9 @@
               {% else %}
               <fieldset aria-labelledby="cc-disclaimer">
                 <legend class="h3">Amount</legend>
+                <div data-payment-disclaimer>
+                  <p id="cc-disclaimer">Please select or enter an amount</p>
+                </div> 
                 <div class="form-row w-100">
                   {% if page.donation_v2.amount_in_cents != 0 %}
                   <div class="form-group col-md-8">
@@ -148,9 +151,9 @@
               </div>
               {% endif %}
 
-              <div data-payment-disclaimer>
+              <!-- <div data-payment-disclaimer>
                 <p id="cc-disclaimer">Please select or enter an amount</p>
-              </div>
+              </div> -->
 
               <hr>
 
