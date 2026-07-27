@@ -162,6 +162,19 @@ legend.h3 {
     border-radius: 0;
 }
 
+.custom-control-label::before {
+  background-color: transparent;
+  border: var(--km-blue-900) solid 1px;
+  &:hover {
+    background-color: var(--km-blue-900-10);
+  }
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: var(--km-blue-900);
+  background-color: var(--km-blue-900);
+}
+
 .mt-2, .my-2 {
     margin-top: -1px !important;
 }
