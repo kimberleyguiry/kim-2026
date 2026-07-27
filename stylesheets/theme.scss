@@ -1219,6 +1219,9 @@ a:hover {
     line-height: 1.5;
     color: var(--km-text-on-light);
   }
+  p strong {
+    color: var(--km-blue-900);
+  }
 }
 
 .km-quote {
