@@ -1282,6 +1282,13 @@ a:hover {
 
 .km-issues-images {
   width: 50%;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+
+  img {
+    border-radius: 20px;
+  }
 }
 
 .km-play-button {
