@@ -114,6 +114,12 @@
   font-family: 'Inter', sans-serif;
 }
 
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--km-blue-900);
+}
+
 /* --- NB Form overrides ------------------------------------------------- */
 fieldset {
   margin-top: 32px;
