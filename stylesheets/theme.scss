@@ -124,6 +124,9 @@ hr {
 fieldset {
   margin-top: 32px;
 }
+textarea {
+  min-height: 200px;
+}
 
 .form-control, .StripeElement[data-payments-element-type="card"] {
     display: block;
