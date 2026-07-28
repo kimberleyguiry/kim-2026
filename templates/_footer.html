@@ -1,6 +1,6 @@
 <footer class="km-footer" style="background-image: url('{{ theme['grain-for-dark-bks.png'] }}');">
 
-  {% if page.is_homepage? %}
+  {% if page.slug == 'home' or page.is_homepage? %}
     <div class="km-footer__stripes-row">
       <div class="km-footer__stripes" aria-hidden="true">
         <span class="km-footer__stripe km-footer__stripe--purple"></span>
