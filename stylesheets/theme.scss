@@ -78,6 +78,18 @@ main#content {
     background-color: var(--km-cream-polaroid);
 }
 
+/* Scroll-reveal utility for photos/polaroids: fades in and settles from a
+   small extra rotation into its resting --km-base-rotate angle. km-photo-
+   reveal.js is what adds/removes .km-reveal--pending — elements are fully
+   visible at rest by default so nothing depends on JS running. */
+.km-reveal {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.km-reveal.km-reveal--pending {
+  opacity: 0;
+}
+
 .km-page {
   font-family: 'Inter', sans-serif;
   color: var(--km-blue-900);
@@ -593,7 +605,7 @@ legend.h3 {
   padding: 10px 10px 32px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  transition: transform 0.35s ease;
+  transform: rotate(calc(var(--km-base-rotate, 0deg) + var(--km-reveal-shift, 0deg)));
 
   img {
     display: block;
@@ -614,11 +626,6 @@ legend.h3 {
     border-radius: 3px;
     pointer-events: none;
   }
-
-  &:hover {
-    transform: rotate(0deg) scale(1.08);
-    z-index: 20;
-  }
 }
 
 .km-polaroid--1 {
@@ -626,7 +633,7 @@ legend.h3 {
   top: 0%;
   width: 44.59%;
   height: 37.43%;
-  transform: rotate(-13.5deg);
+  --km-base-rotate: -13.5deg;
   z-index: 3;
 }
 
@@ -635,7 +642,7 @@ legend.h3 {
   top: 23.98%;
   width: 38.21%;
   height: 31.32%;
-  transform: rotate(-3.3deg);
+  --km-base-rotate: -3.3deg;
   z-index: 4;
 }
 
@@ -644,7 +651,7 @@ legend.h3 {
   top: 45.56%;
   width: 56.36%;
   height: 48.1%;
-  transform: rotate(22.09deg);
+  --km-base-rotate: 22.09deg;
   z-index: 5;
 }
 
@@ -653,7 +660,7 @@ legend.h3 {
   top: 50.97%;
   width: 64.4%;
   height: 49.02%;
-  transform: rotate(-17deg);
+  --km-base-rotate: -17deg;
   z-index: 7;
 }
 
@@ -662,7 +669,7 @@ legend.h3 {
   top: 25.47%;
   width: 58.08%;
   height: 42%;
-  transform: rotate(12.34deg);
+  --km-base-rotate: 12.34deg;
   z-index: 8;
 }
 
@@ -1826,6 +1833,7 @@ img.km-retro-img {
 
 .km-about-collage__photo {
   position: absolute;
+  transform: rotate(calc(var(--km-base-rotate, 0deg) + var(--km-reveal-shift, 0deg)));
 
   .km-about-polaroid {
     width: 100%;
@@ -1834,10 +1842,10 @@ img.km-retro-img {
   }
 }
 
-.km-about-collage__photo--1 { left: 20.20%; top: 3.10%;  width: 58.55%; height: 39.00%; transform: rotate(-4.93deg); }
-.km-about-collage__photo--2 { left: 51.83%; top: 26.04%; width: 53.24%; height: 35.51%; transform: rotate(5.29deg); }
-.km-about-collage__photo--3 { left: 0;      top: 45.30%; width: 66.63%; height: 44.42%; transform: rotate(-18.69deg); }
-.km-about-collage__photo--4 { left: 40.24%; top: 56.30%; width: 65.61%; height: 43.71%; transform: rotate(14.30deg); }
+.km-about-collage__photo--1 { left: 20.20%; top: 3.10%;  width: 58.55%; height: 39.00%; --km-base-rotate: -4.93deg; }
+.km-about-collage__photo--2 { left: 51.83%; top: 26.04%; width: 53.24%; height: 35.51%; --km-base-rotate: 5.29deg; }
+.km-about-collage__photo--3 { left: 0;      top: 45.30%; width: 66.63%; height: 44.42%; --km-base-rotate: -18.69deg; }
+.km-about-collage__photo--4 { left: 40.24%; top: 56.30%; width: 65.61%; height: 43.71%; --km-base-rotate: 14.30deg; }
 
 p.km-about-collage__caption {
   position: absolute;
@@ -1858,9 +1866,9 @@ p.km-about-collage__caption {
   aspect-ratio: 624 / 739.4876;
 }
 
-.km-about-collage__photo--5 { left: 5.70%;  top: 0;      width: 59.00%; height: 49.79%; transform: rotate(3.99deg); }
-.km-about-collage__photo--6 { left: 46.18%; top: 24.66%; width: 59.34%; height: 50.08%; transform: rotate(6.64deg); }
-.km-about-collage__photo--7 { left: 0;      top: 54.26%; width: 66.53%; height: 56.16%; transform: rotate(-12.83deg); }
+.km-about-collage__photo--5 { left: 5.70%;  top: 0;      width: 59.00%; height: 49.79%; --km-base-rotate: 3.99deg; }
+.km-about-collage__photo--6 { left: 46.18%; top: 24.66%; width: 59.34%; height: 50.08%; --km-base-rotate: 6.64deg; }
+.km-about-collage__photo--7 { left: 0;      top: 54.26%; width: 66.53%; height: 56.16%; --km-base-rotate: -12.83deg; }
 
 .km-about-collage__caption--5 { left: 63.41%; top: 5.15%; }
 .km-about-collage__caption--6 { left: 61.99%; top: 19.17%; }
@@ -1871,9 +1879,9 @@ p.km-about-collage__caption {
   aspect-ratio: 624 / 719.4444;
 }
 
-.km-about-collage__photo--8  { left: 32%; top: 2%;  width: 58%; height: 45%; transform: rotate(6deg); }
-.km-about-collage__photo--9  { left: 0;   top: 28%; width: 50%; height: 44%; transform: rotate(-9deg); }
-.km-about-collage__photo--10 { left: 36%; top: 45%; width: 62%; height: 52%; transform: rotate(5deg); }
+.km-about-collage__photo--8  { left: 32%; top: 2%;  width: 58%; height: 45%; --km-base-rotate: 6deg; }
+.km-about-collage__photo--9  { left: 0;   top: 28%; width: 50%; height: 44%; --km-base-rotate: -9deg; }
+.km-about-collage__photo--10 { left: 36%; top: 45%; width: 62%; height: 52%; --km-base-rotate: 5deg; }
 
 .km-about-collage__caption--8 { left: 2%; top: 15%; max-width: 130px; }
 .km-about-collage__caption--9 { left: 2%; top: 78%; }
