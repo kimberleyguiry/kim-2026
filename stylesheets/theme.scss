@@ -1891,6 +1891,58 @@ img.km-retro-img {
   color: var(--km-blue-900);
 }
 
+.km-about-photo-quote {
+  position: relative;
+  background-color: var(--km-blue-900);
+  background-repeat: repeat, no-repeat;
+  background-size: 200px 200px, cover;
+  background-position: top left, center;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(4, 31, 62, 0.6) 0%, rgba(164, 122, 219, 0.12) 71.202%),
+      rgba(149, 125, 217, 0.25);
+    pointer-events: none;
+  }
+}
+
+.km-about-photo-quote__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  min-height: 619px;
+  margin: 0 auto;
+  padding: var(--km-section-padding) var(--km-page-margin);
+  display: flex;
+  align-items: center;
+}
+
+.km-about-photo-quote__text {
+  max-width: 577px;
+  padding-right: 64px;
+}
+
+.km-about-photo-quote__quote {
+  margin: 0 0 140px;
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.4;
+  color: var(--km-cream);
+}
+
+.km-about-photo-quote__caption {
+  margin: 0;
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #fff;
+}
+
 /* ── Issues page ──────────────────────────────────────────────────────── */
 
 .km-issues-page__inner {
@@ -2377,6 +2429,21 @@ img.km-retro-img {
     padding: 24px;
   }
 
+  .km-about-photo-quote__inner {
+    min-height: 400px;
+    padding: 96px var(--km-page-margin);
+  }
+
+  .km-about-photo-quote__text {
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .km-about-photo-quote__quote {
+    font-size: 30px;
+    margin-bottom: 80px;
+  }
+
   .km-progress-section__inner {
     padding: 96px var(--km-page-margin);
   }
@@ -2647,6 +2714,21 @@ img.km-retro-img {
     font-size: 22px;
     padding: 16px;
     max-width: none;
+  }
+
+  .km-about-photo-quote__inner {
+    min-height: 320px;
+    padding: 48px 24px;
+  }
+
+  .km-about-photo-quote__text {
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .km-about-photo-quote__quote {
+    font-size: 24px;
+    margin-bottom: 48px;
   }
 
   .km-about-photo-row {
