@@ -44,7 +44,7 @@
 /* ── Kim 2026 Campaign Styles ─────────────────────────────────────────────── */
 
 main#content {
-  padding: 4em;
+  padding: var(--km-content-padding, 4em);
 }
 
 @font-face {
@@ -71,6 +71,7 @@ main#content {
   --km-stripes-width: 108px;
   --km-stripes-gap: 8px;
   --km-section-padding: 144px;
+  --km-content-padding: 4em;
 }
 
 .bg-white {
@@ -1864,6 +1865,15 @@ img.km-retro-img {
 .km-about-collage__caption--5 { left: 63.41%; top: 5.15%; }
 .km-about-collage__caption--6 { left: 61.99%; top: 19.17%; }
 .km-about-collage__caption--7 { left: 67.94%; top: 76.73%; }
+
+.km-about-quote,
+.km-about-photo-quote {
+  /* main#content has its own padding — break out of it so the background
+     photo reaches the true viewport edge instead of stopping at that inset. */
+  margin-left: calc(-1 * var(--km-content-padding));
+  margin-right: calc(-1 * var(--km-content-padding));
+  width: calc(100% + 2 * var(--km-content-padding));
+}
 
 .km-about-quote {
   background-repeat: no-repeat;
