@@ -174,3 +174,41 @@
     </div>
   </div>
 </section>
+
+<section class="km-about-momentum">
+  <div class="km-about-momentum__inner">
+    <div class="km-momentum">
+      <div class="km-momentum__row">
+        <h2 class="km-momentum__heading">Help keep up the momentum</h2>
+        <p class="km-momentum__text">I&rsquo;m fighting for a city built for people, not developers. As a grassroots movement without big-money backing, we rely entirely on you. If you believe in this vision, please step up today; <strong>every contribution is the fuel we need to keep people at the heart of Langford</strong></p>
+      </div>
+
+      <div class="km-momentum__tiles">
+        <a href="/issues" class="km-tile">
+          <span class="km-tile__heading">Give feedback</span>
+          <span class="km-tile__text">Help shape my platform</span>
+          <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="/volunteer" class="km-tile">
+          <span class="km-tile__heading">Volunteer</span>
+          <span class="km-tile__text">Join the ground team</span>
+          <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="/get_a_lawn_sign" class="km-tile">
+          <span class="km-tile__heading">Get a Lawn Sign</span>
+          <span class="km-tile__text">Spread the word</span>
+          <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+        </a>
+        {% if site.has_donation_page? %}
+          <a href="{{ site.donation_page.url }}" class="km-tile km-tile--donate">
+        {% else %}
+          <a href="/donate" class="km-tile km-tile--donate">
+        {% endif %}
+          <span class="km-tile__heading">Donate</span>
+          <span class="km-tile__text">Fuel the movement</span>
+          <i class="fa-solid fa-arrow-right km-tile__arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

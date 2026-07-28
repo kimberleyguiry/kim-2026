@@ -1882,6 +1882,12 @@ img.km-retro-img {
   border-bottom: 1px solid var(--km-blue-900);
 }
 
+.km-about-momentum__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--km-page-margin);
+}
+
 .km-about-quote,
 .km-about-photo-quote {
   /* main#content has its own padding — break out of it so the background
