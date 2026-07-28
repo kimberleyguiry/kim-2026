@@ -1,7 +1,71 @@
-{% yield %}
+<!DOCTYPE html>
+<html lang="en">
 
-----
-This email was sent to {{ recipient.email }}.{% if page %}  To stop receiving updates on this page: {{ page.unsubscribe_url }}{% endif %}
-{{ settings.official_name }}{% if settings.has_address? %} - {{ settings.address.one_line }} {% endif %}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <style type="text/css">
+    body, table, td { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    body { margin: 0; padding: 0; width: 100% !important; background-color: #ffffff; }
+    img { border: 0; outline: none; -ms-interpolation-mode: bicubic; }
+    td p { margin: 0; }
+    .km-email-body p { margin: 0 0 1em; }
+    .km-email-body p:last-child { margin-bottom: 0; }
+    .km-email-body a { color: #d1430f; }
+    @media only screen and (max-width: 620px) {
+      .km-email-wrap { width: 100% !important; }
+      .km-email-pad { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+  </style>
+</head>
 
-Created with NationBuilder - https://nationbuilder.com/
+<body style="margin: 0; padding: 0; background-color: #ffffff;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
+    <tr>
+      <td align="center" style="padding: 24px 16px;">
+        <table role="presentation" class="km-email-wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 100%; background-color: #fff3e5;">
+
+          <!-- Header: navy with light logo -->
+          <tr>
+            <td align="center" class="km-email-pad" style="background-color: #1b2b3d; padding: 32px 32px 28px;">
+              <img src="{{ theme['kim-logo-light-2x.png'] }}" width="180" height="84" alt="Re-Elect Kimberley Guiry for Langford Council" style="display: block; width: 180px; height: auto; border: 0;" />
+            </td>
+          </tr>
+
+          <!-- Stripes -->
+          <tr>
+            <td style="padding: 0; line-height: 0; font-size: 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="33.33%" style="background-color: #4d3f5c; height: 8px; line-height: 8px; font-size: 1px;">&nbsp;</td>
+                  <td width="33.33%" style="background-color: #d1430f; height: 8px; line-height: 8px; font-size: 1px;">&nbsp;</td>
+                  <td width="33.34%" style="background-color: #ff8b00; height: 8px; line-height: 8px; font-size: 1px;">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Message body: cream, no texture -->
+          <tr>
+            <td class="km-email-body km-email-pad" style="background-color: #fff3e5; padding: 40px 32px; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; color: #1b2b3d;">
+              {% yield %}
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="km-email-pad" style="background-color: #fff3e5; padding: 20px 32px 32px; border-top: 1px solid rgba(27, 43, 61, 0.15); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.6; color: #5b6b7d;">
+              This email was sent to {{ recipient.email }}.{% if page %} To stop receiving updates on this page: <a href="{{ page.unsubscribe_url }}" style="color: #d1430f;">click here</a>.{% endif %}
+              <br />{{ settings.official_name }}{% if settings.has_address? %} &middot; {{ settings.address.one_line }}{% endif %}
+              <br /><br />Created with <a href="https://nationbuilder.com/" style="color: #5b6b7d;">NationBuilder</a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
