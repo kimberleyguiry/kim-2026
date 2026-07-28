@@ -436,15 +436,17 @@ legend.h3 {
   }
 }
 
-/* -- Feedback and Volunteer page ------------------------------------------------------*/
-.content-pages-show-feedback-wide, .content-pages-show-volunteer-signup-wide {
+/* -- Feedback, Blog post, and Volunteer page ------------------------------------------------------*/
+.content-pages-show-feedback-wide, .content-pages-show-volunteer-signup-wide, .content-pages-show-blog-post {
   max-width: 800px;
   margin: 64px auto;
 }
-.page-pages-show-feedback-wide .km-page-header__heading, .page-pages-show-volunteer-signup-wide .km-page-header__heading {
+.page-pages-show-feedback-wide, .page-pages-show-blog-post-wide, .page-pages-show-volunteer-signup-wide {
+  .km-page-header__heading {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 16px;
+  }
 }
 .intro {
   margin-bottom: 3rem;
