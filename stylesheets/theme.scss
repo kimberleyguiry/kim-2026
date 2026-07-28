@@ -1814,6 +1814,44 @@ img.km-retro-img {
   }
 }
 
+/* Scattered polaroid collage — positions/rotations lifted directly from Figma
+   (percentages of the 624×936.577 collage frame), not a generalizable grid. */
+.km-about-collage {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 624 / 936.577;
+}
+
+.km-about-collage__photo {
+  position: absolute;
+
+  .km-about-polaroid {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+.km-about-collage__photo--1 { left: 20.20%; top: 3.10%;  width: 58.55%; height: 39.00%; transform: rotate(-4.93deg); }
+.km-about-collage__photo--2 { left: 51.83%; top: 26.04%; width: 53.24%; height: 35.51%; transform: rotate(5.29deg); }
+.km-about-collage__photo--3 { left: 0;      top: 45.30%; width: 66.63%; height: 44.42%; transform: rotate(-18.69deg); }
+.km-about-collage__photo--4 { left: 40.24%; top: 56.30%; width: 65.61%; height: 43.71%; transform: rotate(14.30deg); }
+
+.km-about-collage__caption {
+  position: absolute;
+  margin: 0;
+  max-width: 150px;
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--km-blue-800);
+}
+
+.km-about-collage__caption--1 { left: 79.28%; top: 17.90%; }
+.km-about-collage__caption--2 { left: 0.14%;  top: 35.16%; }
+.km-about-collage__caption--4 { left: 24.90%; top: 94.14%; }
+
 .km-about-quote {
   background-repeat: no-repeat;
   background-position: center;
