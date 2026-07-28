@@ -101,7 +101,7 @@
 
       {% if request.sorta_logged_in? == false or request.current_signup.has_full_address? == false %}
         <div class="form-group">
-          <label for="feedback_submitted_address">Address <small class="text-muted">(Street, City, State, Postal code)</small></label>
+          <label for="feedback_submitted_address">Address <small class="text-muted">(Street, City, Postal code)</small></label>
           {% if page.feedback.require_address? %}
             {% text_field "submitted_address", class:"form-control text", required: "required" %}
           {% else %}
