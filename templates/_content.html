@@ -1,7 +1,7 @@
 <div class="container content-{{ request.template  | replace: '_', '-' }}">
   <div class="row">
     <div class="col-12 {%if sidebar %}col-md-8{%endif%}">
-      {% include "breadcrumbs" %}
+      <!-- {% include "breadcrumbs" %} -->
       {% yield %}
     </div>
     {% if sidebar %}
