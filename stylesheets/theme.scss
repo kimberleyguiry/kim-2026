@@ -1852,6 +1852,19 @@ img.km-retro-img {
 .km-about-collage__caption--2 { left: 0.14%;  top: 35.16%; }
 .km-about-collage__caption--4 { left: 24.90%; top: 94.14%; }
 
+/* Second collage (About page, third section) — its own frame ratio (624×739.4876). */
+.km-about-collage--section-3 {
+  aspect-ratio: 624 / 739.4876;
+}
+
+.km-about-collage__photo--5 { left: 5.70%;  top: 0;      width: 59.00%; height: 49.79%; transform: rotate(3.99deg); }
+.km-about-collage__photo--6 { left: 46.18%; top: 24.66%; width: 59.34%; height: 50.08%; transform: rotate(6.64deg); }
+.km-about-collage__photo--7 { left: 0;      top: 54.26%; width: 66.53%; height: 56.16%; transform: rotate(-12.83deg); }
+
+.km-about-collage__caption--5 { left: 63.41%; top: 5.15%; }
+.km-about-collage__caption--6 { left: 61.99%; top: 19.17%; }
+.km-about-collage__caption--7 { left: 67.94%; top: 76.73%; }
+
 .km-about-quote {
   background-repeat: no-repeat;
   background-position: center;
