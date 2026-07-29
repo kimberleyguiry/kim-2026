@@ -13,6 +13,12 @@
   {% endif %}
 </header>
 
+{% if page.has_meta_image? %}
+  <div class="km-blog-post__image">
+    <img src="{{ page.meta_image_url }}" alt="" loading="eager" />
+  </div>
+{% endif %}
+
 <div id="content">
 
   <div id="intro" class="intro">
