@@ -22,6 +22,18 @@
     var magnitude = 8 + Math.random() * 6;
     el.style.setProperty('--km-reveal-shift', sign * magnitude + 'deg');
     el.classList.add('km-reveal--pending');
-    observer.observe(el);
+  });
+
+  // Force the browser to paint the pending (hidden) state before observing.
+  // Elements already in the viewport (e.g. the hero polaroids) otherwise get
+  // their "intersecting" callback on the very next microtask, collapsing the
+  // hidden -> visible change into a single frame so the transition never
+  // actually plays.
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      els.forEach(function (el) {
+        observer.observe(el);
+      });
+    });
   });
 })();
