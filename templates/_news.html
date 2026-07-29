@@ -1,0 +1,46 @@
+<section class="km-news-page">
+  <div class="km-news-page__inner">
+    <div class="km-news__grid km-news__grid--page">
+      {% for post in page.blog.most_recent_blog_posts %}
+        {% assign km_story_kicker = "" %}
+        {% for ptag in post.tags %}
+          {% unless ptag.name == 'featured' %}
+            {% if km_story_kicker == "" %}
+              {% assign km_story_kicker = ptag.name %}
+            {% else %}
+              {% assign km_story_kicker = km_story_kicker | append: ', ' | append: ptag.name %}
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+        <article class="km-story">
+          <div class="km-story__image">
+            {% if post.has_meta_image? %}
+              <img src="{{ post.meta_image_url }}" alt="" loading="lazy" />
+            {% else %}
+              <img src="{{ theme['intro-photo-clinic.jpg'] }}" alt="" loading="lazy" />
+            {% endif %}
+          </div>
+          <div class="km-story__body">
+            {% if km_story_kicker != "" %}
+              <p class="km-story__kicker">{{ km_story_kicker }}</p>
+            {% endif %}
+            <h3 class="km-story__heading">{{ post.headline }}</h3>
+            <p class="km-story__excerpt">{{ post.blog_post.content_full | strip_html | truncatewords: 30 }}</p>
+            <div class="km-story__footer">
+              <div class="km-story__author">
+                <span class="km-story__author-name">{{ post.author.full_name }}</span>
+                <span class="km-story__date">{{ post.published_at | date: "%B %-d, %Y" }}</span>
+              </div>
+              <a href="{{ post.url }}" class="km-story__link">Read More <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          <div class="km-story__corner-shadow" aria-hidden="true"></div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="km-news-page__pagination">
+      {{ page.blog.most_recent_blog_posts | paginate prev_label: "Previous" next_label: "Next" }}
+    </div>
+  </div>
+</section>

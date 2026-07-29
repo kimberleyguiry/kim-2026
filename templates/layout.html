@@ -66,6 +66,8 @@
             {% include "about" %}
           {% elsif page.slug == 'issues' %}
             {% include "issues" %}
+          {% elsif page.slug == 'news' %}
+            {% include "news" %}
           {% else %}
             {% include "content", sidebar: request.is_sidebar? %}
           {% endif %}

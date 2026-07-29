@@ -1646,6 +1646,62 @@ img.km-retro-img {
   align-items: stretch;
 }
 
+/* ── News page (full listing, reuses .km-story cards from the homepage) ── */
+
+.km-news-page__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--km-section-padding) var(--km-page-margin);
+}
+
+.km-news__grid--page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 48px;
+  align-items: stretch;
+}
+
+.km-news-page__pagination {
+  margin-top: 64px;
+  text-align: center;
+
+  .pagination {
+    display: inline-flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--km-blue-900);
+    color: var(--km-blue-900);
+    font-family: 'Cal Sans', 'Inter', sans-serif;
+    text-decoration: none;
+
+    &:hover {
+      background-color: var(--km-blue-900-10);
+      text-decoration: none;
+    }
+  }
+
+  .active .page-link {
+    background-color: var(--km-blue-900);
+    color: var(--km-cream);
+  }
+
+  .disabled .page-link {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
 .km-story {
   position: relative;
   z-index: 0;
@@ -2874,6 +2930,15 @@ p.km-about-collage__caption {
 @media (max-width: 767px) {
   .km-issues-page__inner {
     padding: 0 24px;
+  }
+
+  .km-news-page__inner {
+    padding: 48px 24px;
+  }
+
+  .km-news__grid--page {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .km-issues-item__stripes {
