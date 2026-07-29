@@ -2690,6 +2690,10 @@ p.km-about-collage__caption {
 /* ── Responsive ───────────────────────────────────────────────────────── */
 
 @media (max-width: 1279px) {
+  .km-story__corner-shadow {
+    width: 180px;
+  }
+
   .km-issues-item__content {
     padding: 48px 24px 48px 64px;
   }
