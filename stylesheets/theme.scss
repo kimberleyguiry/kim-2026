@@ -2954,6 +2954,13 @@ p.km-about-collage__caption {
     flex-direction: column;
   }
 
+  /* Text stacks above the image at this width, so open accordion items run
+     much taller than the 900px tuned for the desktop side-by-side layout —
+     without more room here the image's bottom gets clipped. */
+  .km-accordion__item--open .km-accordion__body {
+    max-height: 1800px;
+  }
+
   .km-accordion__video {
     flex: 0 0 auto;
     width: 100%;
@@ -3439,6 +3446,10 @@ p.km-about-collage__caption {
 
   .km-accordion__body-inner {
     padding: 0 16px 16px;
+  }
+
+  .km-accordion__item--open .km-accordion__body {
+    max-height: 2400px;
   }
 
   .km-story__body {
