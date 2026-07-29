@@ -2131,11 +2131,12 @@ p.km-about-collage__caption {
 /* Third collage (About page, "Stepping up for local change" section). */
 .km-about-collage--section-4 {
   aspect-ratio: 624 / 719.4444;
+  margin-top: 64px;
 }
 
-.km-about-collage__photo--8  { left: 32%; top: 2%;  width: 58%; height: 45%; --km-base-rotate: 6deg; }
-.km-about-collage__photo--9  { left: 0;   top: 28%; width: 50%; height: 44%; --km-base-rotate: -9deg; }
-.km-about-collage__photo--10 { left: 36%; top: 45%; width: 62%; height: 52%; --km-base-rotate: 5deg; }
+.km-about-collage__photo--8  { left: 32%; top: 2%;  width: 50%; height: 43%; --km-base-rotate: 6deg; }
+.km-about-collage__photo--9  { left: 0;   top: 28%; width: 50%; height: 43%; --km-base-rotate: -9deg; }
+.km-about-collage__photo--10 { left: 36%; top: 45%; width: 50%; height: 43%; --km-base-rotate: 5deg; }
 
 .km-about-collage__caption--8 { left: 2%; top: 15%; max-width: 130px; }
 .km-about-collage__caption--9 { left: 2%; top: 78%; }
