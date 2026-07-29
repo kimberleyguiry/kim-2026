@@ -298,6 +298,12 @@ legend.h3 {
     margin-top: -1px !important;
 }
 
+.page-type-donation-v2 .km-page-header__heading {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+
 /* ── Donate page: amount radio buttons ───────────────────────────────────
    NB renders these as Bootstrap custom-radio controls (hidden input +
    label with ::before/::after for the circle indicator). Scoped to
