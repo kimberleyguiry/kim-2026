@@ -99,6 +99,9 @@
     {% if km_is_home %}
       <script src="km-accordion.js"></script>
     {% endif %}
+    {% if km_is_home or page.slug == 'progress' %}
+      <script src="km-signup-forms.js"></script>
+    {% endif %}
     {% if page.slug == 'issues' %}
       <script src="km-issues-curves.js"></script>
     {% endif %}

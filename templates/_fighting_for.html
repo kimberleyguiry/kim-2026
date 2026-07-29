@@ -39,21 +39,24 @@
       <div class="km-fighting__signup">
         <p class="km-fighting__signup-text">I&rsquo;m taking the time to listen before I launch my full platform. Sign up to receive a notification the moment my full platform is released.</p>
 
-        {% assign fighting_signup_page_id = 999 %}
-        <form class="km-fighting__form" method="post" action="/forms/signups">
+        {% assign fighting_signup_page_id = 793 %}
+        <form class="km-fighting__form" method="post" action="/forms/signups" data-ajax-signup novalidate>
           <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}" />
           <input type="hidden" name="page_id" value="{{ fighting_signup_page_id }}" />
 
           <div class="km-form-field">
             <label for="fighting-name">Name</label>
-            <input type="text" id="fighting-name" name="signup[first_name]" />
+            <input type="text" id="fighting-name" name="signup[first_name]" class="km-ajax-name" autocomplete="name" required aria-required="true" />
           </div>
           <div class="km-form-field">
             <label for="fighting-email">Email</label>
-            <input type="email" id="fighting-email" name="signup[email]" required />
+            <input type="email" id="fighting-email" name="signup[email]" class="km-ajax-email" autocomplete="email" required aria-required="true" />
           </div>
           <button type="submit" class="km-btn km-btn--donate km-fighting__submit">Stay informed</button>
         </form>
+
+        <p class="km-fighting__form-feedback km-fighting__form-feedback--success" hidden>Thanks for signing up! We&rsquo;ll notify you the moment the full platform is released.</p>
+        <p class="km-fighting__form-feedback km-fighting__form-feedback--error" hidden></p>
       </div>
     </div>
 
