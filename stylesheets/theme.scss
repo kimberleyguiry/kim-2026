@@ -3171,7 +3171,10 @@ p.km-about-collage__caption {
   }
 
   .km-intro__stripes {
-    display: none;
+   // display: none;
+    width: 48px;
+    height: 72px;
+    margin-top: -64px;
   }
 
   .km-intro__content {
