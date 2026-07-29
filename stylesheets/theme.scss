@@ -667,6 +667,10 @@ legend.h3 {
   height: 132px;
 }
 
+.km-stripes--mobile-only {
+  display:none;
+}
+
 .km-stripes-endcap {
   display: flex;
   flex-direction: column;
@@ -3127,6 +3131,10 @@ p.km-about-collage__caption {
   .km-stripes {
     width: 100%;
     height: 24px;
+  }
+
+  .km-stripes--mobile-only {
+    display: flex;
   }
 
   .km-stripes-endcap {
