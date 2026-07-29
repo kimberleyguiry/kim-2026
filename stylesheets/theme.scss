@@ -2985,6 +2985,9 @@ p.km-about-collage__caption {
 }
 
 @media (max-width: 767px) {
+  .km-showcase__image--sidewalks, .km-showcase__image--clinic {
+    aspect-ratio: 1 / 1;
+  }
   .km-issues-page__inner {
     padding: 0 24px;
   }
