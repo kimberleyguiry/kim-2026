@@ -44,7 +44,7 @@
 /* ── Kim 2026 Campaign Styles ─────────────────────────────────────────────── */
 
 main#content {
-  padding: var(--km-content-padding, 4em);
+  //padding: var(--km-content-padding, 4em);
 }
 
 @font-face {
@@ -2996,6 +2996,10 @@ p.km-about-collage__caption {
   }
   .col-12 {
     padding: 24px;
+  }
+  .km-story .km-story__kicker {
+    font-size: 22px;
+    margin-bottom: 16px;
   }
   .km-about-momentum__inner {
     padding: 0 24px;
