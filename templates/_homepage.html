@@ -316,8 +316,15 @@
           {% for post in site.most_recent_blog_post_pages %}
             {% if km_news_count < 2 and post.parent.slug == 'news' %}
               {% assign km_is_featured = false %}
+              {% assign km_story_kicker = "" %}
               {% for ptag in post.tags %}
-                {% if ptag.name == 'featured' %}{% assign km_is_featured = true %}{% endif %}
+                {% if ptag.name == 'featured' %}
+                  {% assign km_is_featured = true %}
+                {% elsif km_story_kicker == "" %}
+                  {% assign km_story_kicker = ptag.name %}
+                {% else %}
+                  {% assign km_story_kicker = km_story_kicker | append: ', ' | append: ptag.name %}
+                {% endif %}
               {% endfor %}
               {% if km_is_featured %}
                 <article class="km-story">
@@ -329,7 +336,9 @@
                     {% endif %}
                   </div>
                   <div class="km-story__body">
-                    <p class="km-story__kicker">Goldstream Gazette</p>
+                    {% if km_story_kicker != "" %}
+                      <p class="km-story__kicker">{{ km_story_kicker }}</p>
+                    {% endif %}
                     <h3 class="km-story__heading">{{ post.headline }}</h3>
                     <p class="km-story__excerpt">{{ post.blog_post.content_full | strip_html | truncatewords: 30 }}</p>
                     <div class="km-story__footer">
