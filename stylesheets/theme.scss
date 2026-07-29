@@ -2998,6 +2998,9 @@ p.km-about-collage__caption {
   .col-12 {
     padding: 24px;
   }
+  .km-progress-stories {
+  gap: 24px;
+  }
   .km-story .km-story__kicker {
     font-size: 22px;
     margin-bottom: 16px;
@@ -3183,8 +3186,11 @@ p.km-about-collage__caption {
   }
 
   .km-progress-section__inner {
-    padding: 48px 24px;
-    gap: 40px;
+    padding: 32px 24px;
+    gap: 32px;
+  }
+  .km-progress-stories__grid, .km-services-row, .km-progress-stories__grid--2x2 {
+    gap: 32px;
   }
 
   .km-progress__image {
@@ -3204,7 +3210,7 @@ p.km-about-collage__caption {
   }
 
   .km-services-row__col {
-    gap: 40px;
+    gap: 32px;
   }
 
   .km-services-stats {
