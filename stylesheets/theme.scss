@@ -219,6 +219,14 @@ legend.h3 {
    label with ::before/::after for the circle indicator). Scoped to
    .donation-v2-amounts so the generic .custom-control-label rules used by
    every other checkbox/radio on the site are left untouched. */
+/* NB wraps this in a Bootstrap .form-group.col-md-8, which caps it at 66.67%
+   width and forces the pills to wrap early — free it up to the full row. */
+.form-group.col-md-8:has(.donation-v2-amounts) {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
 .donation-v2-amounts {
   display: flex;
   flex-wrap: wrap;
