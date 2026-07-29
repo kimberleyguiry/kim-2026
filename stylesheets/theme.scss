@@ -210,6 +210,41 @@ legend.h3 {
   box-shadow: none;
 }
 
+/* Checkboxes specifically (not radios) — a bit bigger than Bootstrap's
+   default, transparent+outlined when unchecked, solid near-black with a
+   white checkmark when checked. */
+.custom-checkbox {
+  padding-left: 1.75rem;
+}
+
+.custom-checkbox .custom-control-label {
+  &::before,
+  &::after {
+    top: 0;
+    left: -1.75rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+  }
+
+  &::before {
+    background-color: transparent;
+    border: 1px solid var(--km-blue-900);
+  }
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: var(--km-blue-900);
+  border-color: var(--km-blue-900);
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3E%3C/svg%3E");
+  background-size: 65% 65%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .mt-2, .my-2 {
     margin-top: -1px !important;
 }
