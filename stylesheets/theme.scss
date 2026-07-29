@@ -677,6 +677,9 @@ legend.h3 {
   gap: var(--km-stripes-gap, 8px);
   width: 100%;
 }
+.km-stripes-endcap--mobile-only {
+  display: none;
+}
 
 .km-stripes-endcap__row {
   display: flex;
@@ -3144,6 +3147,11 @@ p.km-about-collage__caption {
   .km-stripes-endcap {
     //display: none;
     gap: 4px;
+  }
+
+  .km-stripes-endcap--mobile-only {
+    display: flex;
+    width: 48px;
   }
 
   .km-hero__text {
