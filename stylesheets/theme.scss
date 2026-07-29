@@ -1656,7 +1656,7 @@ img.km-retro-img {
 
 .km-news__grid--page {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 48px;
   align-items: stretch;
 }
