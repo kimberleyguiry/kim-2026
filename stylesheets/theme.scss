@@ -2233,10 +2233,12 @@ p.km-about-collage__caption {
 
 .km-about-photo-quote__caption {
   margin: 0;
-  font-family: 'La Belle Aurore', cursive;
+  font-family: 'La Belle Aurore', cursive !important;
   font-size: 20px;
   line-height: 1.2;
   color: #fff;
+  position: absolute;
+  bottom: 32px;
 }
 
 /* ── Issues page ──────────────────────────────────────────────────────── */
