@@ -2985,6 +2985,9 @@ p.km-about-collage__caption {
 }
 
 @media (max-width: 767px) {
+  .km-story__heading {
+    font-size: 28px;
+  }
   .km-showcase__image--sidewalks, .km-showcase__image--clinic {
     aspect-ratio: 1 / 1;
   }
