@@ -1756,6 +1756,14 @@ img.km-retro-img {
   }
 }
 
+.km-blog-post__tags {
+  margin: 0 0 24px;
+
+  .km-tag {
+    margin: 0;
+  }
+}
+
 /* ── Single blog post: featured image ────────────────────────────────── */
 
 .km-blog-post__image {
