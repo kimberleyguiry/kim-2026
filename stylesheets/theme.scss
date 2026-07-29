@@ -997,6 +997,10 @@ legend.h3 {
 .km-showcase__image--sidewalks {
   aspect-ratio: 327 / 588;
   margin-top: 2rem;
+
+  img {
+    object-position: right;
+  }
 }
 
 .km-showcase__image--clinic {
@@ -1752,6 +1756,7 @@ img.km-retro-img {
 
 .km-story__image {
   position: relative;
+  min-width: 0;
   aspect-ratio: 16 / 11;
   padding: 20px;
   background-color: var(--km-cream-polaroid);
