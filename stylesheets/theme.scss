@@ -1002,6 +1002,10 @@ legend.h3 {
 .km-showcase__image--clinic {
   aspect-ratio: 327 / 524;
   margin-bottom: 2rem;
+
+  img {
+    object-position: center;
+  }
 }
 
 .km-showcase__image--tall {
