@@ -2117,6 +2117,7 @@ p.km-about-collage__caption {
 /* Second collage (About page, third section) — its own frame ratio (624×739.4876). */
 .km-about-collage--section-3 {
   aspect-ratio: 624 / 739.4876;
+  margin-bottom: 64px;
 }
 
 .km-about-collage__photo--5 { left: 5.70%;  top: 0;      width: 50.00%; height: 42.79%; --km-base-rotate: 3.99deg; }
