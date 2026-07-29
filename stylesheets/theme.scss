@@ -3111,6 +3111,15 @@ p.km-about-collage__caption {
     padding: 16px;
     max-width: none;
   }
+  .km-about-photo-quote {
+    width: 100%;
+    margin: 0;
+    background-attachment: inherit;
+    background-size: cover;
+  }
+  .km-about-photo-quote::after {
+    background: #29418a9e;
+  }
 
   .km-about-photo-quote__inner {
     min-height: 320px;
