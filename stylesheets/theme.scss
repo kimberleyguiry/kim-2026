@@ -2985,6 +2985,9 @@ p.km-about-collage__caption {
 }
 
 @media (max-width: 767px) {
+  main#content {
+    padding: 0;
+  }
   .km-story__heading {
     font-size: 28px;
   }
