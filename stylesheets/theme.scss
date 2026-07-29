@@ -2985,6 +2985,9 @@ p.km-about-collage__caption {
 }
 
 @media (max-width: 767px) {
+  .km-page {
+    overflow-x: hidden;
+  }
   .km-about-collage__caption{
     display: none;
   }
@@ -3083,7 +3086,7 @@ p.km-about-collage__caption {
   }
 
   .km-page-header__stripes {
-    height: 24px;
+    height: 48px;
   }
 
   .km-about-section__inner {
