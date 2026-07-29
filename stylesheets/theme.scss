@@ -3109,8 +3109,11 @@ p.km-about-collage__caption {
   }
 
   .km-stripes-group {
-    //width: 100%;
+    width: 64px;
     gap: 4px;
+    &.lower {
+      display: none;
+    }
   }
 
   .km-stripes {
@@ -3134,6 +3137,7 @@ p.km-about-collage__caption {
 
   .km-hero__body {
     max-width: none;
+    font-size: 16px;
   }
 
   .km-caption {
