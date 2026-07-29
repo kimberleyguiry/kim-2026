@@ -2985,6 +2985,9 @@ p.km-about-collage__caption {
 }
 
 @media (max-width: 767px) {
+  .km-about-collage__caption{
+    display: none;
+  }
   .km-about-collage__photo--1 {
     left: 0;
     top: 0;
@@ -3010,7 +3013,24 @@ p.km-about-collage__caption {
     width: 75%;
     height: 50%;
 }
-  
+  .km-about-collage__photo--5 {
+    left: 5.70%;
+    top: -10%;
+    width: 75%;
+    height: 60%;
+}
+  .km-about-collage__photo--6 {
+    left: 60.18%;
+    top: 32.66%;
+    width: 75%;
+    height: 60%;
+}
+  .km-about-collage__photo--7 {
+    left: -10%;
+    top: 45.26%;
+    width: 75%;
+    height: 60%;
+}
   main#content {
     padding: 0;
   }
