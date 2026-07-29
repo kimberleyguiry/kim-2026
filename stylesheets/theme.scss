@@ -3249,21 +3249,21 @@ p.km-about-collage__caption {
     margin-top: 8px;
   }
 
-  .km-cta__stripes {
-    flex-direction: column;
-    height: 24px;
-    /* .km-cta__inner has its own horizontal padding — break out of it so
-       the stripes reach the true viewport edges instead of stopping at
-       that inset. */
-    width: calc(100% + 2 * var(--km-page-margin));
-    margin-left: calc(-1 * var(--km-page-margin));
-    margin-right: calc(-1 * var(--km-page-margin));
-  }
-
   .km-cta__inner {
     flex-direction: column;
     gap: 0;
     padding: 0 24px;
+  }
+
+  .km-cta__stripes {
+    flex-direction: column;
+    height: 24px;
+    /* .km-cta__inner's padding is 24px at this breakpoint (not
+       --km-page-margin) — match it so the stripes reach the true viewport
+       edges without overshooting past them. */
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    margin-right: -24px;
   }
 
   .km-momentum__heading {
