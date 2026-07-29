@@ -2985,6 +2985,32 @@ p.km-about-collage__caption {
 }
 
 @media (max-width: 767px) {
+  .km-about-collage__photo--1 {
+    left: 0;
+    top: 0;
+    width: 75%;
+    height: 50%;
+  }
+
+  .km-about-collage__photo--2 {
+    left: 51.83%;
+    top: 25%;
+    width: 75%;
+    height: 50%;
+}
+  .km-about-collage__photo--3 {
+    left: -10%;
+    top: 50%;
+    width: 75%;
+    height: 50%;
+}
+  .km-about-collage__photo--4 {
+    left: 28.24%;
+    top: 70%;
+    width: 75%;
+    height: 50%;
+}
+  
   main#content {
     padding: 0;
   }
