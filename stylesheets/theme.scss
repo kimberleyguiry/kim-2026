@@ -3282,13 +3282,17 @@ p.km-about-collage__caption {
 
   .km-cta__stripes {
     flex-direction: column;
-    height: 24px;
+    height: 48px;
     /* .km-cta__inner's padding is 24px at this breakpoint (not
        --km-page-margin) — match it so the stripes reach the true viewport
        edges without overshooting past them. */
     width: calc(100% + 48px);
     margin-left: -24px;
     margin-right: -24px;
+  }
+
+  .km-momentum {
+    padding-top: 48px;
   }
 
   .km-momentum__heading {
