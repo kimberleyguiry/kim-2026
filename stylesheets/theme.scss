@@ -1985,6 +1985,7 @@ img.km-retro-img {
   display: flex;
   flex-direction: column;
   gap: 64px;
+  margin: auto 0;
 }
 
 .km-about-block__heading {
@@ -2119,7 +2120,7 @@ p.km-about-collage__caption {
 }
 
 .km-about-collage__photo--5 { left: 5.70%;  top: 0;      width: 50.00%; height: 42.79%; --km-base-rotate: 3.99deg; }
-.km-about-collage__photo--6 { left: 46.18%; top: 24.66%; width: 50.34%; height: 42.08%; --km-base-rotate: 6.64deg; }
+.km-about-collage__photo--6 { left: 40.18%; top: 28.66%; width: 50.34%; height: 42.08%; --km-base-rotate: 6.64deg; }
 .km-about-collage__photo--7 { left: 0;      top: 54.26%; width: 50.53%; height: 42.16%; --km-base-rotate: -12.83deg; }
 
 .km-about-collage__caption--5 { left: 63.41%; top: 5.15%; }
