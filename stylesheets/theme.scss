@@ -214,6 +214,59 @@ legend.h3 {
     margin-top: -1px !important;
 }
 
+/* ── Donate page: amount radio buttons ───────────────────────────────────
+   NB renders these as Bootstrap custom-radio controls (hidden input +
+   label with ::before/::after for the circle indicator). Scoped to
+   .donation-v2-amounts so the generic .custom-control-label rules used by
+   every other checkbox/radio on the site are left untouched. */
+.donation-v2-amounts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.donation-v2-amounts .custom-control {
+  padding-left: 0;
+  margin-right: -1px;
+}
+
+.donation-v2-amounts .custom-control-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin: 0;
+  padding: 12px 20px;
+  border: 1px solid var(--km-blue-900);
+  font-family: 'Cal Sans', 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--km-blue-900);
+  text-align: center;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  &:hover {
+    background-color: var(--km-blue-900-10);
+  }
+}
+
+.donation-v2-amounts .custom-control-input:checked ~ .custom-control-label {
+  background-color: var(--km-blue-900);
+  color: var(--km-cream);
+
+  &:hover {
+    background-color: var(--km-blue-900);
+  }
+}
+
+.donation-v2-amounts .custom-control-input:focus ~ .custom-control-label {
+  outline: 2px solid var(--km-red-600);
+  outline-offset: -2px;
+}
+
 /* ── Header / nav ─────────────────────────────────────────────────────── */
 
 .km-header {
