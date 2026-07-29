@@ -218,12 +218,15 @@ legend.h3 {
 }
 
 .custom-checkbox .custom-control-label {
+  padding-left: 10px;
+
   &::before,
   &::after {
-    top: 0;
+    top: 50%;
     left: -1.75rem;
     width: 20px;
     height: 20px;
+    margin-top: -10px;
     border-radius: 3px;
   }
 
@@ -248,14 +251,23 @@ legend.h3 {
 /* Plain Bootstrap .form-check checkboxes (e.g. the contact/feedback page) —
    these are real native <input type="checkbox">, not the hidden-input +
    pseudo-element .custom-control pattern above, so they need their own
-   appearance:none treatment to get the same look. */
+   appearance:none treatment to get the same look. Flexbox instead of
+   Bootstrap's default absolute-positioned input so the label reliably
+   centers on the box regardless of label height. */
+.form-check:has(.form-check-input.checkbox) {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
 .form-check-input.checkbox {
   appearance: none;
   -webkit-appearance: none;
+  position: static;
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  margin-top: 0.15rem;
+  margin: 0;
   border: 1px solid var(--km-blue-900);
   border-radius: 3px;
   background-color: transparent;
@@ -275,6 +287,11 @@ legend.h3 {
     outline-offset: 1px;
     box-shadow: none;
   }
+}
+
+.form-check:has(.form-check-input.checkbox) .form-check-label {
+  margin: 0;
+  padding-left: 10px;
 }
 
 .mt-2, .my-2 {
