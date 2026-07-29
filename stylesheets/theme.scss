@@ -2959,7 +2959,7 @@ p.km-about-collage__caption {
   }
 
   .km-footer__inner {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 48px;
   }
 
@@ -2968,7 +2968,7 @@ p.km-about-collage__caption {
   }
 
   .km-footer__card {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-self: stretch;
     width: 100%;
   }
@@ -3354,6 +3354,10 @@ p.km-about-collage__caption {
   .km-footer__meta {
     padding-left: 24px;
     padding-right: 24px;
+  }
+
+  .km-footer__card-photo {
+    height: 350px;
   }
 
   .km-footer__logo {
