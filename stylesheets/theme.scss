@@ -2371,7 +2371,15 @@ p.km-about-collage__caption {
       background-color: rgba(255, 243, 229, 0.1);
   }
 
+  &:first-child {
+    position: relative;
+    left: -1px;
+    top: 1px;
+  }
+
   &:last-child {
+    position: relative;
+    top: 1px;
     margin-right: 0;
   }
 
