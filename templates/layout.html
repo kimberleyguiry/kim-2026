@@ -21,9 +21,9 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=La+Belle+Aurore&display=swap" rel="stylesheet" />
     </noscript>
 
-    <link rel="preload" as="image" href="{{ theme['kim-logo-dark-2x.png'] }}" />
+    <link rel="preload" as="image" href="{{ theme['kim-logo-dark-2x.webp'] }}" />
     {% if km_is_home %}
-      <link rel="preload" as="image" href="{{ theme['hero-photo-4.jpg'] }}" />
+      <link rel="preload" as="image" href="{{ theme['hero-photo-4.webp'] }}" />
     {% endif %}
 
     <!-- start of content for header -->
@@ -42,13 +42,13 @@
     {% elsif km_is_home %}
       {% include "homepage" %}
     {% elsif page.type_name == "Donation (v2)" %}
-      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.webp'] }}');">
         {% include "header" %}
         {% include "page_header" %}
         {% yield %}
       </div>
     {% else %}
-      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.png'] }}');">
+      <div class="km-page km-page--light" style="background-image: url('{{ theme['grain-for-light-bks.webp'] }}');">
         {% include "header" %}
         {% include "page_header" %}
         {% if site.has_header_image? %}
