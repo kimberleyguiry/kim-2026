@@ -2171,7 +2171,8 @@ p.km-about-collage__caption {
   border-bottom: 1px solid var(--km-blue-900);
 }
 
-.km-about-momentum__inner {
+.km-about-momentum__inner,
+.km-platform-momentum__inner {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 var(--km-page-margin);
@@ -3030,7 +3031,8 @@ p.km-about-collage__caption {
     font-size: 22px;
     margin-bottom: 16px;
   }
-  .km-about-momentum__inner {
+  .km-about-momentum__inner,
+  .km-platform-momentum__inner {
     padding: 0 24px;
   }
   .km-about-collage__caption{
