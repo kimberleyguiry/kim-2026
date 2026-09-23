@@ -68,6 +68,8 @@
             {% include "issues" %}
           {% elsif page.slug == 'news' %}
             {% include "news" %}
+          {% elsif page.slug == 'platform' %}
+            {% include "platform_page" %}
           {% else %}
             {% include "content", sidebar: request.is_sidebar? %}
           {% endif %}
@@ -99,7 +101,7 @@
     <script src="km-counter-animations.js"></script>
     <script src="km-photo-reveal.js"></script>
     <script src="km-form-enhancements.js"></script>
-    {% if km_is_home %}
+    {% if km_is_home or page.slug == 'platform' %}
       <script src="km-accordion.js"></script>
     {% endif %}
     {% if km_is_home or page.slug == 'progress' %}
