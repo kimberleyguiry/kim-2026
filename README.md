@@ -1,6 +1,8 @@
 # kim-2026
 
-NationBuilder theme for Kimberley Guiry's 2026 Langford City Council campaign, built from a Figma design. See `CLAUDE.md` for full project conventions (file structure, Liquid rules, deploy workflow).
+NationBuilder theme for Kimberley Guiry's 2026 Langford City Council campaign, built from a Figma design. 
+
+> **2026-10-26: NationBuilder is deprecated.** The site is now the static site in `site/`. Start with [`AGENTS.md`](AGENTS.md). The log below is the NationBuilder-era history; the NB guide moved to `docs/nationbuilder-theme.md`.
 
 ## Status
 
