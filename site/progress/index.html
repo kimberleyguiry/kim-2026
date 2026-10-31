@@ -369,7 +369,8 @@
       </div>
       <div class="km-fighting__signup">
         <p class="km-fighting__signup-text">I&rsquo;m taking the time to listen before I launch my full platform. Sign up to receive a notification the moment my full platform is released.</p>
-        <form class="km-fighting__form" method="post" data-ajax-signup novalidate action="#" data-static-form>
+        <!--FORM-DISABLED (restore: python3 tools/toggle-forms.py enable)
+<form class="km-fighting__form" method="post" data-ajax-signup novalidate action="#" data-static-form>
           <input type="hidden" name="authenticity_token" value="" />
           <input type="hidden" name="page_id" value="793" />
           <div class="km-form-field">
@@ -382,6 +383,8 @@
           </div>
           <button type="submit" class="km-btn km-btn--donate km-fighting__submit">Stay informed</button>
         </form>
+FORM-DISABLED-->
+<p class="static-form-email">To get campaign updates, please email us at <a href="mailto:vote@kimberleyguiry.ca?subject=Keep%20me%20updated">vote@kimberleyguiry.ca</a>.</p><!--/FORM-DISABLED-EMAIL-->
         <p class="km-fighting__form-feedback km-fighting__form-feedback--success" hidden>Thanks for signing up! We&rsquo;ll notify you the moment the full platform is released.</p>
         <p class="km-fighting__form-feedback km-fighting__form-feedback--error" hidden></p>
       </div>
