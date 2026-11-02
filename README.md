@@ -32,7 +32,7 @@ npx serve@14.2.4 site    # http://localhost:3000
 
 ## Forms
 
-The sign-up, contact, feedback, volunteer, lawn sign and donation forms are switched off, and each one shows an email link (vote@kimberleyguiry.ca) instead. The original forms are kept as HTML comments.
+The sign-up, contact, feedback, volunteer, lawn sign and donation forms are switched off. Each one shows an email link (vote@kimberleyguiry.ca) instead, except the donation form, which has no replacement. The original forms are kept as HTML comments.
 
 ```bash
 python3 tools/toggle-forms.py enable    # restore the forms

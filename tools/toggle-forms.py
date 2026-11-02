@@ -102,8 +102,9 @@ def disable(s, path, email):
 
 
 def enable(s):
+    # The email line is optional: it may have been removed by hand.
     pat = re.compile(re.escape(OPEN) + r'(.*?)' + re.escape(CLOSE) +
-                     r'\n<p class="static-form-email">.*?' + re.escape(EMAIL_END), re.S)
+                     r'(?:\n<p class="static-form-email">.*?' + re.escape(EMAIL_END) + ')?', re.S)
     restore = lambda m: m.group(1).replace('--&gt;', '-->').replace('--!&gt;', '--!>')
     return pat.subn(restore, s)
 
